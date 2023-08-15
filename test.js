@@ -10,11 +10,11 @@ let planeMesh
 //4.Spped of the stars
 let speed = 0.09
 
-const mouse = {
+/*const mouse = {
 //  x: innerWidth / 2,
 //  y: innerHeight / 2
-}
-const text = document.querySelector('.text')
+}*/
+//const text = document.querySelector('.text')
 const title = document.querySelector('.title')
 
 title.style.top = innerHeight / 2 - 50 + 'px'
@@ -22,28 +22,60 @@ title.style.left = innerWidth / 2 - 200 + 'px'
 
 //Lauch the light speed
 let activated = false
-window.addEventListener("mousedown", (event) => {
+
+//render animation or not
+let isAnimation = true
+
+function launchToLightSpeed() {
   activated = true
   title.classList.remove('apparition')
   title.classList.add('disparition')
+ /*
   text.classList.remove('apparition')
   text.classList.add('disparition')
-})
-window.addEventListener("mouseup", (event) => {
+*/
+}
+
+function exitLightSpeed() {
   activated = false;
   title.classList.remove('disparition')
   title.classList.add('apparition')
+  /*
   text.classList.remove('disparition')
   text.classList.add('apparition')
+  */
+}
+
+
+window.addEventListener("mousedown", (event) => {
+  /*activated = true
+  title.classList.remove('apparition')
+  title.classList.add('disparition')
+  text.classList.remove('apparition')
+  text.classList.add('disparition')*/
+  launchToLightSpeed();
 })
+
+
+window.addEventListener("mouseup", (event) => {
+  /*activated = false;
+  title.classList.remove('disparition')
+  title.classList.add('apparition')
+  text.classList.remove('disparition')
+  text.classList.add('apparition')*/
+  exitLightSpeed();
+})
+
 
 const colors = ["#0952BD", "#A5BFF0", "#118CD6", "#1AAEE8", "#ffffff"]
 
+/*
 //Mouse Moves Listener
 addEventListener('mousemove', (event) => {
   mouse.x = event.clientX
   mouse.y = event.clientY
 })
+*/
 
 addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight
@@ -52,7 +84,7 @@ addEventListener('resize', () => {
   title.style.top = innerHeight / 2 - 50 + 'px'
   title.style.left = innerWidth / 2 - 200 + 'px'
 })
-
+/*
 //Animated Circle Text Effects
 text.innerHTML = text.textContent.replace(/\S/g,"<span>$&</span>")
 const element = document.querySelectorAll('span')
@@ -63,6 +95,7 @@ document.addEventListener('mousemove', (event) => {
   text.style.left = event.pageX + 'px'
   text.style.top = event.pageY + 'px'
 })
+*/
 
 /*---------------------
     Implementation
@@ -122,8 +155,10 @@ function init() {
        Render
 --------------------------*/
 function render() {
+  if (isAnimation) {
   //Animation loop
   requestAnimationFrame(render)
+  }
   //Add the scene cube plus the camera
   renderer.render(scene, camera)
   
@@ -152,3 +187,23 @@ function render() {
 
 init()
 render()
+
+function endAnimation() {
+    exitLightSpeed();
+    isAnimation = false;
+    document.body.removeChild(renderer.domElement);
+    document.body.removeChild(title);
+};
+
+setTimeout( function(){
+    launchToLightSpeed();
+}, 5000);
+
+setTimeout(function() {
+    endAnimation();
+    exitLightSpeed();
+}, 9000);
+
+
+
+
