@@ -65,10 +65,10 @@ body {
         font-size: 2.5em;
        }
        .disparition {        
-        opacity : 0;
+        display : none;
        }
        .apparition {
-        opacity : 1;
+        display : block;
        }
 .github {
         position: absolute;
@@ -143,5 +143,10 @@ body {
     <div class="github">
       <a href="#"><i class="fab fa-github"></i></a>
     </div-->
+
+    <div id="main" class="disparition">
+
+    </div>
+
     <script type="module" src="{{ site.baseurl }}/test.js"></script>
   </body>

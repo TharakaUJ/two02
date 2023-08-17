@@ -16,6 +16,7 @@ let speed = 0.09
 }*/
 //const text = document.querySelector('.text')
 const title = document.querySelector('.title')
+const main = document.getElementById('main')
 
 title.style.top = innerHeight / 2 - 50 + 'px'
 title.style.left = innerWidth / 2 - 200 + 'px'
@@ -193,6 +194,9 @@ function endAnimation() {
     isAnimation = false;
     document.body.removeChild(renderer.domElement);
     document.body.removeChild(title);
+    main.classList.remove('disaparition');
+    main.classList.add('apparition')
+
 };
 
 setTimeout( function(){
@@ -203,7 +207,5 @@ setTimeout(function() {
     endAnimation();
     exitLightSpeed();
 }, 9000);
-
-
 
 
