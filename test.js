@@ -17,6 +17,7 @@ let speed = 0.09
 //const text = document.querySelector('.text')
 const title = document.querySelector('.title')
 const main = document.getElementById('main')
+const loading = document.getElementById('loading')
 
 title.style.top = innerHeight / 2 - 50 + 'px'
 title.style.left = innerWidth / 2 - 200 + 'px'
@@ -209,3 +210,6 @@ setTimeout(function() {
 }, 9000);
 
 
+window.onload = function() {
+  loading.classList.add('disparition')
+}
