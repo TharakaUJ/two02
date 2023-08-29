@@ -34,11 +34,10 @@
 			width: 100px;
 			aspect-ratio: 1;
 			background-color: aqua;
-			border-radius: 100%;
+			border-bottom-left-radius: 100%;
 			position: fixed;
-			top: -50px;
-			right: -50px;
-			transform: rotate(-90deg);
+			top: 0px;
+			right: 0px;
 		}
 
 		#main-wrapper {
@@ -227,6 +226,16 @@
 	}
 
 	
+
+
+	const menu = document.getElementById('menu-toggle');
+
+	menu.addEventListener('click', function() {
+		menu.animate({
+			width: `${window.innerWidth}px`,
+			opacity: `0.5`
+		}, {duration: 3000, fill: "forwards"});
+	});
 
 
 </script>
