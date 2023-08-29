@@ -135,11 +135,14 @@
 	const speeds = [0.1, 0.22, 0.14];
 
 	for (let i = 0; i < 3; i++) {
+		verticalGrids[i].addEventListener('scroll', function() {
+			position[i] = verticalGrids[i].scrollTop;
+		});
 
 		setInterval(function() {
 		scrollAnime(i)
 	}, 10);
-	}
+	};
 
 
 	const maxScrollHeight = verticalGrids[0].scrollHeight - 400;
@@ -154,7 +157,6 @@
 		verticalGrids[i].scrollTop = position[i];
 
 		if (position[i] >  maxScrollHeight || position[i] < 0) {
-			console.log(position[i])
 			scrollDirection[i] = scrollDirection[i] * (-1);
 		};
 
