@@ -41,27 +41,142 @@
 			transform: rotate(-90deg);
 		}
 
-		#container {
-			height: 200vh;
+		#main-wrapper {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr;
+			gap: 10px;
+			padding: 10px;
+			overflow-y: hidden;
+			height: 100%;
+			
 		}
+
+		#main-wrapper:after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.403) 0 , transparent 10% 90%, #252a34a0 100%);
+		pointer-events: none;
+    }
+
+		.vertical-grid {
+			height: 60vh;
+			background-color: aliceblue;
+			display: grid;
+			grid-template-columns: 1fr;
+			gap: 10px;
+			padding: 10px;
+			overflow-y: scroll;
+		}
+
+		.vertical-grid{
+			&::-webkit-scrollbar {
+    		display: none;
+  		}
+		}
+
+		.vertical-grid:nth-child(2) {
+			margin-top: 20%;
+			margin-bottom: 20%;
+		}
+
+		.vertical-grid:nth-child(3) {
+			margin-top: auto;
+		}
+
+
+		.grid-items {
+			background-color: brown;
+			height: 400px;
+		}
+
+
+
+	
 
 	</style>
 	
 	<div id="menu-toggle"></div>
-	<div id="container"></div>
-	
+	<div id="main-wrapper">
+		<div class="vertical-grid">
+			<div class="grid-items">hh</div>
+			<div class="grid-items">jj</div>
+			<div class="grid-items">jj</div>
+			<div class="grid-items">jj</div>
+			<div class="grid-items">jj</div>
+
+		</div>
+		<div class="vertical-grid">
+			<div class="grid-items">hh</div>
+			<div class="grid-items">jj</div>
+			<div class="grid-items">jj</div>
+			<div class="grid-items">jj</div>
+			<div class="grid-items">jj</div>
+
+		</div>
+		<div class="vertical-grid">
+			<div class="grid-items">hh</div>
+			<div class="grid-items">jj</div>
+			<div class="grid-items">jj</div>
+			<div class="grid-items">jj</div>
+			<div class="grid-items">jj</div>
+
+		</div>
+	</div>
 	
 </body>
 
-<script type="module">
+<script>
+	const verticalGrids = document.getElementsByClassName('vertical-grid');
+
+	const speeds = [0.1, 0.22, 0.14];
+
+	for (let i = 0; i < 3; i++) {
+
+		setInterval(function() {
+		scrollAnime(i)
+	}, 10);
+	}
+
+
+	const maxScrollHeight = verticalGrids[0].scrollHeight - 400;
+
+//scroll 2nd div to bottom so that animation can moveupwards
+	var position = [0, maxScrollHeight, 0];
+	var scrollDirection = [1, -1, 1];
+
+
+	function scrollAnime(i) {
+		position[i] = position[i] + speeds[i] * scrollDirection[i];
+		verticalGrids[i].scrollTop = position[i];
+
+		if (position[i] >  maxScrollHeight || position[i] < 0) {
+			console.log(position[i])
+			scrollDirection[i] = scrollDirection[i] * (-1);
+		};
+
+	}
+
+	
+
+
+</script>
+
+<!--script type="module">
 import * as THREE from 'three';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 
 
+const scaleFactor = window.innerWidth / 1000;
+
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
+
 
 
 
@@ -70,18 +185,12 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 
-function animate() {
-	requestAnimationFrame( animate );
-	renderer.render( scene, camera );
-}
-animate();
-
 
 const fontLoader = new FontLoader();
 fontLoader.load('fonts/helvetiker_regular.typeface.json',function(tex){ 
     var  textGeo = new TextGeometry('two 02', {
-            size: 16,
-            height: 20,
+            size: 16 * scaleFactor,
+            height: 20 * scaleFactor,
             curveSegments: 16,
             font: tex,
     });
@@ -99,15 +208,40 @@ const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
     directionalLight.position.set(0, 0, 60)
     scene.add( directionalLight );
 
-	camera.position.set(40, 20, 60)
+	camera.position.set(40 * scaleFactor, 20 * scaleFactor, 60 * scaleFactor)
 
 
 	window.addEventListener('scroll', function() {
-		let percent = window.scrollY / window.innerHeight
+		let decimal = window.scrollY / window.innerHeight;
 
-		console.log(percent)
 	});
 
+	const cursor = {x: 0, y: 0}
 
-</script>
+	window.addEventListener('mousemove', (e) => {
+		cursor.x = e.clientX / window.innerWidth -0.5
+		cursor.y = e.clientY / window.innerHeight - 0.5
+
+
+	})
+
+
+
+
+function animate() {
+	requestAnimationFrame( animate );
+	renderer.render( scene, camera );
+
+	const cameraX = cursor.x * 10 + 40;
+	const cameraY = -cursor.y * 20 + 20;
+
+	camera.position.x = cameraX;
+	camera.position.y = cameraY
+	}
+animate();
+
+
+camera.rotate = 30;
+
+</script-->
 </html>
