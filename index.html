@@ -229,10 +229,11 @@
 
 
 	const menu = document.getElementById('menu-toggle');
+	const menuNewWidth = Math.max(window.innerHeight, window.innerWidth);
 
 	menu.addEventListener('click', function() {
 		menu.animate({
-			width: `${window.innerWidth}px`,
+			width: `${menuNewWidth}px`,
 			opacity: `0.5`
 		}, {duration: 3000, fill: "forwards"});
 	});
