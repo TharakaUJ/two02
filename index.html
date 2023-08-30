@@ -32,12 +32,16 @@
 
 		#menu-toggle {
 			width: 100px;
-			aspect-ratio: 1;
+			height: 100px;
 			background-color: aqua;
 			border-bottom-left-radius: 100%;
 			position: fixed;
 			top: 0px;
 			right: 0px;
+			z-index: 10;
+			cursor: pointer;
+
+
 		}
 
 		#main-wrapper {
@@ -229,13 +233,16 @@
 
 
 	const menu = document.getElementById('menu-toggle');
-	const menuNewWidth = Math.max(window.innerHeight, window.innerWidth);
 
 	menu.addEventListener('click', function() {
 		menu.animate({
-			width: `${menuNewWidth}px`,
-			opacity: `0.5`
-		}, {duration: 3000, fill: "forwards"});
+			width: `100%`,
+			height: `100%`,
+			opacity: `0.8`,
+			borderRadius: `0`,
+			Filter: `blur(8px)`
+		}, {duration: 1000, fill: "forwards"});
+
 	});
 
 
