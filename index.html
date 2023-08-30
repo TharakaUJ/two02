@@ -20,6 +20,7 @@
 		body {
 			margin: 0;
 			background-color: black;
+			color: white;
 			
 		}
 
@@ -34,13 +35,14 @@
 		#menu-toggle {
 			width: 100px;
 			height: 100px;
-			background-color: aqua;
+			background-color: cornflowerblue;
 			border-bottom-left-radius: 100%;
 			position: fixed;
 			top: 0px;
 			right: 0px;
 			z-index: 10;
 			cursor: pointer;
+			backdrop-filter: blur(50px);
 		}
 
 		#menu-toggle > i {
@@ -56,7 +58,7 @@
 		#main-wrapper {
 			display: grid;
 			grid-template-columns: 1fr 1fr 1fr;
-			gap: 10px;
+			gap: 20px;
 			padding: 10px;
 			overflow-y: hidden;
 			height: 100%;
@@ -70,16 +72,16 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.403) 0 , transparent 10% 90%, #252a34a0 100%);
+        /*background: linear-gradient(to bottom, rgb(0, 0, 0) 0 , transparent 10% 90%, #252a34a0 100%);*/
 		pointer-events: none;
     }
 
 		.vertical-grid {
 			height: 60vh;
-			background-color: aliceblue;
+			background-color: black;
 			display: grid;
 			grid-template-columns: 1fr;
-			gap: 10px;
+			gap: 20px;
 			overflow-y: scroll;
 		}
 
@@ -90,6 +92,9 @@
 		}
 
 		.vertical-grid:nth-child(1) {
+
+			margin-top: 40%;
+
 			.grid-items:nth-child(1) {
 				background-image: url('pics/connecting-a-LED-to-GPIO-pin.png');
 			}
@@ -114,6 +119,7 @@
 
 
 		.vertical-grid:nth-child(2) {
+
 			margin-top: 20%;
 			margin-bottom: 20%;
 
@@ -140,7 +146,6 @@
 		}
 
 		.vertical-grid:nth-child(3) {
-			margin-top: auto;
 
 			.grid-items:nth-child(1) {
 				background-image: url('pics/steel-mountain-hack-mr.-robot-e1686160421682-1080x675.png');
@@ -169,6 +174,38 @@
 			aspect-ratio: 1;
 		}
 
+		h1 {
+			color: white;
+			-webkit-text-stroke: 2px black;
+			opacity: 0.9;
+			margin: 0;
+			z-index: 20;
+			font-size: 6em;
+		}
+
+		h1 > sub {
+			font-size: 0.5em;
+		}
+
+		.title {
+			/*backdrop-filter: blur(10px);*/
+			position: absolute;
+			top: 0;
+			left: 0%;
+
+		}
+
+		.down {
+			font-size: 2em;
+			text-align: center;
+			margin: 0;
+			color: white;
+		}
+
+		.down :is(svg) {
+			color: white;
+		}
+		
 
 	
 
@@ -178,6 +215,11 @@
 		<i class="material-icons">menu</i>
 		<i class="material-icons hide">close</i>
 	</div>
+
+<div class="title">
+	<h1>two<sub>02</sub></h1>
+</div>
+
 	<div id="main-wrapper">
 		<div class="vertical-grid">
 			<div class="grid-items"></div>
@@ -204,7 +246,9 @@
 
 		</div>
 	</div>
-	
+
+	<div class="down">
+	</div>
 </body>
 
 <script>
@@ -268,9 +312,13 @@
 
 		menu.children[0].classList.remove('hide');
 		menu.children[1].classList.add('hide')
-	})
+	});
 
 
+
+	window.addEventListener('wheel', function() {
+
+	});
 </script>
 
 <!--script type="module">
