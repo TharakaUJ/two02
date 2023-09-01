@@ -95,7 +95,7 @@ pointer-events: none;
     margin-top: 40%;
 
     .grid-items:nth-child(1) {
-        background-image: url('{{ site.baseurl }}/pics/connecting-a-LED-to-GPIO-pin.png');
+        background-image: url("{{ site.baseurl }}/pics/connecting-a-LED-to-GPIO-pin.png");
     }
 
     .grid-items:nth-child(2) {
@@ -123,23 +123,23 @@ pointer-events: none;
     margin-bottom: 20%;
 
     .grid-items:nth-child(1) {
-        background-image: url('pics/menupreferencesrecomended-software.png');
+        background-image: url('{{ site.baseurl }}/pics/menupreferencesrecomended-software.png');
     }
 
     .grid-items:nth-child(2) {
-        background-image: url('pics/pi-hole-featured-img.jpg');
+        background-image: url('{{ site.baseurl }}/pics/pi-hole-featured-img.jpg');
     }
 
     .grid-items:nth-child(3) {
-        background-image: url('pics/menuprogrammingscratch3.png');
+        background-image: url('{{ site.baseurl }}/pics/menuprogrammingscratch3.png');
     }
 
     .grid-items:nth-child(4) {
-        background-image: url('pics/LED-blink-codesave.png');
+        background-image: url('{{ site.baseurl }}/pics/LED-blink-codesave.png');
     }
 
     .grid-items:nth-child(5) {
-        background-image: url('pics/pac-man fetured img.jpg');
+        background-image: url('{{ site.baseurl }}/pics/pac-man fetured img.jpg');
     }
     
 }
@@ -147,23 +147,23 @@ pointer-events: none;
 .vertical-grid:nth-child(3) {
 
     .grid-items:nth-child(1) {
-        background-image: url('pics/steel-mountain-hack-mr.-robot-e1686160421682-1080x675.png');
+        background-image: url('{{ site.baseurl }}/pics/steel-mountain-hack-mr.-robot-e1686160421682-1080x675.png');
     }
 
     .grid-items:nth-child(2) {
-        background-image: url('pics/Screenshot-from-2023-04-26-16.33.55@2x-e1682518769168.png');
+        background-image: url('{{ site.baseurl }}/pics/Screenshot-from-2023-04-26-16.33.55@2x-e1682518769168.png');
     }
 
     .grid-items:nth-child(3) {
-        background-image: url('pics/save-the-code.png');
+        background-image: url('{{ site.baseurl }}/pics/save-the-code.png');
     }
 
     .grid-items:nth-child(4) {
-        background-image: url('pics/rpi-imagerotherspecific-OS.png');
+        background-image: url('{{ site.baseurl }}/pics/rpi-imagerotherspecific-OS.png');
     }
 
     .grid-items:nth-child(5) {
-        background-image: url('pics/recomended-software.png');
+        background-image: url('{{ site.baseurl }}/pics/recomended-software.png');
     }
 }
 
