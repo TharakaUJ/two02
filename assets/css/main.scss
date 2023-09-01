@@ -7,3 +7,255 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+
+body {
+    margin: 0;
+    background-color: black;
+    color: white;
+    
+}
+
+body {
+    &::-webkit-scrollbar {
+    display: none;
+      }
+}
+
+canvas {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    transform: translate(50%, 50%);
+    z-index: -100;
+}
+
+#menu-toggle {
+    width: 100px;
+    height: 100px;
+    background-color: cornflowerblue;
+    border-bottom-left-radius: 100%;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 10;
+    cursor: pointer;
+    backdrop-filter: blur(50px);
+}
+
+#menu-toggle > i {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 3em;
+    }
+.hide {
+    display: none;
+}
+
+#main-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 10px;
+    overflow-y: hidden;
+    height: 100%;
+    
+}
+
+#main-wrapper:after {
+content: '';
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+/*background: linear-gradient(to bottom, rgb(0, 0, 0) 0 , transparent 10% 90%, #252a34a0 100%);*/
+pointer-events: none;
+}
+
+.vertical-grid {
+    height: 60vh;
+    background-color: black;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    overflow-y: scroll;
+    z-index: -1;
+}
+
+.vertical-grid{
+    &::-webkit-scrollbar {
+    display: none;
+      }
+}
+
+.vertical-grid:nth-child(1), .vertical-grid:nth-child(4) {
+
+    margin-top: 40%;
+
+    .grid-items:nth-child(1) {
+        background-image: url('{{ site.baseurl }}/pics/connecting-a-LED-to-GPIO-pin.png');
+    }
+
+    .grid-items:nth-child(2) {
+        background-image: url('{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png');
+    }
+
+    .grid-items:nth-child(3) {
+        background-image: url('{{ site.baseurl }}/pics/featured-img-for-blinking-LED-with-rpi.png');
+    }
+
+    .grid-items:nth-child(4) {
+        background-image: url('{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png');
+    }
+
+    .grid-items:nth-child(5) {
+        background-image: url('{{ site.baseurl }}/pics/GPIO-pinouts.jpg');
+    }
+    
+}
+
+
+.vertical-grid:nth-child(2) {
+
+    margin-top: 20%;
+    margin-bottom: 20%;
+
+    .grid-items:nth-child(1) {
+        background-image: url('pics/menupreferencesrecomended-software.png');
+    }
+
+    .grid-items:nth-child(2) {
+        background-image: url('pics/pi-hole-featured-img.jpg');
+    }
+
+    .grid-items:nth-child(3) {
+        background-image: url('pics/menuprogrammingscratch3.png');
+    }
+
+    .grid-items:nth-child(4) {
+        background-image: url('pics/LED-blink-codesave.png');
+    }
+
+    .grid-items:nth-child(5) {
+        background-image: url('pics/pac-man fetured img.jpg');
+    }
+    
+}
+
+.vertical-grid:nth-child(3) {
+
+    .grid-items:nth-child(1) {
+        background-image: url('pics/steel-mountain-hack-mr.-robot-e1686160421682-1080x675.png');
+    }
+
+    .grid-items:nth-child(2) {
+        background-image: url('pics/Screenshot-from-2023-04-26-16.33.55@2x-e1682518769168.png');
+    }
+
+    .grid-items:nth-child(3) {
+        background-image: url('pics/save-the-code.png');
+    }
+
+    .grid-items:nth-child(4) {
+        background-image: url('pics/rpi-imagerotherspecific-OS.png');
+    }
+
+    .grid-items:nth-child(5) {
+        background-image: url('pics/recomended-software.png');
+    }
+}
+
+
+.grid-items {
+    background-size: cover;
+    aspect-ratio: 1;
+}
+
+h1 {
+    color: white;
+    -webkit-text-stroke: 2px black;
+    opacity: 0.9;
+    margin: 0;
+    z-index: 20;
+    font-size: 6em;
+}
+
+h1 > sub {
+    font-size: 0.5em;
+}
+
+.title {
+    /*backdrop-filter: blur(10px);*/
+    position: absolute;
+    top: 0;
+    left: 0%;
+
+}
+
+.down {
+    font-size: 2em;
+    text-align: center;
+    margin: 0;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.down path {
+    opacity: 0;
+}
+
+.down:hover path:nth-child(1) {
+    animation: updown 1s ease-in-out 0s infinite forwards;
+}
+
+.down:hover path:nth-child(2) {
+    animation: updown 1s ease-in-out 0.5s infinite forwards;
+}
+
+@keyframes updown {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+
+
+
+.typing-wrapper {
+    /*This part is important for centering*/
+    display: grid;
+    place-items: center;
+    grid-area: 2 / 2 / span 1 / span 1;
+    }
+
+.typing-demo {
+    width: 28ch;
+    animation: typing 3s steps(30), blink .5s step-end 10 alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+    font-size: 1.5em;
+    mix-blend-mode: difference;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+}
+    
+@keyframes blink {
+    50% {
+        border-color: transparent
+    }
+}
+
+
+#section2 {
+    h2 {
+
+    }
+}

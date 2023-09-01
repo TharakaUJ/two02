@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 	<title>two02</title>
 
 	<script type="importmap">
@@ -22,6 +23,12 @@
 			background-color: black;
 			color: white;
 			
+		}
+
+		body {
+			&::-webkit-scrollbar {
+    		display: none;
+  			}
 		}
 
 		canvas {
@@ -83,6 +90,7 @@
 			grid-template-columns: 1fr;
 			gap: 20px;
 			overflow-y: scroll;
+			z-index: -1;
 		}
 
 		.vertical-grid{
@@ -91,7 +99,7 @@
   			}
 		}
 
-		.vertical-grid:nth-child(1) {
+		.vertical-grid:nth-child(1), .vertical-grid:nth-child(4) {
 
 			margin-top: 40%;
 
@@ -200,6 +208,9 @@
 			text-align: center;
 			margin: 0;
 			align-items: center;
+			position: fixed;
+			bottom: 0;
+			width: 100%;
 		}
 		.down path {
 			opacity: 0;
@@ -251,6 +262,12 @@
 			}
 		}
 
+
+		#section2 {
+			h2 {
+				
+			}
+		}
 		
 
 	</style>
@@ -303,6 +320,18 @@
 			</svg>
 				
 			
+	</div>
+
+	<div id="section2">
+		<h2>Services</h2>
+		<p>Feasibility report generation for ranking your business web site<br>
+			Search engine optimizations/ Keyword seletion <br>
+			Traffic redirections plans</p>
+		<h2>Lorem Ipsum</h2>
+		<p>dhrd hrd gdrd dddd gte bnhkd rtryks gthn aweds cfgghhh This height is used as reference to calculate the gap then we added it to the height (the one we used to find the gap that is based on the content). This will not trigger the height calculation of the grid again because it will create a cycle and will have an infinite loop thus the browser will stop here and we will have an overflow</p>
+
+		<h2>Lorem Ipsum</h2>
+		<p>dhrd hrd gdrd dddd gte bnhkd rtryks gthn aweds cfgghhh This height is used as reference to calculate the gap then we added it to the height (the one we used to find the gap that is based on the content). This will not trigger the height calculation of the grid again because it will create a cycle and will have an infinite loop thus the browser will stop here and we will have an overflow</p>
 	</div>
 </body>
 
@@ -370,10 +399,53 @@
 	});
 
 
+		const bgDiv1 = verticalGrids[2];
+		const section2 = document.getElementById('section2');
 
-	window.addEventListener('wheel', function() {
+		const main = document.getElementById('main-wrapper');
 
+
+
+		const timeline = new ScrollTimeline({
+			source: document.documentElement,
+			axis: "block",
 	});
+		
+
+	window.addEventListener('scroll', (e) => {
+		vGridsAnimation();
+		
+		if (window.scrollY > window.innerHeight * 0.4) {
+			console.log(window.scrollY / window.innerHeight);
+			//mainWrapperAnimation();
+			//section2Animation();
+		};
+	});
+
+
+function vGridsAnimation() {
+	bgDiv1.style.width = `${(window.innerWidth-60)/3}px`;
+	bgDiv1.style.position = 'absolute';
+	bgDiv1.style.right = '0px';
+	bgDiv1.animate({
+		top: [`10px`, `${600}px`],
+		right: [`${0}px`, `${500}px`],
+	}, {timeline, fill: 'forwards'});
+}
+
+function mainWrapperAnimation() {
+	main.animate({
+		transform: 'rotateX(90deg)'
+	}, {timeline, fill: 'forwards'});
+
+}
+
+function section2Animation() {
+	section2.animate({
+		transform: 'rotateX(0deg)'
+	}, {duration: 1000, fill: 'forwards'});
+
+}
 </script>
 
 <!--script type="module">
