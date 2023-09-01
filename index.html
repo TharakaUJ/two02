@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="{{ '/assets/css/mymain.css' | relative_url }}">
+
 	<title>two02</title>
 
 	<script type="importmap">
@@ -76,204 +77,18 @@
 		<p>Feasibility report generation for ranking your business web site<br>
 			Search engine optimizations/ Keyword seletion <br>
 			Traffic redirections plans</p>
-		<h2>Lorem Ipsum</h2>
-		<p>dhrd hrd gdrd dddd gte bnhkd rtryks gthn aweds cfgghhh This height is used as reference to calculate the gap then we added it to the height (the one we used to find the gap that is based on the content). This will not trigger the height calculation of the grid again because it will create a cycle and will have an infinite loop thus the browser will stop here and we will have an overflow</p>
+		<h2>Features
+		</h2>
+		<p>two<sub>02</sub> is a consultation company related to all round web services. <br>
+			We are experts in Search Engine Optimization (SEO), Keyword Search and <br>
+			many more related services for ranking your web site.</p>
 
-		<h2>Lorem Ipsum</h2>
-		<p>dhrd hrd gdrd dddd gte bnhkd rtryks gthn aweds cfgghhh This height is used as reference to calculate the gap then we added it to the height (the one we used to find the gap that is based on the content). This will not trigger the height calculation of the grid again because it will create a cycle and will have an infinite loop thus the browser will stop here and we will have an overflow</p>
+		<h2>Products</h2>
+		<p>two<sub>02</sub> is a consultation company related to all round web services. We are <br>
+			experts in Search Engine Optimization (SEO), Keyword Search and many more <br>
+			related services for ranking your web site.</p>
 	</div>
 </body>
 
-<script>
-	const verticalGrids = document.getElementsByClassName('vertical-grid');
-
-	const speeds = [0.1, 0.22, 0.14];
-
-	for (let i = 0; i < 3; i++) {
-		verticalGrids[i].addEventListener('scroll', function() {
-			position[i] = verticalGrids[i].scrollTop;
-		});
-
-		setInterval(function() {
-		scrollAnime(i)
-	}, 10);
-	};
-
-
-	const maxScrollHeight = verticalGrids[0].scrollHeight - 400;
-
-//scroll 2nd div to bottom so that animation can moveupwards
-	var position = [0, maxScrollHeight, 0];
-	var scrollDirection = [1, -1, 1];
-
-
-	function scrollAnime(i) {
-		position[i] = position[i] + speeds[i] * scrollDirection[i];
-		verticalGrids[i].scrollTop = position[i];
-
-		if (position[i] >  maxScrollHeight || position[i] < 0) {
-			scrollDirection[i] = scrollDirection[i] * (-1);
-		};
-
-	}
-
-	
-
-
-	const menu = document.getElementById('menu-toggle');
-
-	menu.children[0].addEventListener('click', function() {
-		menu.animate({
-			width: `100%`,
-			height: `100%`,
-			opacity: `0.8`,
-			borderRadius: `0`
-		}, {duration: 1000, fill: "forwards"});
-
-		menu.children[0].classList.add('hide');
-		menu.children[1].classList.remove('hide')
-
-	});
-
-	menu.children[1].addEventListener('click', function() {
-		menu.animate({
-			width: `100px`,
-			height: `100px`,
-			opacity: `1`,
-			borderBottomLeftRadius: `100%`
-		}, {duration: 1000, fill: "forwards"});
-
-		menu.children[0].classList.remove('hide');
-		menu.children[1].classList.add('hide')
-	});
-
-
-		const bgDiv1 = verticalGrids[2];
-		const section2 = document.getElementById('section2');
-
-		const main = document.getElementById('main-wrapper');
-
-
-
-		const timeline = new ScrollTimeline({
-			source: document.documentElement,
-			axis: "block",
-	});
-		
-
-	window.addEventListener('scroll', (e) => {
-		vGridsAnimation();
-		
-		if (window.scrollY > window.innerHeight * 0.4) {
-			console.log(window.scrollY / window.innerHeight);
-			//mainWrapperAnimation();
-			//section2Animation();
-		};
-	});
-
-
-function vGridsAnimation() {
-	bgDiv1.style.width = `${(window.innerWidth-60)/3}px`;
-	bgDiv1.style.position = 'absolute';
-	bgDiv1.style.right = '0px';
-	bgDiv1.animate({
-		top: [`10px`, `${600}px`],
-		right: [`${0}px`, `${500}px`],
-	}, {timeline, fill: 'forwards'});
-}
-
-function mainWrapperAnimation() {
-	main.animate({
-		transform: 'rotateX(90deg)'
-	}, {timeline, fill: 'forwards'});
-
-}
-
-function section2Animation() {
-	section2.animate({
-		transform: 'rotateX(0deg)'
-	}, {duration: 1000, fill: 'forwards'});
-
-}
-</script>
-
-<!--script type="module">
-import * as THREE from 'three';
-import { FontLoader } from 'three/addons/loaders/FontLoader.js';
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-
-
-const scaleFactor = window.innerWidth / 1000;
-
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 10000 );
-
-
-
-
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
-
-
-
-const fontLoader = new FontLoader();
-fontLoader.load('fonts/helvetiker_regular.typeface.json',function(tex){ 
-    var  textGeo = new TextGeometry('two 02', {
-            size: 16 * scaleFactor,
-            height: 20 * scaleFactor,
-            curveSegments: 16,
-            font: tex,
-    });
-    var  color = new THREE.Color();
-    color.setRGB(255, 250, 250);
-    var  textMaterial = new THREE.MeshStandardMaterial({ color: color });
-    var  text = new THREE.Mesh(textGeo , textMaterial);
-    text.position.set(0, 0, 0)
-    text.castShadow = true;
-    scene.add(text);
-})
-
-
-const directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-    directionalLight.position.set(0, 0, 60)
-    scene.add( directionalLight );
-
-	camera.position.set(40 * scaleFactor, 20 * scaleFactor, 60 * scaleFactor)
-
-
-	window.addEventListener('scroll', function() {
-		let decimal = window.scrollY / window.innerHeight;
-
-	});
-
-	const cursor = {x: 0, y: 0}
-
-	window.addEventListener('mousemove', (e) => {
-		cursor.x = e.clientX / window.innerWidth -0.5
-		cursor.y = e.clientY / window.innerHeight - 0.5
-
-
-	})
-
-
-
-
-function animate() {
-	requestAnimationFrame( animate );
-	renderer.render( scene, camera );
-
-	const cameraX = cursor.x * 10 + 40;
-	const cameraY = -cursor.y * 20 + 20;
-
-	camera.position.x = cameraX;
-	camera.position.y = cameraY
-	}
-animate();
-
-
-camera.rotate = 30;
-
-</script-->
+<script src="{{ '/assets/js/index.js' | relative_url }}"></script>
 </html>
