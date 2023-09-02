@@ -1,15 +1,20 @@
 const verticalGrids = document.getElementsByClassName('vertical-grid');
 
 	const speeds = [0.1, 0.22, 0.14];
+	const intervalScroll1 = setInterval(function() {
+		scrollAnime(0)
+	}, 10);
+	const intervalScroll2 = setInterval(function() {
+		scrollAnime(1)
+	}, 10);
+	const intervalScroll3 = setInterval(function() {
+		scrollAnime(2)
+	}, 10);
 
 	for (let i = 0; i < 3; i++) {
 		verticalGrids[i].addEventListener('scroll', function() {
-			position[i] = verticalGrids[i].scrollTop;
+			position[i] = verticalGrids[i]?.scrollTop;
 		});
-
-		setInterval(function() {
-		scrollAnime(i)
-	}, 10);
 	};
 
 
@@ -83,19 +88,7 @@ const verticalGrids = document.getElementsByClassName('vertical-grid');
 		
 
 	window.addEventListener('scroll', (e) => {
-        let decimal = window.scrollY/window.innerHeight;
-        console.log(decimal);
-
-        if (decimal < 0.5) {
-            vGridsAnimation(2);
-            vGridsAnimation(1);
-            vGridsAnimation(0);
-        } else if (0.5 < decimal <= 0.9) {
-            console.log('kk')
-            section2Animation();
-            secondVGridsAnimation();
-        }
-
+		scrollIfs();
 		
 		/*if (window.scrollY > window.innerHeight * 0.6) {
 			console.log(window.scrollY / window.innerHeight);
@@ -103,6 +96,22 @@ const verticalGrids = document.getElementsByClassName('vertical-grid');
 			
 		};*/
 	});
+
+var sectionAnimHaventDone = true;
+
+	function scrollIfs() {
+
+		let decimal = window.scrollY/window.innerHeight;
+        //console.log(decimal);
+
+        if (decimal < 0.5 && sectionAnimHaventDone) {
+            vGridsAnimation(2);
+            vGridsAnimation(1);
+            vGridsAnimation(0);
+        } else if (0.5 < decimal && sectionAnimHaventDone) {
+            section2Animation();
+        }
+	}
 
     const hTwos = section2.getElementsByTagName('h2');
 
@@ -122,54 +131,32 @@ function vGridsAnimation(i) {
 }
 
 
-/*
-function vGridsAnimation2() {
-    let dFromTOp = window.scrollY + section2.getElementsByTagName('h2')[1].getBoundingClientRect().top
-    let dFromLeft = (window.innerWidth - 60)/3
-	bgDiv2.style.width = `${(window.innerWidth-60)/3}px`;
-	bgDiv2.style.position = 'absolute';
-	bgDiv2.animate({
-		top: [`0px`, `${dFromTOp}px`],
-        left: [`${dFromLeft}px`, `${dFromLeft}px`],
-        transform: 'rotate(20deg)',
-	}, {timeline, fill: 'forwards'});
-}
-
-function vGridsAnimation3() {
-    let dFromTOp = window.scrollY + section2.getElementsByTagName('h2')[0].getBoundingClientRect().top
-	bgDiv3.style.width = `${(window.innerWidth-60)/3}px`;
-	bgDiv3.style.position = 'absolute';
-	bgDiv3.animate({
-		top: [`0px`, `${dFromTOp}px`],
-        left: [`${20}px`, `${20}px`],
-        transform: 'rotate(-10deg)',
-	}, {timeline, fill: 'forwards'});
-}
-
-function mainWrapperAnimation() {
-	main.animate({
-		transform: 'rotateX(90deg)'
-	}, {timeline, fill: 'forwards'});
-
-}
-*/
+const title = document.querySelector('.title')
 
 
 function section2Animation() {
-    console.log('called')
 	section2.animate({
         top: ['100%', '0%']
 	}, {duration: 1000, fill: 'forwards'});
 
-}
+	title.scrollIntoView({behavior: 'smooth', block: 'start'})
 
-
-function secondVGridsAnimation() {
-    for (let i = 0; i < 3; i++) {
+		for (let i = 0; i < 3; i++) {
+			verticalGrids[i].animate({
+				top: '-1000px'
+			}, {duration: 2000, fill: 'forwards'});
 
     }
+	setTimeout(function() {
+		clearInterval(intervalScroll1);
+		clearInterval(intervalScroll2);
+		clearInterval(intervalScroll3);
+		main.remove();
+	}, 3000);
 
+	sectionAnimHaventDone = false;
 }
+
 
 /*
 <script type="module">
