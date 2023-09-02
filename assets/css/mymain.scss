@@ -16,6 +16,7 @@ body {
 	color: $font-color;
 	overflow-x: hidden;
 	font-family: $font-family;
+	z-index: -101;
 
 }
 
@@ -25,11 +26,12 @@ body {
 	}
 }
 
-canvas {
+#canvas-container {
 	position: fixed;
-	top: -50%;
-	left: -50%;
-	transform: translate(50%, 50%);
+	top: 0%;
+	left: 0%;
+	bottom: 0%;
+	right: 0;
 	z-index: -100;
 }
 
