@@ -225,10 +225,10 @@ for (let i =0; i < picNames.length; i++) {
     for (let i = 0; i < imgs.length; i++) {
         imgs[i].position.y += speed
     
-        if (imgs[i].position.y >= 60) {
+        if (imgs[i].position.y <= -60) {
         imgs[i].position.x = Math.random() * 100 - 50
         imgs[i].position.z = Math.random() * 100 - 50
-        imgs[i].position.y = 5
+        imgs[i].position.y = 60
         }
       }
 
