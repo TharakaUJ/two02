@@ -66,15 +66,6 @@ const verticalGrids = document.getElementsByClassName('vertical-grid');
 	});
 
 
-
-
-
-
-
-/*
-		const vGrid = verticalGrids[2];
-        const bgDiv2 = verticalGrids[1];
-        const bgDiv3 = verticalGrids[0];*/
 		const section2 = document.getElementById('section2');
 
 		const main = document.getElementById('main-wrapper');
@@ -87,14 +78,8 @@ const verticalGrids = document.getElementsByClassName('vertical-grid');
 	});
 		
 
-	window.addEventListener('scroll', (e) => {
+	window.addEventListener('scroll', () => {
 		scrollIfs();
-		
-		/*if (window.scrollY > window.innerHeight * 0.6) {
-			console.log(window.scrollY / window.innerHeight);
-			//mainWrapperAnimation();
-			
-		};*/
 	});
 
 var sectionAnimHaventDone = true;
