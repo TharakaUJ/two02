@@ -53,7 +53,7 @@ const verticalGrids = document.getElementsByClassName('vertical-grid');
 		}, {duration: 1000, fill: "forwards"});
 
 		menu.children[0].classList.add('hide');
-		menu.children[1].classList.remove('hide')
+		menu.children[1].classList.remove('hide');
 
 	});
 
@@ -66,7 +66,7 @@ const verticalGrids = document.getElementsByClassName('vertical-grid');
 		}, {duration: 1000, fill: "forwards"});
 
 		menu.children[0].classList.remove('hide');
-		menu.children[1].classList.add('hide')
+		menu.children[1].classList.add('hide');
 	});
 
 
@@ -141,7 +141,7 @@ function section2Animation() {
 		clearInterval(intervalScroll2);
 		clearInterval(intervalScroll3);
 		main.remove();
-		animate();
+		//animate();
 
 	}, 3000);
 
