@@ -25,7 +25,11 @@
 	<div id="menu-toggle">
 		<i class="material-icons">menu</i>
 		<i class="material-icons hide">close</i>
-
+		<nav>
+			<a class="link" href="{{ site.baseurl }}/" target="_self">PROJECTS</a>
+			<a class="link" href="{{ site.baseurl }}/" target="_self">CONTACT</a>
+			<a class="link" href="{{ site.baseurl }}/" target="_self">ABOUT US</a>
+		</nav>
 	</div>
 	<canvas id="canvas"></canvas>
 
@@ -98,5 +102,19 @@
 
 <script src="{{ '/assets/js/index.js' | relative_url }}" type="module"></script>
 <script src="{{ '/assets/js/game.js' | relative_url }}" type="module"></script>
+
+<script>for(const link of document.getElementsByClassName("link")) {
+	link.onmousemove = e => {
+	  const decimal = e.clientX / link.offsetWidth;
+	  
+	  const basePercent = 80,
+			percentRange = 20,
+			adjustablePercent = percentRange * decimal;
+	  
+	  const lightBluePercent = basePercent + adjustablePercent;
+	  
+	  link.style.setProperty("--light-blue-percent", `${lightBluePercent}%`);
+	}
+  }</script>
 
 </html>

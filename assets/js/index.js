@@ -54,6 +54,13 @@ const verticalGrids = document.getElementsByClassName('vertical-grid');
 
 		menu.children[0].classList.add('hide');
 		menu.children[1].classList.remove('hide');
+		setTimeout(function() {
+			menu.children[2].classList.remove('hide');
+		}, 600);
+		menu.children[2].animate({
+			top: '0%',
+			right: '0%'
+		}, {duration: 1000, fill: 'forwards'});
 
 	});
 
@@ -67,6 +74,13 @@ const verticalGrids = document.getElementsByClassName('vertical-grid');
 
 		menu.children[0].classList.remove('hide');
 		menu.children[1].classList.add('hide');
+		setTimeout(function() {
+			menu.children[2].classList.add('hide');
+		}, 500);
+		menu.children[2].animate({
+			top: '-100%',
+			right: '-100%'
+		}, {duration: 1000, fill: 'forwards'});
 	});
 
 
