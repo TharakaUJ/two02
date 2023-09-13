@@ -1,0 +1,115 @@
+---
+permalink: /new/
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        html,body {
+            margin: 0;
+
+        }
+
+
+        section {
+            height: 100vh;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+
+            
+        }
+
+        section h1 {
+            font-size: 10em;
+            margin: 0;
+            justify-self: center;
+        }
+        h1,p,ul {
+            margin: 0;
+        }
+
+        .gallery-container {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            gap: 40px;
+            transform: rotate(10deg);
+            width: 120%;
+            position: relative;
+            top: 20%;
+            left: -10%;
+        }
+
+        .gallery-container {
+            &::-webkit-scrollbar {
+            display: none;
+            }
+            
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            height: 300px;
+            width: 400px;
+            border-radius: 40px;
+            background-color: aliceblue;
+            
+        }
+    </style>
+
+    
+    <section>
+        <div>
+            <nav>
+                <ul><li>Home</li></ul>
+            </nav>
+        </div>
+        <h1>TWO<sub>02</sub></h1>
+    </section>
+    <section>
+        <p>
+            Enjoy some of our best work in immersive
+        </p>
+
+        <div class="gallery-container">
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+
+
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const scrollContainer = document.querySelector(".gallery-container");
+    const scrollContent = document.querySelector(".gallery-item");
+
+    scrollContainer.addEventListener("scroll", function() {
+        //const cardWidth = document.querySelector(".card").offsetWidth;
+        const scrollLeft = scrollContainer.scrollLeft;
+        const contentWidth = scrollContent.offsetWidth;
+
+        if (scrollLeft + scrollContainer.offsetWidth == contentWidth) {
+            // If scrolled to the end, scroll back to the first card
+            //scrollContainer.scrollLeft = 0;
+        }
+    });
+});
+
+    </script>
+</body>
+</html>
