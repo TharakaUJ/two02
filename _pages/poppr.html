@@ -32,6 +32,7 @@ permalink: /new/
             font-size: 10em;
             margin: 0;
             justify-self: center;
+            padding: 5%;
         }
         h1,p,ul {
             margin: 0;
@@ -42,7 +43,7 @@ permalink: /new/
             flex-wrap: nowrap;
             overflow-x: scroll;
             gap: 40px;
-            transform: rotate(10deg);
+            transform: rotate(8deg);
             width: 120%;
             position: relative;
             top: 20%;
@@ -75,7 +76,7 @@ permalink: /new/
                 <ul><li>Home</li></ul>
             </nav>
         </div>
-        <h1>TWO<sub>02</sub></h1>
+        <h1>202<sub>success</sub></h1>
     </section>
     <section>
         <p>
@@ -92,9 +93,12 @@ permalink: /new/
 
         </div>
     </section>
+    <section>
+        <p>hhhkss</p>
+    </section>
 
     <script>
-        const scrollContainer = document.getElementById("gallery-container");
+const scrollContainer = document.getElementById("gallery-container");
 let isDragging = false;
 let startX;
 let scrollLeft;
@@ -124,9 +128,26 @@ scrollContainer.addEventListener("mousemove", (e) => {
     scrollContainer.scrollLeft = scrollLeft - walk;
 });
 
+
+
+
+//horizontal scroll when vertical scroll
+var initialFact = 0;
+window.addEventListener('scroll', () => {
+    let fact = window.scrollY / document.body.scrollHeight;
+    if (fact <= 0.6) {
+        if (initialFact < fact) {
+            scrollContainer.scrollLeft = scrollContainer.scrollLeft + fact * 10;
+        } else {
+            scrollContainer.scrollLeft = scrollContainer.scrollLeft - fact * 10;
+        }
+
+        initialFact = fact
+    }
+});
     </script>
 
-    <script>
+    <!--script>
 var horizontalScrollableDiv = document.getElementById("gallery-container");
 
 horizontalScrollableDiv.addEventListener("scroll", function() {
@@ -139,7 +160,29 @@ horizontalScrollableDiv.addEventListener("scroll", function() {
     }
 });
 
-    </script>
+    </script-->
+
+    <!--script>
+        var horizontalScrollableDiv = document.getElementById("gallery-container");
+var isLooping = false;
+
+horizontalScrollableDiv.addEventListener("scroll", function() {
+  if (!isLooping) {
+    if (horizontalScrollableDiv.scrollLeft === 0) {
+      isLooping = true;
+      // Scroll to the right end
+      horizontalScrollableDiv.scrollLeft = horizontalScrollableDiv.scrollWidth;
+    } else if (horizontalScrollableDiv.scrollLeft + horizontalScrollableDiv.clientWidth >= horizontalScrollableDiv.scrollWidth) {
+      isLooping = true;
+      // Scroll to the left end
+      horizontalScrollableDiv.scrollLeft = 0;
+    }
+  } else {
+    isLooping = false;
+  }
+});
+
+    </script-->
 
 </body>
 </html>
