@@ -11,21 +11,21 @@ permalink: /new/
 </head>
 <body>
     <style>
-        html,body {
+        body {
             margin: 0;
-
+            background-color: black;
+            z-index: -100;
         }
 
 
         section {
             height: 100vh;
             width: 100%;
-            background-color: black;
             color: white;
             text-align: center;
             overflow: hidden;
-
-            
+            opacity: 0.8;
+            background-color: transparent;            
         }
 
         section h1 {
@@ -67,11 +67,81 @@ permalink: /new/
             background-color: aliceblue;
             
         }
+
+
+
+
+@keyframes rotate {
+  from {
+    rotate: 0deg;
+  }
+  
+  50% {
+    scale: 1 1.5;
+  }
+  
+  to {
+    rotate: 360deg;
+  }
+}
+
+#blob {
+  background-color: white;
+  height: 34vmax;
+  aspect-ratio: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: linear-gradient(to right, aquamarine, mediumpurple);
+  animation: rotate 20s infinite;
+  opacity: 0.8;
+  z-index: -4;
+  filter: blur(12vmax);
+}
+
+#blur {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+#logo {
+    position: fixed;
+	top: 0;
+	left: 0%;
+	z-index: 10000;
+}
+
+#logo img {
+		width: 200px;
+        margin: 10px;
+	}
+
+
+.masthead {
+    margin: 10px;
+}
+
+.masthead ul {
+    text-decoration: none;
+    list-style-type: none;
+}
+
     </style>
 
     
     <section>
-        <div>
+        <div class="masthead">
+            <div id="logo">
+                <img src="../assets/images/white text horizontal .png" alt="TWO02">
+            </div>
             <nav>
                 <ul><li>Home</li></ul>
             </nav>
@@ -97,6 +167,9 @@ permalink: /new/
         <p>hhhkss</p>
     </section>
 
+    <div id="blur">
+        <div id="blob"></div>
+    </div>
     <script>
 const scrollContainer = document.getElementById("gallery-container");
 let isDragging = false;
@@ -145,6 +218,22 @@ window.addEventListener('scroll', () => {
         initialFact = fact
     }
 });
+
+
+
+/* -- Glow effect -- */
+
+const blob = document.getElementById("blob");
+
+window.onpointermove = event => { 
+  const { clientX, clientY } = event;
+  
+  blob.animate({
+    left: `${clientX}px`,
+    top: `${clientY}px`
+  }, { duration: 3000, fill: "forwards" });
+}
+
     </script>
 
     <!--script>
