@@ -37,7 +37,7 @@ permalink: /new/
             margin: 0;
         }
 
-        .gallery-container {
+        #gallery-container {
             display: flex;
             flex-wrap: nowrap;
             overflow-x: scroll;
@@ -49,7 +49,7 @@ permalink: /new/
             left: -10%;
         }
 
-        .gallery-container {
+        #gallery-container {
             &::-webkit-scrollbar {
             display: none;
             }
@@ -82,7 +82,7 @@ permalink: /new/
             Enjoy some of our best work in immersive
         </p>
 
-        <div class="gallery-container">
+        <div id="gallery-container">
             <div class="gallery-item"></div>
             <div class="gallery-item"></div>
             <div class="gallery-item"></div>
@@ -94,22 +94,52 @@ permalink: /new/
     </section>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    const scrollContainer = document.querySelector(".gallery-container");
-    const scrollContent = document.querySelector(".gallery-item");
+        const scrollContainer = document.getElementById("gallery-container");
+let isDragging = false;
+let startX;
+let scrollLeft;
 
-    scrollContainer.addEventListener("scroll", function() {
-        //const cardWidth = document.querySelector(".card").offsetWidth;
-        const scrollLeft = scrollContainer.scrollLeft;
-        const contentWidth = scrollContent.offsetWidth;
+scrollContainer.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    startX = e.pageX - scrollContainer.offsetLeft;
+    scrollLeft = scrollContainer.scrollLeft;
+    scrollContainer.style.cursor = "grabbing"; // Change cursor when dragging
+});
 
-        if (scrollLeft + scrollContainer.offsetWidth == contentWidth) {
-            // If scrolled to the end, scroll back to the first card
-            //scrollContainer.scrollLeft = 0;
-        }
-    });
+scrollContainer.addEventListener("mouseup", () => {
+    isDragging = false;
+    scrollContainer.style.cursor = "grab"; // Change cursor back to "grab"
+});
+
+scrollContainer.addEventListener("mouseleave", () => {
+    isDragging = false;
+    scrollContainer.style.cursor = "grab"; // Change cursor back to "grab"
+});
+
+scrollContainer.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainer.offsetLeft;
+    const walk = (x - startX) * 2; // Adjust the multiplier for faster/slower scrolling
+    scrollContainer.scrollLeft = scrollLeft - walk;
 });
 
     </script>
+
+    <script>
+var horizontalScrollableDiv = document.getElementById("gallery-container");
+
+horizontalScrollableDiv.addEventListener("scroll", function() {
+    if (horizontalScrollableDiv.scrollLeft + horizontalScrollableDiv.clientWidth >= horizontalScrollableDiv.scrollWidth) {
+        console.log("Reached the end of the horizontally scrollable div!");
+    }
+
+    if (horizontalScrollableDiv.scrollLeft === 0) {
+        console.log("Reached the left end of the horizontally scrollable div!");
+    }
+});
+
+    </script>
+
 </body>
 </html>
