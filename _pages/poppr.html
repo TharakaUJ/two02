@@ -25,15 +25,24 @@ permalink: /new/
             text-align: center;
             overflow: hidden;
             opacity: 0.8;
-            background-color: transparent;            
+            background-color: transparent;
+            display: grid;         
         }
 
-        section h1 {
+        #big-text {
+            justify-self: center;
+        }
+
+        #big-text h1 {
             font-size: 10em;
             margin: 0;
             justify-self: center;
-            padding: 5%;
         }
+        #big-text h4 {
+            font-size: 5em;
+            margin: 0;
+        }
+
         h1,p,ul {
             margin: 0;
         }
@@ -146,7 +155,10 @@ permalink: /new/
                 <ul><li>Home</li></ul>
             </nav>
         </div>
-        <h1>202<sub>success</sub></h1>
+        <div id="big-text">
+            <h1>202</h1>
+            <h4>success</h4>
+        </div>
     </section>
     <section>
         <p>
@@ -154,11 +166,11 @@ permalink: /new/
         </p>
 
         <div id="gallery-container">
+            <div class="gallery-item" style="background-color: firebrick;"></div>
             <div class="gallery-item"></div>
+            <div class="gallery-item" style="background-color: darkgreen;"></div>
             <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
+            <div class="gallery-item" style="background-color: firebrick;"></div>
 
 
         </div>
@@ -236,23 +248,30 @@ window.onpointermove = event => {
 
     </script>
 
-    <!--script>
+    <script>
 var horizontalScrollableDiv = document.getElementById("gallery-container");
 
 horizontalScrollableDiv.addEventListener("scroll", function() {
     if (horizontalScrollableDiv.scrollLeft + horizontalScrollableDiv.clientWidth >= horizontalScrollableDiv.scrollWidth) {
-        console.log("Reached the end of the horizontally scrollable div!");
+        let children = horizontalScrollableDiv.children;
+        horizontalScrollableDiv.appendChild(children[0]);
+        horizontalScrollableDiv.appendChild(children[1]);
+        horizontalScrollableDiv.scrollLeft = horizontalScrollableDiv.scrollLeft - 2 * children[0].offsetWidth -10; 
     }
 
     if (horizontalScrollableDiv.scrollLeft === 0) {
-        console.log("Reached the left end of the horizontally scrollable div!");
+        let children = horizontalScrollableDiv.children;
+        horizontalScrollableDiv.prepend(children[children.length-1]);
+        horizontalScrollableDiv.prepend(children[children.length-2]);
+        horizontalScrollableDiv.scrollLeft = horizontalScrollableDiv.scrollLeft + 2 * children[0].offsetWidth;
+    
     }
 });
 
-    </script-->
+    </script>
 
     <!--script>
-        var horizontalScrollableDiv = document.getElementById("gallery-container");
+var horizontalScrollableDiv = document.getElementById("gallery-container");
 var isLooping = false;
 
 horizontalScrollableDiv.addEventListener("scroll", function() {
