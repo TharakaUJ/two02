@@ -171,6 +171,10 @@ permalink: /new/
             <div class="gallery-item" style="background-color: darkgreen;"></div>
             <div class="gallery-item"></div>
             <div class="gallery-item" style="background-color: firebrick;"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
 
 
         </div>
@@ -252,7 +256,7 @@ window.onpointermove = event => {
 var horizontalScrollableDiv = document.getElementById("gallery-container");
 
 horizontalScrollableDiv.addEventListener("scroll", function() {
-    if (horizontalScrollableDiv.scrollLeft + horizontalScrollableDiv.clientWidth >= horizontalScrollableDiv.scrollWidth) {
+    if (horizontalScrollableDiv.scrollLeft + horizontalScrollableDiv.clientWidth >= horizontalScrollableDiv.scrollWidth - 100) {
         let children = horizontalScrollableDiv.children;
         horizontalScrollableDiv.appendChild(children[0]);
         horizontalScrollableDiv.appendChild(children[1]);
