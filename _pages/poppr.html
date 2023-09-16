@@ -143,6 +143,17 @@ permalink: /new/
     list-style-type: none;
 }
 
+#video-container {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    z-index: -1;
+    width: 50%;
+    height: 50%;
+    background-color: rgb(60, 60, 60);
+    border-radius: 40px;
+}
+
     </style>
 
     
@@ -159,10 +170,13 @@ permalink: /new/
             <h1>202</h1>
             <h4>success</h4>
         </div>
+        <div id="video-container">
+            <img style="height: 100%; width: 100%;" src="../pics/pi-hole-featured-img.jpg" alt="">
+        </div>
     </section>
     <section>
         <p>
-            Enjoy some of our best work in immersive
+            Enjoy some of our best work in immersive 
         </p>
 
         <div id="gallery-container">
@@ -185,7 +199,7 @@ permalink: /new/
 
     <div id="blur">
         <div id="blob"></div>
-    </div>
+    </div>   
     <script>
 const scrollContainer = document.getElementById("gallery-container");
 let isDragging = false;
@@ -237,9 +251,10 @@ window.addEventListener('scroll', () => {
 
 
 
-/* -- Glow effect -- */
+/* -- Glow effect -- And turning effect */
 
 const blob = document.getElementById("blob");
+const turner = document.getElementById("video-container");
 
 window.onpointermove = event => { 
   const { clientX, clientY } = event;
@@ -248,7 +263,13 @@ window.onpointermove = event => {
     left: `${clientX}px`,
     top: `${clientY}px`
   }, { duration: 3000, fill: "forwards" });
+
+  turner.animate({
+    transform: `rotateX(${ 30 * clientY * 0.001}deg) rotateY(${30 * clientX * 0.001}deg)`,
+  }, {duration: 5000, fill:"forwards" });
 }
+
+
 
     </script>
 
