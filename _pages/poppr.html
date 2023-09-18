@@ -154,6 +154,25 @@ permalink: /new/
     border-radius: 40px;
 }
 
+#toggle-menu {
+    border-radius: 100%;
+    background-color: aqua;
+    aspect-ratio: 1;
+    width: 50px;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 101;
+}
+
+#menu {
+    position: fixed;
+    width: 100%;
+    height: 0%;
+    top: 0%;
+    z-index: 100;
+    background-color: greenyellow;
+}
     </style>
 
     
@@ -162,9 +181,6 @@ permalink: /new/
             <div id="logo">
                 <img src="../assets/images/white text horizontal .png" alt="TWO02">
             </div>
-            <nav>
-                <ul><li>Home</li></ul>
-            </nav>
         </div>
         <div id="big-text">
             <h1>202</h1>
@@ -174,6 +190,12 @@ permalink: /new/
             <img style="height: 100%; width: 100%;" src="../pics/pi-hole-featured-img.jpg" alt="">
         </div>
     </section>
+    <div id="menu">
+        <div id="toggle-menu"></div>
+        <ul>
+            <li>Home</li>
+        </ul>
+    </div>
     <section>
         <p>
             Enjoy some of our best work in immersive 
@@ -199,7 +221,30 @@ permalink: /new/
 
     <div id="blur">
         <div id="blob"></div>
-    </div>   
+    </div>  
+    
+<script>
+    const toggleMenu = document.getElementById('toggle-menu');
+    const menu = document.getElementById('menu');
+    var menuToggled = false
+    
+    toggleMenu.addEventListener('click', () => {
+        if (!menuToggled) {
+            menu.animate({
+                height: '100%',
+                top: ['-100%', '0'],
+            }, {duration:1000, fill: 'forwards'});
+            menuToggled = true;
+        } else {
+            menu.animate({
+                height: '0',
+                top: '100%',
+            }, {duration:1000, fill: 'forwards'});
+            menuToggled = false; 
+        }
+    });
+</script>
+    
     <script>
 const scrollContainer = document.getElementById("gallery-container");
 let isDragging = false;
