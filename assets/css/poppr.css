@@ -191,17 +191,10 @@
             top: -100%;
             z-index: 100;
             background-color: var(--menu-color);
-            /*background: repeating-linear-gradient(
-  45deg,
-  #606dbc,
-  #606dbc 100px,
-  #465298 100px,
-  #465298 200px
-);*/
         }
 
         .hide {
-            display: none;
+            display: none!important;
         }
 
         #scroll-bar {
