@@ -1,0 +1,215 @@
+        :root {
+            --background-color: #303131;
+            --font-color: #ffffff;
+            --menu-color: #003e43;
+            --toggle-menu: #BAB608;
+            --scroll-postion: 0;
+            --scroll-bar-height: 20px;
+            --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--background-color);
+            z-index: -100;
+            font-family: var(--font);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+
+        section {
+            height: 100vh;
+            width: 100%;
+            color: var(--font-color);
+            text-align: center;
+            overflow: hidden;
+            opacity: 0.8;
+            background-color: transparent;
+            display: grid;
+        }
+
+        #big-text {
+            justify-self: center;
+        }
+
+        #big-text h1 {
+            font-size: 10em;
+            margin: 0;
+            justify-self: center;
+        }
+
+        #big-text h4 {
+            font-size: 5em;
+            margin: 0;
+        }
+
+        h1,
+        p,
+        ul {
+            margin: 0;
+        }
+
+        #gallery-container {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: scroll;
+            gap: 40px;
+            transform: rotate(8deg);
+            width: 120%;
+            position: relative;
+            top: 20%;
+            left: -10%;
+        }
+
+        #gallery-container {
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            height: 300px;
+            width: 400px;
+            border-radius: 40px;
+            background-color: aliceblue;
+
+        }
+
+
+
+
+        @keyframes rotate {
+            from {
+                rotate: 0deg;
+            }
+
+            50% {
+                scale: 1 1.5;
+            }
+
+            to {
+                rotate: 360deg;
+            }
+        }
+
+        #blob {
+            background-color: white;
+            height: 34vmax;
+            aspect-ratio: 1;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            translate: -50% -50%;
+            border-radius: 50%;
+            background: linear-gradient(to right, aquamarine, mediumpurple);
+            animation: rotate 20s infinite;
+            opacity: 0.8;
+            z-index: -4;
+            filter: blur(12vmax);
+        }
+
+        #blur {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+
+        #logo {
+            position: fixed;
+            top: 0;
+            left: 0%;
+            z-index: 10000;
+        }
+
+        #logo img {
+            width: 200px;
+            margin: 10px;
+        }
+
+
+        .masthead {
+            margin: 10px;
+        }
+
+        .masthead ul {
+            text-decoration: none;
+            list-style-type: none;
+        }
+
+        #video-container {
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            z-index: -1;
+            width: 50%;
+            height: 50%;
+            background-color: rgb(60, 60, 60);
+            border-radius: 40px;
+        }
+
+        #toggle-menu {
+            border-radius: 100%;
+            background-color: var(--toggle-menu);
+            aspect-ratio: 1;
+            width: 50px;
+            position: fixed;
+            right: 10px;
+            top: 10px;
+            z-index: 101;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        #menu {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: -100%;
+            z-index: 100;
+            background-color: var(--menu-color);
+            /*background: repeating-linear-gradient(
+  45deg,
+  #606dbc,
+  #606dbc 100px,
+  #465298 100px,
+  #465298 200px
+);*/
+        }
+
+        .hide {
+            display: none;
+        }
+
+        #scroll-bar {
+            position: fixed;
+            width: 3px;
+            height: var(--scroll-bar-height);
+            right: 1px;
+            top: var(--scroll-postion);
+            background-color: aqua;
+            opacity: 0;
+        }
