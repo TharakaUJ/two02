@@ -138,6 +138,10 @@ scrollContainer.addEventListener("mousemove", (e) => {
     const x = e.pageX - scrollContainer.offsetLeft;
     const walk = (x - startX) * 2; // Adjust the multiplier for faster/slower scrolling
     scrollContainer.scrollLeft = scrollLeft - walk;
+    if (horizontalScrollableDiv.scrollLeft === 0 | horizontalScrollableDiv.scrollLeft + horizontalScrollableDiv.clientWidth >= horizontalScrollableDiv.scrollWidth - 100) {
+    isDragging = false;
+    scrollContainer.style.cursor = "grab";
+}
 });
 
 
@@ -188,17 +192,16 @@ var horizontalScrollableDiv = document.getElementById("gallery-container");
 horizontalScrollableDiv.addEventListener("scroll", function() {
     if (horizontalScrollableDiv.scrollLeft + horizontalScrollableDiv.clientWidth >= horizontalScrollableDiv.scrollWidth - 100) {
         let children = horizontalScrollableDiv.children;
+        horizontalScrollableDiv.scrollLeft = horizontalScrollableDiv.scrollLeft - 2 * children[0].offsetWidth -10; 
         horizontalScrollableDiv.appendChild(children[0]);
         horizontalScrollableDiv.appendChild(children[1]);
-        horizontalScrollableDiv.scrollLeft = horizontalScrollableDiv.scrollLeft - 2 * children[0].offsetWidth -10; 
     }
 
     if (horizontalScrollableDiv.scrollLeft === 0) {
         let children = horizontalScrollableDiv.children;
-        horizontalScrollableDiv.prepend(children[children.length-1]);
-        horizontalScrollableDiv.prepend(children[children.length-2]);
         horizontalScrollableDiv.scrollLeft = horizontalScrollableDiv.scrollLeft + 2 * children[0].offsetWidth;
-    
+        horizontalScrollableDiv.prepend(children[children.length-1]);
+        horizontalScrollableDiv.prepend(children[children.length-2]);    
     }
 });
 
