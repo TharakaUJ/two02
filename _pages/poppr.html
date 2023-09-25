@@ -4,6 +4,7 @@ permalink: /new/
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,14 +12,15 @@ permalink: /new/
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>TWO02</title>
 </head>
-<body>    
+
+<body>
     <div class="masthead">
         <div id="logo">
             <img src="../assets/images/white text horizontal .png" alt="TWO02">
         </div>
     </div>
     <div class="section">
-        
+
         <div id="video-container">
             <img style="height: 100%; width: 100%;" src="../pics/pi-hole-featured-img.jpg" alt="">
         </div>
@@ -26,7 +28,7 @@ permalink: /new/
     <div id="menu">
         <div id="toggle-menu">
             <i class="material-icons">menu</i>
-		    <i class="material-icons hide">close</i>
+            <i class="material-icons hide">close</i>
         </div>
         <ul>
             <li>Home</li>
@@ -34,21 +36,48 @@ permalink: /new/
     </div>
     <div class="section">
         <p>
-            Enjoy some of our best work in immersive 
+            Enjoy some of our best work in immersive
         </p>
 
         <div id="gallery-container">
-            <div class="gallery-item" style="background-color: firebrick;"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item" style="background-color: darkgreen;"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item" style="background-color: firebrick;"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-
-
+            <div class="gallery-item">
+                <div style='background-image: url("{{ site.baseurl }}/pics/save-the-code.png");'></div>
+            </div>
+            <div class="gallery-item">
+                <div style='background-image: url("{{ site.baseurl }}/pics/connecting-a-LED-to-GPIO-pin.png");'></div>
+            </div>
+            <div class="gallery-item">
+                <div
+                    style='background-image: url("{{ site.baseurl }}/pics/featured-img-for-blinking-LED-with-rpi.png");'>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div
+                    style='background-image: url("{{ site.baseurl }}/pics/featured-img-for-blinking-LED-with-rpi.png");'>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style='background-image: url("{{ site.baseurl }}/pics/connecting-a-LED-to-GPIO-pin.png");'></div>
+            </div>
+            <div class="gallery-item">
+                <div style='background-image: url("{{ site.baseurl }}/pics/pi-hole-featured-img.jpg");'></div>
+            </div>
+            <div class="gallery-item">
+                <div
+                    style='background-image: url("{{ site.baseurl }}/pics/featured-img-for-blinking-LED-with-rpi.png");'>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style='background-image: url("{{ site.baseurl }}/pics/connecting-a-LED-to-GPIO-pin.png");'></div>
+            </div>
+            <div class="gallery-item">
+                <div
+                    style='background-image: url("{{ site.baseurl }}/pics/featured-img-for-blinking-LED-with-rpi.png");'>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style='background-image: url("{{ site.baseurl }}/pics/save-the-code.png");'></div>
+            </div>
         </div>
     </div>
     <div class="section">
@@ -57,177 +86,11 @@ permalink: /new/
 
     <div id="blur">
         <div id="blob"></div>
-    </div>  
-    
+    </div>
+
     <div id="scroll-bar"></div>
 
-<script>
-    const root = document.querySelector(':root');
-    const scrollBar = document.getElementById('scroll-bar');
-
-    root.style.setProperty('--scroll-bar-height', `${window.innerHeight * (window.innerHeight / document.body.scrollHeight)}px`);
-
-    window.addEventListener('scroll', () => {
-        root.style.setProperty('--scroll-postion', `${window.innerHeight * window.scrollY / document.body.scrollHeight}px`);
-        scrollBar.animate({
-            opacity: '1'
-        }, {fill:"forwards", duration: 800})
-    });
-
-    window.addEventListener('scrollend', () => {
-        scrollBar.animate({
-            opacity: '0'
-        }, {fill:"forwards", duration: 400, delay: 400})
-    });
-
-</script>
-
-<script>
-    const toggleMenu = document.getElementById('toggle-menu');
-    const menu = document.getElementById('menu');
-    var menuToggled = false
-    
-    toggleMenu.addEventListener('click', () => {
-        if (!menuToggled) {
-            menu.animate({
-                top: ['-100%', '0'],
-                borderRadius: ['100%', '0']
-            }, {duration:300, fill: 'forwards'});
-            menuToggled = true;
-            toggleMenu.children[0].classList.add('hide');
-            toggleMenu.children[1].classList.remove('hide');
-        } else {
-            menu.animate({
-                top: '100%',
-                //borderTopLeftRadius: ['50%', '0'],
-                //borderTopRightRadius: ['50%', '0']
-            }, {duration:300, fill: 'forwards'});
-            menuToggled = false; 
-            toggleMenu.children[1].classList.add('hide');
-            toggleMenu.children[0].classList.remove('hide');
-        }
-    });
-</script>
-    
-    <script>
-const scrollContainer = document.getElementById("gallery-container");
-let isDragging = false;
-let startX;
-let scrollLeft;
-
-scrollContainer.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    startX = e.pageX - scrollContainer.offsetLeft;
-    scrollLeft = scrollContainer.scrollLeft;
-    scrollContainer.style.cursor = "grabbing"; // Change cursor when dragging
-});
-
-scrollContainer.addEventListener("mouseup", () => {
-    isDragging = false;
-    scrollContainer.style.cursor = "grab"; // Change cursor back to "grab"
-});
-
-scrollContainer.addEventListener("mouseleave", () => {
-    isDragging = false;
-    scrollContainer.style.cursor = "grab"; // Change cursor back to "grab"
-});
-
-scrollContainer.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - scrollContainer.offsetLeft;
-    const walk = (x - startX) * 2; // Adjust the multiplier for faster/slower scrolling
-    scrollContainer.scrollLeft = scrollLeft - walk;
-    if (horizontalScrollableDiv.scrollLeft === 0 | horizontalScrollableDiv.scrollLeft + horizontalScrollableDiv.clientWidth >= horizontalScrollableDiv.scrollWidth - 100) {
-    isDragging = false;
-    scrollContainer.style.cursor = "grab";
-}
-});
-
-
-
-
-//horizontal scroll when vertical scroll
-var initialFact = 0;
-window.addEventListener('scroll', () => {
-    let fact = window.scrollY / document.body.scrollHeight;
-    if (fact <= 0.6) {
-        if (initialFact < fact) {
-            scrollContainer.scrollLeft = scrollContainer.scrollLeft + fact * 10;
-        } else {
-            scrollContainer.scrollLeft = scrollContainer.scrollLeft - fact * 10;
-        }
-
-        initialFact = fact
-    }
-});
-
-
-
-/* -- Glow effect -- And turning effect */
-
-const blob = document.getElementById("blob");
-const turner = document.getElementById("video-container");
-
-window.onpointermove = event => { 
-  const { clientX, clientY } = event;
-  
-  blob.animate({
-    left: `${clientX}px`,
-    top: `${clientY}px`
-  }, { duration: 3000, fill: "forwards" });
-
-  turner.animate({
-    transform: `rotateX(${ 30 * clientY * 0.001}deg) rotateY(${30 * clientX * 0.001}deg)`,
-  }, {duration: 5000, fill:"forwards" });
-}
-
-
-
-    </script>
-
-    <script>
-var horizontalScrollableDiv = document.getElementById("gallery-container");
-
-horizontalScrollableDiv.addEventListener("scroll", function() {
-    if (horizontalScrollableDiv.scrollLeft + horizontalScrollableDiv.clientWidth >= horizontalScrollableDiv.scrollWidth - 100) {
-        let children = horizontalScrollableDiv.children;
-        horizontalScrollableDiv.scrollLeft = horizontalScrollableDiv.scrollLeft - 2 * children[0].offsetWidth -10; 
-        horizontalScrollableDiv.appendChild(children[0]);
-        horizontalScrollableDiv.appendChild(children[1]);
-    }
-
-    if (horizontalScrollableDiv.scrollLeft === 0) {
-        let children = horizontalScrollableDiv.children;
-        horizontalScrollableDiv.scrollLeft = horizontalScrollableDiv.scrollLeft + 2 * children[0].offsetWidth;
-        horizontalScrollableDiv.prepend(children[children.length-1]);
-        horizontalScrollableDiv.prepend(children[children.length-2]);    
-    }
-});
-
-    </script>
-
-    <!--script>
-var horizontalScrollableDiv = document.getElementById("gallery-container");
-var isLooping = false;
-
-horizontalScrollableDiv.addEventListener("scroll", function() {
-  if (!isLooping) {
-    if (horizontalScrollableDiv.scrollLeft === 0) {
-      isLooping = true;
-      // Scroll to the right end
-      horizontalScrollableDiv.scrollLeft = horizontalScrollableDiv.scrollWidth;
-    } else if (horizontalScrollableDiv.scrollLeft + horizontalScrollableDiv.clientWidth >= horizontalScrollableDiv.scrollWidth) {
-      isLooping = true;
-      // Scroll to the left end
-      horizontalScrollableDiv.scrollLeft = 0;
-    }
-  } else {
-    isLooping = false;
-  }
-});
-
-    </script-->
-
+    <script src="{{ site.baseurl }}/assets/js/poppr.js"></script>
 </body>
+
 </html>

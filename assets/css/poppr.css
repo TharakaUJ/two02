@@ -1,3 +1,6 @@
+---
+---
+        
         :root {
             --background-color: #303131;
             --font-color: #ffffff;
@@ -67,11 +70,13 @@
             display: flex;
             flex-wrap: nowrap;
             overflow-x: scroll;
+            overflow-y: hidden;
             gap: 40px;
             transform: rotate(8deg);
             width: 120%;
             position: absolute;
             top: 120%;
+            left: -10%;
         }
 
         #gallery-container {
@@ -90,12 +95,46 @@
             height: 300px;
             width: 400px;
             border-radius: 40px;
-            background-color: aliceblue;
+            overflow: hidden;
 
+
+
+            & div {
+                width: 120%;
+                height: 100%;
+            }
         }
 
-
-
+        /*.gallery-item {
+            &:first-child {
+                transform: rotateY(-32deg);
+            }
+            &:nth-child(2) {
+                transform: rotateY(-24deg);
+            }
+            &:nth-child(3) {
+                transform: rotateY(-16deg);
+            }
+            &:nth-child(4) {
+                transform: rotateY(-8deg);
+            }
+            &:nth-child(5) {
+                transform: rotateY(-0deg);
+            }
+            &:nth-child(6) {
+                transform: rotateY(8deg);
+            }
+            &:nth-child(7) {
+                transform: rotateY(16deg);
+            }
+            &:nth-child(8) {
+                transform: rotateY(24deg);
+            }
+            &:nth-child() {
+                transform: rotateY(32deg);
+            }
+        }*/
+        
 
         @keyframes rotate {
             from {
