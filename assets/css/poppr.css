@@ -228,6 +228,10 @@
             }
         }
 
+        #menu-items-container:has(a:hover) a:not(a:hover) {
+            opacity: 0.5;
+        }
+
         .hide {
             display: none!important;
         }
