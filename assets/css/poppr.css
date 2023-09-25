@@ -225,7 +225,24 @@
 
                 & span {
                     opacity: 0;
+                    display: inline-block;
                 }
+            }
+
+            & a:hover span:first-child {
+                transform: translate(-80%, 60%) rotate(8deg);
+            }
+
+            & a:hover span:nth-child(2) {
+                transform: translate(-40%, 20%) rotate(4deg);
+            }
+
+            & a:hover span:nth-child(3) {
+                transform: translate(-10%, 60%) rotate(-6deg);
+            }
+
+            & a:hover span:nth-child(4) {
+                transform: translate(0%, 8%) rotate(-8deg);
             }
         }
 
