@@ -126,7 +126,7 @@ scrollContainer.addEventListener("scroll", function () {
         let children = scrollContainer.children;
         scrollContainer.appendChild(children[0]);
         scrollContainer.appendChild(children[1]);
-        scrollContainer.scrollLeft = scrollContainer.scrollLeft - 2 * children[0].offsetWidth - 10;
+        scrollContainer.scrollLeft = scrollContainer.scrollLeft - 2 * children[0].offsetWidth - 40;
     }
 
     if (scrollContainer.scrollLeft === 0) {
