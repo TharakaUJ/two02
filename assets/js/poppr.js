@@ -111,7 +111,7 @@ window.onpointermove = event => {
     }, { duration: 3000, fill: "forwards" });
 
     turner.animate({
-        transform: `rotateX(${30 * clientY * 0.001}deg) rotateY(${30 * clientX * 0.001}deg)`,
+        transform: `rotateX(${30 * clientY/window.innerHeight-15}deg) rotateY(${30 * clientX/window.innerWidth - 15}deg)`,
     }, { duration: 5000, fill: "forwards" });
 }
 
