@@ -172,6 +172,10 @@ body {
     list-style-type: none;
 }
 
+.threed {
+    perspective: 300px;
+}
+
 #video-container {
     position: absolute;
     top: 25%;
@@ -335,9 +339,6 @@ body {
     opacity: 0;
 }
 
-.threed {
-    perspective: 300px;
-}
 
 
 
