@@ -230,6 +230,16 @@ body {
         top: 80%;
         left: 20%;
     }
+
+    & div:hover, div:nth-child(3) {
+        text-shadow: 0 0.2px 0 #ccc, 0 0.4px 0 #ccc,
+            0 0.6px 0 #ccc, 0 0.8px 0 #ccc,
+            0 1px 0 #ccc, 0 1.2px 0 #cccccc,
+            0 1.4px 0 #ccc, 0 1.6px 0 #ccc,
+            0 1.8px 0 #ccc, 0 2px 0 #ccc,
+            0 2.2px 0 #ccc, 0 2.4px 0 #ccc,
+            0 2px 3px rgba(0, 0, 0, 0.5);
+    }
 }
 
 
