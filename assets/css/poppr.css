@@ -335,6 +335,11 @@ body {
     opacity: 0;
 }
 
+.threed {
+    perspective: 300px;
+}
+
+
 
 
 
