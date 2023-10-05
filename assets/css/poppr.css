@@ -107,6 +107,15 @@ body {
         width: 120%;
         height: 100%;
         background-size: cover;
+        transition: scale 500ms ease-in-out;
+    }
+
+    &:hover div {
+        scale: 1.1;
+    }
+
+    &:hover p {
+        position: absolute;
     }
 }
 
