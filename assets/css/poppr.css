@@ -33,6 +33,12 @@ body {
     /* Firefox */
 }
 
+#main-wrapper {
+    min-width: fit-content;
+    overflow-x: hidden;
+    position: relative;
+}
+
 
 .section {
     height: 100vh;
@@ -76,8 +82,7 @@ body {
     gap: 40px;
     transform: rotate(8deg);
     width: 120%;
-    position: absolute;
-    top: 120%;
+    position: relative;
     left: -10%;
     padding: 10vw;
     perspective: 600px;
