@@ -139,7 +139,7 @@ scrollContainer.addEventListener("scroll", function () {
 
 
 function parallax() {
-    let galleryItems = scrollContainer.children;
+    let galleryItems = document.getElementsByClassName('gallery-item');
     [...galleryItems].forEach((element) => {
         const divRect = element.getBoundingClientRect();
         element.scrollLeft = divRect.left * 0.06 + 20;

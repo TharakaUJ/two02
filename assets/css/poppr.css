@@ -94,6 +94,10 @@ body {
     /* Firefox */
 }
 
+.gallery-item-wrapper {
+    display: flex;
+}
+
 .gallery-item {
     flex: 0 0 auto;
     width: 40vw;
@@ -111,33 +115,30 @@ body {
     }
 
     &:hover div {
-        scale: 1.1;
+        scale: 1.05;
     }
 
-    & ~ p {
-        background-color: rgba(0, 0, 0, 0.541);
-        height: 0;
-        transition: top 500ms ease-in 500ms, height 0.5s ease;
-        top: 100%;
-        position: absolute;
-        pointer-events: none;
-        font-size: 0.5em;
-        color: white;
-        animation: fade-in 500ms ease 500ms 1 normal forwards;
-    }
-
-    &:hover ~ p {
+    & ~ a {
+        transition: top 500ms ease-in;
         top: 60%;
-        height: auto;
-    }
-}
-
-@keyframes fade-in {
-    from {
+        position: absolute;
+        font-size: 0.5em;
         opacity: 0;
+        color: var(--font-color);
+        text-shadow: 0 0 19px rgba(0, 0, 0, 0.674);
+        transform: rotate(-8deg);
+        text-decoration: none;
+        text-align: center;
+        width: 20vw;
+        aspect-ratio: calc(4/3);
+        transition: top 200ms ease-in, opacity 100ms ease-in;
     }
-    to {
+
+    &:hover ~ a, & ~a:hover {
+        top: 50%;
         opacity: 1;
+        transition: top 200ms ease-in, opacity 500ms ease-in;
+
     }
 }
 
