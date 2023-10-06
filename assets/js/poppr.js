@@ -123,7 +123,7 @@ turner.parentNode.onpointermove = event => {
 
 
 
-
+const gap = window.innerWidth * 0.08
 scrollContainer.addEventListener("scroll", function () {
     parallax();
 
@@ -131,7 +131,7 @@ scrollContainer.addEventListener("scroll", function () {
         let children = scrollContainer.children;
         scrollContainer.appendChild(children[0]);
         scrollContainer.appendChild(children[1]);
-        scrollContainer.scrollLeft = scrollContainer.scrollLeft - 2 * children[0].offsetWidth - 40;
+        scrollContainer.scrollLeft = scrollContainer.scrollLeft - 2 * children[0].offsetWidth - gap;
     }
 
     if (scrollContainer.scrollLeft === 0) {
@@ -147,10 +147,12 @@ function parallax() {
     let galleryItems = document.getElementsByClassName('gallery-item');
     [...galleryItems].forEach((element) => {
         const divRect = element.getBoundingClientRect();
-        element.scrollLeft = divRect.left * 0.06 + 20;
-        element.style.transform = `rotateZ(${divRect.left *20 / window.innerWidth - 12}deg) rotateY(${divRect.left *20 / window.innerWidth - 12}deg)`;
-        element.style.scale = `${1.2 - Math.abs(divRect.left/window.innerWidth - 0.35)}`;
-        element.parentNode.style.transform = `rotateY(${divRect.left *20 / window.innerWidth - 12}deg)`;
+        if (divRect.left >= 0 && divRect.left <= window.innerWidth || divRect.right >= 0 && divRect.right <= window.innerWidth) {
+            element.scrollLeft = divRect.left * 0.06 + 20;
+            element.style.transform = `rotateZ(${divRect.left *20 / window.innerWidth - 12}deg) rotateY(${divRect.left *20 / window.innerWidth - 12}deg)`;
+            element.style.scale = `${1.2 - Math.abs(divRect.left/window.innerWidth - 0.35)}`;
+            element.parentNode.style.transform = `rotateY(${divRect.left *20 / window.innerWidth - 12}deg)`;
+        }
     });
 }
 

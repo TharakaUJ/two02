@@ -79,12 +79,12 @@ body {
     flex-wrap: nowrap;
     overflow-x: scroll;
     overflow-y: hidden;
-    gap: 40px;
+    gap: 8vw;
     transform: rotate(8deg);
     width: 120%;
     position: relative;
     left: -10%;
-    padding: 10vw;
+    padding: 12vw;
     perspective: 600px;
 }
 
@@ -110,7 +110,7 @@ body {
 .gallery-item {
     width: inherit;
     aspect-ratio: inherit;
-    border-radius: 40px;
+    border-radius: 2rem;
     overflow: hidden;
 
 
