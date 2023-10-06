@@ -145,6 +145,7 @@ function parallax() {
         element.scrollLeft = divRect.left * 0.06 + 20;
         element.style.transform = `rotateZ(${divRect.left *20 / window.innerWidth - 12}deg) rotateY(${divRect.left *20 / window.innerWidth - 12}deg)`;
         element.style.scale = `${1.2 - Math.abs(divRect.left/window.innerWidth - 0.35)}`;
+        element.parentNode.style.transform = `rotateY(${divRect.left *20 / window.innerWidth - 12}deg)`;
     });
 }
 
