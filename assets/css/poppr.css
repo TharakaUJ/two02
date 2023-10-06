@@ -80,7 +80,7 @@ body {
     top: 120%;
     left: -10%;
     padding: 10vw;
-    perspective: 600px;
+    perspective: 500px;
 }
 
 #gallery-container {
