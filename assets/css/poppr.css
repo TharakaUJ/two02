@@ -95,11 +95,11 @@ body {
 }
 
 .gallery-item-wrapper {
-    display: flex;
+    flex: 0 0 auto;
+    perspective: 400px;
 }
 
 .gallery-item {
-    flex: 0 0 auto;
     width: 40vw;
     aspect-ratio: calc(4/3);
     border-radius: 40px;
