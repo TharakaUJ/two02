@@ -220,7 +220,6 @@ body {
     background-color: transparent;
     border-radius: 40px;
     padding: 20px;
-    perspective: 2px;
 }
 
 #video-container {
