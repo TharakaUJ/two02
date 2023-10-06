@@ -80,7 +80,7 @@ body {
     top: 120%;
     left: -10%;
     padding: 10vw;
-    perspective: 500px;
+    perspective: 600px;
 }
 
 #gallery-container {
@@ -97,11 +97,14 @@ body {
 .gallery-item-wrapper {
     flex: 0 0 auto;
     perspective: 400px;
+    width: 40vw;
+    aspect-ratio: calc(4/3);
+    backface-visibility: hidden;
 }
 
 .gallery-item {
-    width: 40vw;
-    aspect-ratio: calc(4/3);
+    width: inherit;
+    aspect-ratio: inherit;
     border-radius: 40px;
     overflow: hidden;
 
