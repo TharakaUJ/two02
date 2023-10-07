@@ -41,7 +41,7 @@ body {
 
 
 .section {
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     color: var(--font-color);
     text-align: center;
@@ -233,6 +233,11 @@ body {
 #video-container {
     & div {
         position: absolute;
+
+        & a {
+            text-decoration: none;
+            color: var(--font-color);
+        }
     }
 
     & div:first-child {
@@ -277,7 +282,7 @@ body {
         left: 20%;
     }
 
-    & div:hover, div:nth-child(3) {
+    & .clickable:hover, div:nth-child(3) {
         text-shadow: 0 0.2px 0 #ccc, 0 0.4px 0 #ccc,
             0 0.6px 0 var(--font-shadow-color), 0 0.8px 0 #ccc,
             0 1px 0 var(--font-shadow-color), 0 1.2px 0 #ccc,
@@ -287,7 +292,7 @@ body {
             0 2px 3px rgba(0, 0, 0, 0.5);
     }
 
-    & div:active {
+    & .clickable:active {
         text-shadow: none;
     }
 }
