@@ -18,6 +18,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 
 camera.position.z = 5;
+const zRotation = -0.3; //radians of mesh rotation
 
 const renderer = new THREE.WebGLRenderer({
     alpha: true
@@ -41,6 +42,7 @@ function createAPlane(imag) {
         transparent: true
     });
     const object = new THREE.Mesh(geometry, material);
+    object.rotation.z = zRotation;
     return object;
 }
 
@@ -72,10 +74,10 @@ function onMouseMove(event) {
     event.preventDefault();
 
     //dafault * 2 -1
-    mouse.x = (event.clientX / window.innerWidth) * 1.8 - 0.8;
+    mouse.x = (event.clientX / window.innerWidth) * 1.5 - 0.5;
 
     //default *2 + 1
-    mouse.y = -(event.clientY / window.innerHeight) * 1.8 + 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 1.5 + 1;
 
     var pos = IntoThreeD(mouse.x, mouse.y);
     //plane.position.copy(pos);
@@ -102,6 +104,7 @@ function animate() {
     //plane.position.lerp(planePos, 0.02);
     [...planes].forEach((plane) => {
         plane.position.lerp(planePos, 0.02);
+        plane.rotation.z = zRotation + (planePos.x + planePos.y - plane.position.y - plane.position.x) * 0.06;
     });
 }
 animate();
@@ -113,7 +116,7 @@ function atHoverEnd(material, object) {
         hoverEndRAFId[planes.indexOf(object)] = requestAnimationFrame(() => {
             atHoverEnd(material, object);
         });
-        material.opacity = material.opacity - 0.025;
+        material.opacity = material.opacity - 0.04;
     } else {
         scene.remove(object);
     }
@@ -130,3 +133,5 @@ function atHoverStart(object, element) {
         cancelAnimationFrame(hoverEndRAFId[planes.indexOf(object)]);
     }
 }
+
+
