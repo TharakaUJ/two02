@@ -106,14 +106,14 @@ function animate() {
 }
 animate();
 
-var hoverEndRAFId;
+var hoverEndRAFId = [];
 
 function atHoverEnd(material, object) {
-    if (material.opacity > -4) {
-        hoverEndRAFId = requestAnimationFrame(() => {
+    if (material.opacity > 0) {
+        hoverEndRAFId[planes.indexOf(object)] = requestAnimationFrame(() => {
             atHoverEnd(material, object);
         });
-        material.opacity = material.opacity - 0.05;
+        material.opacity = material.opacity - 0.025;
     } else {
         scene.remove(object);
     }
@@ -126,8 +126,7 @@ function atHoverStart(object, element) {
         let elStartX = (elRect.right / window.innerWidth) * 2 - 1;
         let elStartY = -(elRect.top / window.innerWidth) * 2 + 1;
         object.position.copy(IntoThreeD(elStartX, elStartY));
-        planes.indexOf(object);
     } else {
-        cancelAnimationFrame(hoverEndRAFId);
+        cancelAnimationFrame(hoverEndRAFId[planes.indexOf(object)]);
     }
 }

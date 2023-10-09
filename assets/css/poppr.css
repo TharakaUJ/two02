@@ -395,7 +395,7 @@ body {
 .insights {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1em;
+    gap: 2em;
     padding: 0.5em;
 }
 
@@ -405,7 +405,7 @@ body {
     padding: 0.5em;
     display: grid;
 
-    border: #ccc 1px solid;
+    border: #131313 1px solid;
 
     & h4 {
         align-self: center;
