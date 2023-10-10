@@ -34,7 +34,7 @@ const loader = new THREE.TextureLoader();
 const images = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
 
 function createAPlane(imag) {
-    const geometry = new THREE.PlaneGeometry(1.5, 2);
+    const geometry = new THREE.PlaneGeometry(1.5, 2); //use the aspect ratio of the images
     const material = new THREE.MeshLambertMaterial({
         color: 0xffffff,
         map: loader.load(imag),
