@@ -74,10 +74,10 @@ function onMouseMove(event) {
     event.preventDefault();
 
     //dafault * 2 -1
-    mouse.x = (event.clientX / window.innerWidth) * 1.5 - 0.5;
+    mouse.x = (event.clientX / window.innerWidth) * 1 - 0.5;
 
     //default *2 + 1
-    mouse.y = -(event.clientY / window.innerHeight) * 1.5 + 1;
+    mouse.y = -(event.clientY / window.innerHeight) * 1.8 + 1;
 
     var pos = IntoThreeD(mouse.x, mouse.y);
     //plane.position.copy(pos);
@@ -127,7 +127,7 @@ function atHoverStart(object, element) {
         scene.add(object);
         let elRect = element.getBoundingClientRect();
         let elStartX = (elRect.right / window.innerWidth) * 2 - 1;
-        let elStartY = -(elRect.top / window.innerWidth) * 2 + 1;
+        let elStartY = -(elRect.top / window.innerWidth) * 2 + 0.5;
         object.position.copy(IntoThreeD(elStartX, elStartY));
     } else {
         cancelAnimationFrame(hoverEndRAFId[planes.indexOf(object)]);
