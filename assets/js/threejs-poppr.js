@@ -127,7 +127,7 @@ function atHoverStart(object, element) {
         scene.add(object);
         let elRect = element.getBoundingClientRect();
         let elStartX = (elRect.right / window.innerWidth) * 2 - 1;
-        let elStartY = -(elRect.top / window.innerWidth) * 2 + 0.5;
+        let elStartY = -(elRect.top / window.innerHeight) * 2 + 1;
         object.position.copy(IntoThreeD(elStartX, elStartY));
     } else {
         cancelAnimationFrame(hoverEndRAFId[planes.indexOf(object)]);
