@@ -49,7 +49,7 @@ function createAPlane(imag) {
 
 //const plane = createAPlane(imag);
 
-container.addEventListener("mousemove", (event) => {
+window.addEventListener("mousemove", (event) => {
     planePos = onMouseMove(event);
     lastScrollPos = window.scrollY;
 });
@@ -62,7 +62,7 @@ window.addEventListener("scroll", (event) => {
         window.requestAnimationFrame(function() {
         planePos = IntoThreeD(mouse.x, mouse.y + (window.scrollY - lastScrollPos)/window.innerHeight * 2);
         [...planes].forEach((plane) => {
-            plane.position.lerp(planePos, 0.2);
+            plane.position.lerp(planePos, 0.3);
         });
         ticking = false;
         });
@@ -78,6 +78,7 @@ for (let i = 0; i < hoverElements.length; i++) {
     hoverElements[i].addEventListener("mouseenter", () => {
         atHoverStart(planes[i], hoverElements[i]);
         planes[i].material.opacity = 1;
+        lastScrollPos = window.scrollY;
     });
 
     hoverElements[i].addEventListener("mouseleave", () => {
