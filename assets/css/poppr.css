@@ -3,7 +3,7 @@
 :root {
     --background-color: #303131;
     --font-color: #ffffff;
-    --menu-color: #003f43c6;
+    --menu-color: #3c464650; /*previous color #003f43c6 */
     --toggle-menu: #BAB608;
     --color-1: #17f1d1;
     --color-2: #b087ff;
@@ -241,7 +241,7 @@ body {
     }
 
     & div:first-child {
-        font-size: 5vh;
+        font-size: 1em;
     }
 
     & div:nth-child(2) {
