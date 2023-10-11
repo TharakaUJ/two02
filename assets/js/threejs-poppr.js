@@ -6,6 +6,7 @@ import * as THREE from "https://esm.sh/three";
 var mouse = { x: 0, y: 0 };
 var planePos = { x: 0, y: 0, z: 0 };
 var planes = [];
+var lastScrollPos = 0;
 
 const container = document.getElementById("insights");
 
@@ -50,6 +51,23 @@ function createAPlane(imag) {
 
 container.addEventListener("mousemove", (event) => {
     planePos = onMouseMove(event);
+    lastScrollPos = window.scrollY;
+});
+
+window.addEventListener("scroll", (event) => {
+    //planePos = IntoThreeD(mouse.x, mouse.y + (window.scrollY - lastScrollPos)/window.innerHeight * 2);
+    let ticking = false;
+    if (!ticking) {
+        // event throtteling
+        window.requestAnimationFrame(function() {
+        planePos = IntoThreeD(mouse.x, mouse.y + (window.scrollY - lastScrollPos)/window.innerHeight * 2);
+        [...planes].forEach((plane) => {
+            plane.position.lerp(planePos, 0.2);
+        });
+        ticking = false;
+        });
+        ticking = true;
+    }
 });
 
 const hoverElements = document.getElementsByClassName("insight-items");
@@ -73,10 +91,8 @@ function onMouseMove(event) {
     // Update the mouse variable
     event.preventDefault();
 
-    //dafault * 2 -1
     mouse.x = ((event.clientX + 80) / window.innerWidth) * 2 - 1;
 
-    //default *2 + 1
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
     var pos = IntoThreeD(mouse.x, mouse.y);
