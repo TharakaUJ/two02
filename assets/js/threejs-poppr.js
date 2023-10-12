@@ -8,6 +8,7 @@ var planePos = { x: 0, y: 0, z: 0 };
 var planes = [];
 var lastScrollPos = 0;
 var ticking = false;
+var hovering = false;
 
 const container = document.getElementById("insights");
 
@@ -115,16 +116,21 @@ function IntoThreeD(x, y) {
     return pos;
 }
 
-function animate() {
-    requestAnimationFrame(animate);
+function hoverAnimate() {
+    if (!hovering) {
+        return
+    } else {
+    requestAnimationFrame(hoverAnimate);
     renderer.render(scene, camera);
     //plane.position.lerp(planePos, 0.02);
     [...planes].forEach((plane) => {
         plane.position.lerp(planePos, 0.02);
         plane.rotation.z = zRotation + (planePos.x + planePos.y - plane.position.y - plane.position.x) * 0.06;
     });
+    console.log('animating')
+    }
 }
-animate();
+hoverAnimate();
 
 var hoverEndRAFId = [];
 
@@ -136,11 +142,22 @@ function atHoverEnd(material, object) {
         material.opacity = material.opacity - 0.04;
     } else {
         scene.remove(object);
+        let hasMesh = false;
+        scene.traverse(function (object) {
+            if (object.isMesh) hasMesh = true;
+          });
+        if (!hasMesh) hovering = false;
     }
 }
 
 function atHoverStart(object, element) {
     if (object.parent != scene) {
+        hovering = true;
+        let hasMesh = false;
+        scene.traverse(function (object) {
+            if (object.isMesh) hasMesh = true;
+          });
+        if (!hasMesh) hoverAnimate();
         scene.add(object);
         let elRect = element.getBoundingClientRect();
         let elStartX = ((elRect.right - 50) / window.innerWidth) * 2 - 1;
