@@ -130,7 +130,17 @@ function hoverAnimate() {
     console.log('animating')
     }
 }
-hoverAnimate();
+
+//var runing = false;
+function runAnimate() {
+    if (hovering) {
+        console.log('heh')
+        return;
+    }
+    hovering = true;
+    hoverAnimate();
+}
+
 
 var hoverEndRAFId = [];
 
@@ -142,6 +152,7 @@ function atHoverEnd(material, object) {
         material.opacity = material.opacity - 0.04;
     } else {
         scene.remove(object);
+        //to stop the rendering
         let hasMesh = false;
         scene.traverse(function (object) {
             if (object.isMesh) hasMesh = true;
@@ -152,12 +163,8 @@ function atHoverEnd(material, object) {
 
 function atHoverStart(object, element) {
     if (object.parent != scene) {
-        hovering = true;
         let hasMesh = false;
-        scene.traverse(function (object) {
-            if (object.isMesh) hasMesh = true;
-          });
-        if (!hasMesh) hoverAnimate();
+        runAnimate();
         scene.add(object);
         let elRect = element.getBoundingClientRect();
         let elStartX = ((elRect.right - 50) / window.innerWidth) * 2 - 1;
