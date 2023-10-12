@@ -120,21 +120,19 @@ function hoverAnimate() {
     if (!hovering) {
         return
     } else {
-    requestAnimationFrame(hoverAnimate);
-    renderer.render(scene, camera);
-    //plane.position.lerp(planePos, 0.02);
-    [...planes].forEach((plane) => {
-        plane.position.lerp(planePos, 0.02);
-        plane.rotation.z = zRotation + (planePos.x + planePos.y - plane.position.y - plane.position.x) * 0.06;
-    });
-    console.log('animating')
+        requestAnimationFrame(hoverAnimate);
+        renderer.render(scene, camera);
+        //plane.position.lerp(planePos, 0.02);
+        [...planes].forEach((plane) => {
+            plane.position.lerp(planePos, 0.02);
+            plane.rotation.z = zRotation + (planePos.x + planePos.y - plane.position.y - plane.position.x) * 0.06;
+        });
     }
 }
 
 //var runing = false;
 function runAnimate() {
     if (hovering) {
-        console.log('heh')
         return;
     }
     hovering = true;
