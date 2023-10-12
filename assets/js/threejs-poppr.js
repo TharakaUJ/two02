@@ -7,6 +7,7 @@ var mouse = { x: 0, y: 0 };
 var planePos = { x: 0, y: 0, z: 0 };
 var planes = [];
 var lastScrollPos = 0;
+var ticking = false;
 
 const container = document.getElementById("insights");
 
@@ -56,7 +57,6 @@ window.addEventListener("mousemove", (event) => {
 
 window.addEventListener("scroll", (event) => {
     //planePos = IntoThreeD(mouse.x, mouse.y + (window.scrollY - lastScrollPos)/window.innerHeight * 2);
-    let ticking = false;
     if (!ticking) {
         // event throtteling
         window.requestAnimationFrame(function() {

@@ -2,11 +2,13 @@ const root = document.querySelector(':root');
 const scrollBar = document.getElementById('scroll-bar');
 const gap = window.innerWidth * 0.08 //css grid gap in gallery-container
 var initialFact = 0; //horizontal scroll when vertical scroll
+var ticking = false; // for throttling scroll events
+var tocking = false; // for throttling scroll events
+
 
 root.style.setProperty('--scroll-bar-height', `${window.innerHeight * (window.innerHeight / document.body.scrollHeight)}px`);
 
 window.addEventListener('scroll', () => {
-    let ticking = false;
     if (!ticking) {
         // event throtteling
         window.requestAnimationFrame(function () {
@@ -127,15 +129,14 @@ turner.parentNode.onpointermove = event => {
 
 
 scrollContainer.addEventListener("scroll", function () {
-    let ticking = false;
-    if (!ticking) {
+    if (!tocking) {
         // event throtteling
         window.requestAnimationFrame(function () {
             parallax();
             atScrollEnd();
-            ticking = false;
+            tocking = false;
         });
-        ticking = true;
+        tocking = true;
     }
 });
 
