@@ -9,15 +9,72 @@ const renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 
+const loader = new THREE.TextureLoader();
+
+
+
+//================common constants end =========================================================
+const carasolContainer = document.getElementById('gallery-container');
+const carasolItems = carasolContainer.children;
+const carasolImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
+const carsolPlanes = [];
+
+const carasolScene = new THREE.Scene();
+const carasolCamera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+);
+
+carasolCamera.position.z = 5;
+carasolScene.add(carasolCamera);
+
+const carasolDirectionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+carasolDirectionalLight.position.set(0, 0, 60);
+carasolScene.add(carasolDirectionalLight);
+
+
+//use a dictionary to map element to plane
+//for (let i = 0; i < carasolItems.length; i++) {
+for (let i = 0; i < 4; i++) {
+    carsolPlanes.push(createAPlane(carasolImages[i]));
+    setCarasol(carsolPlanes[i], carasolItems[i]);
+};
+
+
+function setCarasol(object, element) {
+        carasolScene.add(object);
+        let elRect = element.getBoundingClientRect();
+        let elStartX = ((elRect.right + 50) / window.innerWidth) * 2 - 1;
+        let elStartY = -((elRect.top - 500) / window.innerHeight) * 2 + 1;
+        object.position.copy(IntoThreeD(elStartX, elStartY, carasolCamera));
+}
+
+
+
+function carasolAnimate() {
+    requestAnimationFrame(carasolAnimate);
+    renderer.render(carasolScene, carasolCamera);
+}
+
+carasolAnimate();
+
+
+
+
+
+
 
 //=========================hover animation variables======================================================================
 var mouse = { x: 0, y: 0 };
 var planePos = { x: 0, y: 0, z: 0 };
-var planes = [];
+var hoverPlanes = [];
 var lastScrollPos = 0;
 var ticking = false;
 var hovering = false;
 const zRotation = -0.3; //radians of mesh rotation
+const hoverImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
 const hoverElements = document.getElementsByClassName("insight-items");
 const container = document.getElementById("insights");
 container.appendChild(renderer.domElement);
@@ -38,9 +95,6 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.position.set(0, 0, 60);
 hoverScene.add(directionalLight);
 
-const loader = new THREE.TextureLoader();
-const images = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
-
 function createAPlane(imag) {
     const geometry = new THREE.PlaneGeometry(1.5, 2); //use the aspect ratio of the images
     const material = new THREE.MeshLambertMaterial({
@@ -50,7 +104,6 @@ function createAPlane(imag) {
         transparent: true
     });
     const object = new THREE.Mesh(geometry, material);
-    object.rotation.z = zRotation;
     return object;
 }
 
@@ -66,7 +119,7 @@ window.addEventListener("scroll", (event) => {
         // event throtteling
         window.requestAnimationFrame(function() {
         planePos = IntoThreeD(mouse.x, mouse.y + (window.scrollY - lastScrollPos)/window.innerHeight * 2, hoverCamera);
-        [...planes].forEach((plane) => {
+        [...hoverPlanes].forEach((plane) => {
             plane.position.lerp(planePos, 0.3);
         });
         ticking = false;
@@ -77,16 +130,16 @@ window.addEventListener("scroll", (event) => {
 
 
 for (let i = 0; i < hoverElements.length; i++) {
-    //[...hoverElements].forEach((hoverElement) => {
-    planes.push(createAPlane(images[i]));
+    hoverPlanes.push(createAPlane(hoverImages[i]));
+    hoverPlanes[i].rotation.z = zRotation;
     hoverElements[i].addEventListener("mouseenter", () => {
-        atHoverStart(planes[i], hoverElements[i]);
-        planes[i].material.opacity = 1;
+        atHoverStart(hoverPlanes[i], hoverElements[i]);
+        hoverPlanes[i].material.opacity = 1;
         lastScrollPos = window.scrollY;
     });
 
     hoverElements[i].addEventListener("mouseleave", () => {
-        atHoverEnd(planes[i].material, planes[i]);
+        atHoverEnd(hoverPlanes[i].material, hoverPlanes[i]);
     });
     //});
 }
@@ -128,7 +181,7 @@ function hoverAnimate() {
         requestAnimationFrame(hoverAnimate);
         renderer.render(hoverScene, hoverCamera);
         //plane.position.lerp(planePos, 0.02);
-        [...planes].forEach((plane) => {
+        [...hoverPlanes].forEach((plane) => {
             plane.position.lerp(planePos, 0.02);
             plane.rotation.z = zRotation + (planePos.x + planePos.y - plane.position.y - plane.position.x) * 0.06;
         });
@@ -148,7 +201,7 @@ var hoverEndRAFId = [];
 
 function atHoverEnd(material, object) {
     if (material.opacity > 0) {
-        hoverEndRAFId[planes.indexOf(object)] = requestAnimationFrame(() => {
+        hoverEndRAFId[hoverPlanes.indexOf(object)] = requestAnimationFrame(() => {
             atHoverEnd(material, object);
         });
         material.opacity = material.opacity - 0.04;
@@ -165,7 +218,6 @@ function atHoverEnd(material, object) {
 
 function atHoverStart(object, element) {
     if (object.parent != hoverScene) {
-        let hasMesh = false;
         runAnimate();
         hoverScene.add(object);
         let elRect = element.getBoundingClientRect();
@@ -173,7 +225,7 @@ function atHoverStart(object, element) {
         let elStartY = -((elRect.top + 50) / window.innerHeight) * 2 + 1;
         object.position.copy(IntoThreeD(elStartX, elStartY, hoverCamera));
     } else {
-        cancelAnimationFrame(hoverEndRAFId[planes.indexOf(object)]);
+        cancelAnimationFrame(hoverEndRAFId[hoverPlanes.indexOf(object)]);
     }
 }
 //==============hover functions end=======================================================
