@@ -45,6 +45,7 @@ for (let i = 0; i < 4; i++) {
 
 function setCarasol(object, element) {
         carasolScene.add(object);
+        object.material.opacity = 1;
         let elRect = element.getBoundingClientRect();
         let elStartX = ((elRect.right + 50) / window.innerWidth) * 2 - 1;
         let elStartY = -((elRect.top - 500) / window.innerHeight) * 2 + 1;
