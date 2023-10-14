@@ -2,119 +2,135 @@
 ---
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<link rel="stylesheet" href="{{ '/assets/css/mymain.css' | relative_url }}">
-
-	<title>two02</title>
-
-	<script type="importmap">
-		{
-		  "imports": {
-			"three": "https://unpkg.com/three@v0.155.0/build/three.module.js",
-			"three/addons/": "https://unpkg.com/three@v0.155.0/examples/jsm/"
-		  }
-		}
-	</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/poppr.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>TWO02</title>
 </head>
+
 <body>
-	
+<div id="main-wrapper">
+    <div class="masthead">
+        <div id="logo">
+            <img src="{{ site.baseurl }}/assets/images/white text horizontal .png" alt="TWO02">
+        </div>
+    </div>
+    <div class="section typogram">
 
-	<div id="menu-toggle">
-		<i class="material-icons">menu</i>
-		<i class="material-icons hide">close</i>
-		<nav>
-			<a class="link" href="{{ site.baseurl }}/" target="_self">PROJECTS</a>
-			<a class="link" href="{{ site.baseurl }}/" target="_self">CONTACT</a>
-			<a class="link" href="{{ site.baseurl }}/" target="_self">ABOUT US</a>
-		</nav>
-	</div>
-	<canvas id="canvas"></canvas>
+        <div id="video-container">
+            <div class="clickable"><a href="#" target="_blank">make.lk</a></div>
+            <div><span>loot box</span></div>
+            <div><span>TWO02</span></div>
+            <div><span>labs</span></div>
+            <div class="clickable"><a href="https://midj.app" target="_blank">MIDJ.app</a></div>
+            <div class="clickable"><a href="https://pi.lk" target="_blank">PI.lk</a></div>
+            <div class="clickable"><a href="https://expel.bg" target="_blank">expel.bg</a></div>
+        </div>
+    </div>
+    <div id="menu">
+        <div id="toggle-menu">
+            <i class="material-icons">menu</i>
+            <i class="material-icons hide">close</i>
+        </div>
+        <div id="menu-items-container">
+            <a href="{{ site.baseurl }}/new/"><span>H</span><span>O</span><span>M</span><span>E</span></a>
+            <a href="{{ site.baseurl }}/new/"><span>T</span><span>O</span></a>
 
+        </div>
+    </div>
+    <div class="section">
+        <p>
+            Enjoy some of our best work in immersive
+        </p>
 
-<div class="title">
-	<img src="assets/images/white text horizontal .png" alt="TWO02">
-	<!--h1>TWO<sub>02</sub></h1-->
-	<div class="typing-wrapper">
-		<div class="typing-demo">
-			&#60;Web automation laboratory&#62;
-		</div>
-	</div>
+        <div id="gallery-container">
+            <div class="gallery-item-wrapper">
+                <div class="gallery-item">
+                    <div style='background-image: url("{{ site.baseurl }}/pics/connecting-a-LED-to-GPIO-pin.png");'>
+                    </div>
+                </div>
+                <a href="{{ site.baseurl }}/new/">Lorem ipsum dolor sit amet consectetur deserunt sapiente!</a>
+            </div>
+            <div class="gallery-item-wrapper">
+                <div class="gallery-item">
+                    <div
+                        style='background-image: url("{{ site.baseurl }}/pics/featured-img-for-blinking-LED-with-rpi.png");'>
+                    </div>
+                </div>
+                <a href="{{ site.baseurl }}/new/">Lorem ipsum dolor sit amet consectetur deserunt sapiente!</a>
+
+            </div>
+            <div class="gallery-item-wrapper">
+                <div class="gallery-item">
+                    <div
+                        style='background-image: url("{{ site.baseurl }}/pics/featured-img-for-blinking-LED-with-rpi.png");'>
+                    </div>
+                </div>
+                <a href="{{ site.baseurl }}/new/">Lorem ipsum dolor sit amet consectetur deserunt sapiente!</a>
+            </div>
+            <div class="gallery-item-wrapper">
+                <div class="gallery-item">
+                    <div style='background-image: url("{{ site.baseurl }}/pics/connecting-a-LED-to-GPIO-pin.png");'>
+                    </div>
+                </div>
+                <a href="{{ site.baseurl }}/new/">Lorem ipsum dolor sit amet consectetur deserunt sapiente!</a>
+            </div>
+            <div class="gallery-item-wrapper">
+                <div class="gallery-item">
+                    <div style='background-image: url("{{ site.baseurl }}/pics/pi-hole-featured-img.jpg");'></div>
+                </div>
+                <a href="{{ site.baseurl }}/new/">Lorem ipsum dolor sit amet consectetur deserunt sapiente!</a>
+            </div>
+            <div class="gallery-item-wrapper">
+                <div class="gallery-item">
+                    <div
+                        style='background-image: url("{{ site.baseurl }}/pics/featured-img-for-blinking-LED-with-rpi.png");'>
+                    </div>
+                </div>
+                <a href="{{ site.baseurl }}/new/">Lorem ipsum dolor sit amet consectetur deserunt sapiente!</a>
+            </div>
+            <div class="gallery-item-wrapper">
+                <div class="gallery-item">
+                    <div style='background-image: url("{{ site.baseurl }}/pics/connecting-a-LED-to-GPIO-pin.png");'>
+                    </div>
+                </div>
+                <a href="{{ site.baseurl }}/new/">Lorem ipsum dolor sit amet consectetur deserunt sapiente!</a>
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="insights" id="insights">
+            <a class="insight-items">
+                <span class="tag">API</span>
+                <h4>lorem ipsum dolor sit amet consectetur consectetur deserunt sapiente!</h4>
+            </a>
+            <a class="insight-items">
+                <span class="tag">API</span>
+                <h4>lorem ipsum dolor sit amet consectetur</h4>
+            </a>
+            <a class="insight-items">
+                <span class="tag">automation</span>
+                <h4>lorem ipsum dolor sit amet consectetur</h4>
+            </a>
+            <a class="insight-items">
+                <span class="tag">AI</span>
+                <h4>lorem ipsum dolor sit amet consectetur</h4>
+            </a>
+        </div>
+    </div>
+
+    <div id="blur">
+        <div id="blob"></div>
+    </div>
+
+    <div id="scroll-bar"></div>
+
+    <script src="{{ site.baseurl }}/assets/js/poppr.js"></script>
+    <script type="module" src="{{ site.baseurl }}/assets/js/threejs-poppr.js"></script>
 </div>
-
-	<div id="main-wrapper">
-		<div class="vertical-grid">
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-
-		</div>
-		<div class="vertical-grid">
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-
-		</div>
-		<div class="vertical-grid">
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-			<div class="grid-items"></div>
-
-		</div>
-	</div>
-
-	<div class="down">
-			<svg width="100" height="100" viewBox="0 0 800 800" fill="white" xmlns="http://www.w3.org/2000/svg">
-				<path d="M594.675 352.441C587.575 349.187 576.063 349.186 568.962 352.441L400.004 429.882L231.038 352.441C223.939 349.187 212.426 349.186 205.325 352.441C198.225 355.696 198.225 360.972 205.325 364.226L387.149 447.559C390.558 449.122 395.182 450 400.004 450C404.826 450 409.452 449.122 412.86 447.559L594.673 364.226C601.775 360.972 601.775 355.695 594.675 352.441Z"/>
-				<path d="M594.675 307.441C587.575 304.187 576.063 304.186 568.962 307.441L400.004 384.882L231.038 307.441C223.939 304.187 212.426 304.186 205.325 307.441C198.225 310.696 198.225 315.972 205.325 319.226L387.149 402.559C390.558 404.122 395.182 405 400.004 405C404.826 405 409.452 404.122 412.86 402.559L594.673 319.226C601.775 315.972 601.775 310.695 594.675 307.441Z"/>
-			</svg>
-				
-			
-	</div>
-
-	<div id="section2">
-		<h2>Services</h2>
-		<p>Feasibility report generation for ranking your business web site<br>
-			Search engine optimizations/ Keyword seletion <br>
-			Traffic redirections plans</p>
-		<h2>Features
-		</h2>
-		<p>two<sub>02</sub> is a consultation company related to all round web services. <br>
-			We are experts in Search Engine Optimization (SEO), Keyword Search and <br>
-			many more related services for ranking your web site.</p>
-
-		<h2>Products</h2>
-		<p>two<sub>02</sub> is a consultation company related to all round web services. We are <br>
-			experts in Search Engine Optimization (SEO), Keyword Search and many more <br>
-			related services for ranking your web site.</p>
-	</div>
-
-	<div id="canvas-container"></div>
 </body>
-
-<script src="{{ '/assets/js/index.js' | relative_url }}" type="module"></script>
-<script src="{{ '/assets/js/game.js' | relative_url }}" type="module"></script>
-
-<script>for(const link of document.getElementsByClassName("link")) {
-	link.onmousemove = e => {
-	  const decimal = e.clientX / link.offsetWidth;
-	  
-	  const basePercent = 80,
-			percentRange = 20,
-			adjustablePercent = percentRange * decimal;
-	  
-	  const lightBluePercent = basePercent + adjustablePercent;
-	  
-	  link.style.setProperty("--light-blue-percent", `${lightBluePercent}%`);
-	}
-  }</script>
 
 </html>
