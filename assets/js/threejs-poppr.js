@@ -30,10 +30,22 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
 directionalLight.position.set(0, 0, 60);
 scene.add(directionalLight);
 
-const container = document.getElementById("insights");
+const container = document.getElementById("canvas-container");
 container.appendChild(renderer.domElement);
 
+//resized shape based on windows
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+window.addEventListener('resize', onWindowResize, false);
+
 //================common constants end =========================================================
+
+//======================================carasol===================================================
+/*
 const carasolContainer = document.getElementById('gallery-container');
 const carasolItems = carasolContainer.children;
 const carasolImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
@@ -48,17 +60,92 @@ for (let i = 0; i < 4; i++) {
 
 
 function setCarasol(object, element) {
-        scene.add(object);
-        object.material.opacity = 1;
-        let elRect = element.getBoundingClientRect();
-        let elStartX = (elRect.right / window.innerWidth) * 2 - 1;
-        let elStartY = -(elRect.top / window.innerHeight) * 2 + 1;
-        object.position.copy(IntoThreeD(elStartX, elStartY, camera));
+    scene.add(object);
+    object.material.opacity = 1;
+    let elRect = element.getBoundingClientRect();
+    let elStartX = ((elRect.right / window.innerWidth)) * 2 - 1;
+    let elStartY = -(elRect.top / window.innerHeight) * 2 + 1;
+    object.position.copy(IntoThreeD(elStartX, elStartY, camera));
 }
 
+carasolContainer.addEventListener('scroll', () => {
+    for (let i = 0; i < 4; i++) {
+        setCarasol(carsolPlanes[i], carasolItems[i]);
+    };
+});
+
+*/
+//============================================togle menu ====================================================
+const menuItemsContainer = document.getElementById('menu-items-container');
+const menuItems = menuItemsContainer.children;
+var clock = new THREE.Clock();
+var targetQuaternion = new THREE.Quaternion();
+var cubeRotating = false;
+
+//create shape
+const geometry = new THREE.BoxGeometry(2, 2, 2);
+const cubeMaterials = [
+    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //right side
+    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //left side
+    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //top side
+    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //bottom side
+    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //front side
+    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //back side
+];
+
+//create material, color, or image texture
+const cube = new THREE.Mesh(geometry, cubeMaterials);
+cube.position.set(3, 0, 0);
+cube.rotation.y = -0.4;
 
 
+export function openMenu() {
+    scene.add(cube);
+    container.style.zIndex = 100;
+}
 
+export function closeMenu() {
+    scene.remove(cube);
+    container.style.zIndex = -1;
+}
+
+var speed = Math.PI * 0.5;
+var delta
+
+for (let i = 0; i < menuItems.length; i++) {
+    menuItems[i].addEventListener('mouseenter', ()=>{
+        targetQuaternion.setFromEuler( new THREE.Euler( Math.PI * 0.5 * i, Math.PI * (i+1), 0 ) );
+        // if ( ! cube.quaternion.equals( targetQuaternion ) ) {
+
+        //     var step = speed * delta;
+        //     cube.quaternion.rotateTowards( targetQuaternion, step );
+        
+        // }
+        startCubeRotation();
+    });
+
+    menuItems[i].addEventListener('mouseleave', ()=>{
+        targetQuaternion.setFromEuler( new THREE.Euler( 0, 0, 0 ) );
+        startCubeRotation();
+    });
+};
+
+function startCubeRotation() {
+    if (cubeRotating) return;
+    cubeRotating = true;
+    rotateCube();
+}
+
+function rotateCube() {
+    if ( cube.quaternion.equals( targetQuaternion ) ) {
+        cubeRotating = false;
+        return;
+    };
+    delta = clock.getDelta();
+    var step = speed * delta;
+    cube.quaternion.rotateTowards( targetQuaternion, step );
+    requestAnimationFrame(rotateCube);
+}
 
 //=========================hover animation variables======================================================================
 var mouse = { x: 0, y: 0 };
@@ -94,12 +181,12 @@ window.addEventListener("mousemove", (event) => {
 window.addEventListener("scroll", (event) => {
     if (!ticking) {
         // event throtteling
-        window.requestAnimationFrame(function() {
-        planePos = IntoThreeD(mouse.x, mouse.y + (window.scrollY - lastScrollPos)/window.innerHeight * 2, camera);
-        [...hoverPlanes].forEach((plane) => {
-            plane.position.lerp(planePos, 0.3);
-        });
-        ticking = false;
+        window.requestAnimationFrame(function () {
+            planePos = IntoThreeD(mouse.x, mouse.y + (window.scrollY - lastScrollPos) / window.innerHeight * 2, camera);
+            [...hoverPlanes].forEach((plane) => {
+                plane.position.lerp(planePos, 0.3);
+            });
+            ticking = false;
         });
         ticking = true;
     }
@@ -187,7 +274,7 @@ function atHoverEnd(material, object) {
         let hasMesh = false;
         scene.traverse(function (object) {
             if (object.isMesh && hoverPlanes.indexOf(object) !== -1) hasMesh = true;
-          });
+        });
         if (!hasMesh) hovering = false;
     }
 }

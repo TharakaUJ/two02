@@ -478,6 +478,10 @@ body {
     color: var(--color-3);
 }
 
+/*canvas container */
+#canvas-container {
+    position: absolute;
+}
 
 canvas {
     position: fixed;

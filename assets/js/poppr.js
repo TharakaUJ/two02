@@ -1,3 +1,5 @@
+import { openMenu, closeMenu } from "./threejs-poppr.js";
+
 const root = document.querySelector(':root');
 const scrollBar = document.getElementById('scroll-bar');
 const gap = window.innerWidth * 0.08 //css grid gap in gallery-container
@@ -54,6 +56,7 @@ toggleMenu.addEventListener('click', () => {
         menuToggled = true;
         toggleMenu.children[0].classList.add('hide');
         toggleMenu.children[1].classList.remove('hide');
+        openMenu();
     } else {
         menu.animate({
             top: '100%',
@@ -64,6 +67,7 @@ toggleMenu.addEventListener('click', () => {
         menuToggled = false;
         toggleMenu.children[1].classList.add('hide');
         toggleMenu.children[0].classList.remove('hide');
+        closeMenu();
     }
 });
 
