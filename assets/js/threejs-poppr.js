@@ -78,7 +78,7 @@ carasolContainer.addEventListener('scroll', () => {
 //============================================togle menu ====================================================
 const menuItemsContainer = document.getElementById('menu-items-container');
 const menuItems = menuItemsContainer.children;
-var clock = new THREE.Clock();
+// var clock = new THREE.Clock();
 var targetQuaternion = new THREE.Quaternion();
 var cubeRotating = false;
 
@@ -109,8 +109,9 @@ export function closeMenu() {
     container.style.zIndex = -1;
 }
 
-var speed = Math.PI * 0.5;
-var delta
+// var speed = Math.PI * 0.5;
+// var delta = clock.getDelta();
+var step = Math.PI * 0.01
 
 for (let i = 0; i < menuItems.length; i++) {
     menuItems[i].addEventListener('mouseenter', ()=>{
@@ -141,8 +142,8 @@ function rotateCube() {
         cubeRotating = false;
         return;
     };
-    delta = clock.getDelta();
-    var step = speed * delta;
+    // delta = clock.getDelta();
+    // var step = speed * delta;
     cube.quaternion.rotateTowards( targetQuaternion, step );
     requestAnimationFrame(rotateCube);
 }
