@@ -1,0 +1,11 @@
+{% assign otherSites = site.data.navigation['otherSites'] %}
+
+<div id="video-container">
+    {% for item in otherSites %}
+    {% if item.url %}
+    <div class="clickable"><a href="{{ item.url }}" target="_blank">{{ item.title }}</a></div>
+    {% else %}
+    <div><span>{{ item.title }}</span></div>
+    {% endif %}
+    {% endfor %}
+</div>
