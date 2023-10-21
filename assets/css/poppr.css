@@ -238,8 +238,36 @@ body {
     padding: 20px;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 #video-container {
-    & div {
+    & .twozerotwolabs:first-child {
+        font-size: 2.5em;
+        top: 40%;
+        left: 20%;
+        z-index: 10;
+    }
+
+    .twozerotwolabs:nth-child(2) {
+        font-size: 0.5em;
+        top: calc(40% + 5em);
+        left: calc(20% + 18.5em);
+    }
+
+    .twozerotwolabs {
+        position: absolute;
+        font-size: var(--font-size);
+        animation: fadeIn 500ms forwards;
+    }
+
+    & .products {
         position: absolute;
         font-size: var(--font-size);
 
@@ -249,49 +277,36 @@ body {
         }
     }
 
-    & div:first-child {
+    & .products:nth-child(3) {
         font-size: 1em;
     }
 
-    & div:nth-child(2) {
+    & .products:nth-child(4) {
         writing-mode: vertical-lr;
         text-orientation: upright;
         font-size: 0.5em;
         top: 9vh;
     }
 
-    & div:nth-child(3) {
-        font-size: 2.5em;
-        top: 40%;
-        left: 20%;
-        z-index: 10;
-    }
-
-    & div:nth-child(4) {
-        font-size: 0.5em;
-        top: calc(40% + 5em);
-        left: calc(20% + 18.5em);
-    }
-
-    & div:nth-child(5) {
+    & .products:nth-child(5) {
         font-size: 0.75em;
         left: 60%;
     }
 
-    & div:nth-child(6) {
+    & .products:nth-child(6) {
         font-size: 0.5em;
         left: 75%;
         top: 30%;
         writing-mode: vertical-lr;
     }
 
-    & div:nth-child(7) {
+    & .products:nth-child(7) {
         font-size: 0.625em;
         top: 80%;
         left: 20%;
     }
 
-    & .clickable:hover, div:nth-child(3) {
+    & .clickable:hover, .twozerotwolabs:first-child {
         text-shadow: 0 0.2px 0 #ccc, 0 0.4px 0 #ccc,
             0 0.6px 0 var(--font-shadow-color), 0 0.8px 0 #ccc,
             0 1px 0 var(--font-shadow-color), 0 1.2px 0 #ccc,
