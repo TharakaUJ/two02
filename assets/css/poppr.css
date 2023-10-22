@@ -292,6 +292,7 @@ body {
     & .products:nth-child(5) {
         font-size: 0.75em;
         left: 60%;
+        top: 0%;
     }
 
     & .products:nth-child(6) {
