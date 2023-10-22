@@ -19,17 +19,15 @@
 <style>
     .clickable .logos {
         opacity: 0;
-        transition: opacity 1500ms, clip-path 2000ms, max-height 1s, inset 1s;
+        transition: opacity 1500ms, clip-path 2000ms, scale 1s, inset 1s;
         position: fixed;
-        /* max-height: 50vh;
-        max-width: 50vw; */
         pointer-events: none;
         clip-path: circle(1%  at 10% 20%);
         inset: inherit;
-        /* max-height: 10px; */
-        /* transform: translate(-50%, -50%); */
+        scale: 0.5;
         margin: 0;
-
+        width: fit-content;
+        height: fit-content;
 
         /* cliping the image */
         background-clip: text;
@@ -39,9 +37,6 @@
         font-size: 4em;
         background-color: black;
 
-        /* display: flex;
-        flex-direction: column;
-        justify-content: center; */
         overflow: hidden;
 
         font-weight: bolder;
@@ -51,18 +46,15 @@
         text-shadow: none;
         writing-mode: initial;
         text-align: initial;
-        width: fit-content;
-        height: fit-content;
+
     }
 
     .clickable:hover .logos {
         opacity: 1;
         clip-path: circle(80% at 50% 50%);
-        /* inset: 20% 0; */
         inset: 40% 0 0 20%;
-        /* max-height: 100%; */
-        transition: opacity 1500ms, clip-path 2000ms, max-height 1s, inset 500ms;
-        /* transform: translate(-50%, -50%); */
+        scale: 1;
+        transition: opacity 100ms, clip-path 2000ms, scale 1s, inset 500ms;
     }
 
     #video-container:has(.clickable:hover) .twozerotwolabs {
