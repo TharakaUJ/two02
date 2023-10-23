@@ -400,47 +400,8 @@ body {
     & a span {
         transition: transform 350ms ease;
     }
-
-    & a:hover {
-        animation: float 5s ease infinite;
-    }
-
-    & a:hover span {
-        transition-duration: 800ms;
-        background: linear-gradient(
-            to right,
-            var(--color-1),
-            var(--color-2),
-            var(--color-1)
-        );
-        background-size: 1000%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        color: transparent;
-        animation: background-pan 150s linear infinite;
-    }
-
-    & a:hover span:first-child {
-        transform: translate(-40%, 30%) rotate(8deg);
-    }
-
-    & a:hover span:nth-child(2) {
-        transform: translate(-20%, 20%) rotate(4deg);
-    }
-
-    & a:hover span:nth-child(3) {
-        transform: translate(-10%, -30%) rotate(-6deg);
-    }
-
-    & a:hover span:nth-child(4) {
-        transform: translate(0%, 8%) rotate(-8deg);
-    }
 }
 
-#menu-items-container:has(a:hover) a:not(a:hover) {
-    opacity: 0.5;
-}
 
 .hide {
     display: none !important;
@@ -553,5 +514,52 @@ media query
         left: 10%;
         width: 80%;
         height: 60%;
+    }
+}
+
+/* hover effects only on hover devices */
+
+@media (hover: hover) {
+    /* menu */
+    #menu-items-container:has(a:hover) a:not(a:hover) {
+        opacity: 0.5;
+    }
+
+    #menu-items-container {
+        & a:hover {
+            animation: float 5s ease infinite;
+        }
+    
+        & a:hover span {
+            transition-duration: 800ms;
+            background: linear-gradient(
+                to right,
+                var(--color-1),
+                var(--color-2),
+                var(--color-1)
+            );
+            background-size: 1000%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: background-pan 150s linear infinite;
+        }
+    
+        & a:hover span:first-child {
+            transform: translate(-40%, 30%) rotate(8deg);
+        }
+    
+        & a:hover span:nth-child(2) {
+            transform: translate(-20%, 20%) rotate(4deg);
+        }
+    
+        & a:hover span:nth-child(3) {
+            transform: translate(-10%, -30%) rotate(-6deg);
+        }
+    
+        & a:hover span:nth-child(4) {
+            transform: translate(0%, 8%) rotate(-8deg);
+        }
     }
 }

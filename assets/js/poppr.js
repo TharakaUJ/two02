@@ -126,7 +126,7 @@ turner.parentNode.onpointermove = event => {
 
     turner.animate({
         transform: `rotateX(${15 - 30 * clientY / window.innerHeight}deg) rotateY(${30 * clientX / window.innerWidth - 15}deg)`,
-    }, { duration: 5000, fill: "forwards" });
+    }, { duration: 10000, fill: "forwards" });
 }
 
 
