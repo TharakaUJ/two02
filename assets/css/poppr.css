@@ -356,13 +356,6 @@ body {
 
 }
 
-.clickable:hover .logos {
-    opacity: 1;
-    clip-path: circle(80% at 50% 50%);
-    inset: 50% 0 0 60%;
-    scale: 1;
-    transition: opacity 100ms, clip-path 2000ms, scale 1s, inset 500ms;
-}
 
 @keyframes waitNhide {
     from {
@@ -373,11 +366,6 @@ body {
     }
 }
 
-#video-container:has(.clickable:hover) .twozerotwolabs {
-    opacity: 0;
-    transition: opacity 500ms;
-    animation: waitNhide 0s  500ms forwards;
-}
 
 
 /* menu */
@@ -619,5 +607,20 @@ media query
         & a:hover span:nth-child(4) {
             transform: translate(0%, 8%) rotate(-8deg);
         }
+    }
+
+    /* logos and products(video-container) */
+    .clickable:hover .logos {
+        opacity: 1;
+        clip-path: circle(80% at 50% 50%);
+        inset: 50% 0 0 60%;
+        scale: 1;
+        transition: opacity 100ms, clip-path 2000ms, scale 1s, inset 500ms;
+    }
+
+    #video-container:has(.clickable:hover) .twozerotwolabs {
+        opacity: 0;
+        transition: opacity 500ms;
+        animation: waitNhide 0s  500ms forwards;
     }
 }
