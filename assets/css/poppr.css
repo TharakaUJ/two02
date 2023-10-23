@@ -323,6 +323,64 @@ body {
     }
 }
 
+.clickable .logos {
+    opacity: 0;
+    transition: opacity 1500ms, clip-path 2000ms, scale 1s, inset 1s;
+    position: fixed;
+    pointer-events: none;
+    clip-path: circle(1%  at 10% 20%);
+    inset: inherit;
+    scale: 0.5;
+    margin: 0;
+    width: fit-content;
+    height: fit-content;
+    transform: translate(-50%, -50%);
+
+    /* cliping the image */
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: cover;
+    color: transparent;
+    font-size: 4em;
+    background-color: black;
+
+    overflow: hidden;
+
+    font-weight: bolder;
+    font-family: 'Luckiest Guy', cursive;
+
+    /* removing text shadow from clickable class */
+    text-shadow: none;
+    writing-mode: initial;
+    text-align: initial;
+
+}
+
+.clickable:hover .logos {
+    opacity: 1;
+    clip-path: circle(80% at 50% 50%);
+    inset: 50% 0 0 60%;
+    scale: 1;
+    transition: opacity 100ms, clip-path 2000ms, scale 1s, inset 500ms;
+}
+
+@keyframes waitNhide {
+    from {
+        display: block;
+    }
+    to {
+        display: none;
+    }
+}
+
+#video-container:has(.clickable:hover) .twozerotwolabs {
+    opacity: 0;
+    transition: opacity 500ms;
+    animation: waitNhide 0s  500ms forwards;
+}
+
+
+/* menu */
 
 #toggle-menu {
     border-radius: 100%;
