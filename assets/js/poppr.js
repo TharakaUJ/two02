@@ -106,32 +106,6 @@ scrollContainer.addEventListener("mousemove", (e) => {
 });
 
 
-/* -- Glow effect -- */
-
-const blob = document.getElementById("blob");
-
-window.onpointermove = event => {
-    const { clientX, clientY } = event;
-
-    blob.animate({
-        left: `${clientX}px`,
-        top: `${clientY}px`
-    }, { duration: 3000, fill: "forwards" });
-}
-
-/* --- turning effect on typogram --*/
-const turner = document.getElementById("video-container");
-turner.parentNode.onpointermove = event => {
-    const { clientX, clientY } = event;
-
-    turner.animate({
-        transform: `rotateX(${15 - 30 * clientY / window.innerHeight}deg) rotateY(${30 * clientX / window.innerWidth - 15}deg)`,
-    }, { duration: 5000, fill: "forwards" });
-}
-
-
-
-
 scrollContainer.addEventListener("scroll", function () {
     if (!tocking) {
         // event throtteling
@@ -198,4 +172,43 @@ function atScrollEnd() {
         scrollContainer.prepend(children[children.length - 2]);
         scrollContainer.scrollLeft = scrollContainer.scrollLeft + 2 * children[0].offsetWidth;
     }
+}
+
+
+
+// only on hover devices
+
+const isMobile = /Mobi/.test(navigator.userAgent) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
+const isTouchOnlyDevice = isMobile && window.innerWidth <= 768; // Adjust the screen width as needed
+
+if (isTouchOnlyDevice) {
+    // This is likely a touch-only device, such as a mobile phone
+
+} else {
+    // This is not a touch-only device, like a desktop with touch support
+
+    /* -- Glow effect -- */
+
+    const blob = document.getElementById("blob");
+
+    window.onpointermove = event => {
+        const { clientX, clientY } = event;
+
+        blob.animate({
+            left: `${clientX}px`,
+            top: `${clientY}px`
+        }, { duration: 3000, fill: "forwards" });
+    }
+
+    /* --- turning effect on typogram --*/
+    const turner = document.getElementById("video-container");
+    turner.parentNode.onpointermove = event => {
+        const { clientX, clientY } = event;
+
+        turner.animate({
+            transform: `rotateX(${15 - 30 * clientY / window.innerHeight}deg) rotateY(${30 * clientX / window.innerWidth - 15}deg)`,
+        }, { duration: 10000, fill: "forwards" });
+    }
+
+
 }
