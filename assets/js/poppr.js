@@ -183,32 +183,13 @@ const isTouchOnlyDevice = isMobile && window.innerWidth <= 768; // Adjust the sc
 
 if (isTouchOnlyDevice) {
     // This is likely a touch-only device, such as a mobile phone
+    var script = document.createElement('script');
+    script.src = '/two02/assets/js/mobile-non-hover.js';
+    document.body.appendChild(script);
 
 } else {
     // This is not a touch-only device, like a desktop with touch support
-
-    /* -- Glow effect -- */
-
-    const blob = document.getElementById("blob");
-
-    window.onpointermove = event => {
-        const { clientX, clientY } = event;
-
-        blob.animate({
-            left: `${clientX}px`,
-            top: `${clientY}px`
-        }, { duration: 3000, fill: "forwards" });
-    }
-
-    /* --- turning effect on typogram --*/
-    const turner = document.getElementById("video-container");
-    turner.parentNode.onpointermove = event => {
-        const { clientX, clientY } = event;
-
-        turner.animate({
-            transform: `rotateX(${15 - 30 * clientY / window.innerHeight}deg) rotateY(${30 * clientX / window.innerWidth - 15}deg)`,
-        }, { duration: 10000, fill: "forwards" });
-    }
-
-
+    var script = document.createElement('script');
+    script.src = '/two02/assets/js/dekstop-hover.js';
+    document.body.appendChild(script);
 }

@@ -624,3 +624,11 @@ media query
         animation: waitNhide 0s  500ms forwards;
     }
 }
+
+
+
+/* styling for non hover devices */
+
+@media (hover: none) {
+    
+}
