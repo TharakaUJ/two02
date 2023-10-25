@@ -1,5 +1,3 @@
-import { openMenu, closeMenu } from "./threejs-poppr.js";
-
 const root = document.querySelector(':root');
 const scrollBar = document.getElementById('scroll-bar');
 const gap = window.innerWidth * 0.08 //css grid gap in gallery-container
@@ -40,35 +38,6 @@ window.addEventListener('scrollend', () => {
     scrollBar.animate({
         opacity: '0'
     }, { fill: "forwards", duration: 400, delay: 400 })
-});
-
-const toggleMenu = document.getElementById('toggle-menu');
-const menu = document.getElementById('menu');
-var menuToggled = false
-
-toggleMenu.addEventListener('click', () => {
-    if (!menuToggled) {
-        menu.animate({
-            top: ['-100%', '0'],
-            borderRadius: ['100%', '0']
-        }, { duration: 300, fill: 'forwards' });
-        menuItemsAnimeOpen();
-        menuToggled = true;
-        toggleMenu.children[0].classList.add('hide');
-        toggleMenu.children[1].classList.remove('hide');
-        openMenu();
-    } else {
-        menu.animate({
-            top: '100%',
-            //borderTopLeftRadius: ['50%', '0'],
-            //borderTopRightRadius: ['50%', '0']
-        }, { duration: 300, fill: 'forwards' });
-        menuItemsAnimeClose();
-        menuToggled = false;
-        toggleMenu.children[1].classList.add('hide');
-        toggleMenu.children[0].classList.remove('hide');
-        closeMenu();
-    }
 });
 
 const scrollContainer = document.getElementById("gallery-container");
@@ -132,31 +101,6 @@ function parallax() {
     });
 }
 
-const menuItemscontainer = document.getElementById('menu-items-container');
-
-function menuItemsAnimeOpen() {
-    let menuItems = menuItemscontainer.children;
-    [...menuItems].forEach((menuItem) => {
-        let i = 0;
-        [...menuItem.children].forEach((letter) => {
-            letter.animate({
-                opacity: ['0', '1']
-            }, { duration: 1000, fill: 'forwards', delay: 300 + i * 100 });
-            i = i + 1;
-        })
-    });
-}
-
-function menuItemsAnimeClose() {
-    let menuItems = menuItemscontainer.children;
-    [...menuItems].forEach((menuItem) => {
-        [...menuItem.children].forEach((letter) => {
-            letter.animate({
-                opacity: '0'
-            }, { duration: 200, fill: 'forwards' });
-        })
-    });
-}
 
 function atScrollEnd() {
     if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth - 100) {
@@ -183,13 +127,18 @@ const isTouchOnlyDevice = isMobile && window.innerWidth <= 768; // Adjust the sc
 
 if (isTouchOnlyDevice) {
     // This is likely a touch-only device, such as a mobile phone
-    var script = document.createElement('script');
-    script.src = '/two02/assets/js/mobile-non-hover.js';
-    document.body.appendChild(script);
+    addScript('/two02/assets/js/mobile-non-hover.js');
 
 } else {
     // This is not a touch-only device, like a desktop with touch support
+    addScript('/two02/assets/js/dekstop-hover.js', "module");
+    addScript('/two02/assets/js/threejs-poppr.js', "module");
+}
+
+
+function addScript(scriptSource, scriptType="text/javascript") {
     var script = document.createElement('script');
-    script.src = '/two02/assets/js/dekstop-hover.js';
+    script.src = scriptSource;
+    script.type = scriptType
     document.body.appendChild(script);
 }
