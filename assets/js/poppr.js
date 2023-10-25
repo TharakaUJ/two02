@@ -132,7 +132,7 @@ if (isTouchOnlyDevice) {
 } else {
     // This is not a touch-only device, like a desktop with touch support
     addScript('/two02/assets/js/dekstop-hover.js', "module");
-    addScript('/two02/assets/js/threejs-poppr.js', "module");
+    addScript('/two02/assets/js/three-desktop.js', "module");
 }
 
 

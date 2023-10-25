@@ -1,4 +1,4 @@
-import { openMenu, closeMenu } from "./threejs-poppr.js";
+import { openMenu, closeMenu } from "./three-desktop.js";
 
 /* -- Glow effect -- */
 
