@@ -628,7 +628,32 @@ media query
 
 
 /* styling for non hover devices */
+@keyframes logoAnime {
+    from {
+        opacity: 0;
+        clip-path: circle(1%  at 10% 20%);
+        inset: 50% 0 0 60%;
+        scale: 1;
+    }
+
+    50% {
+        opacity: 1;
+        clip-path: circle(80% at 50% 50%);
+        inset: inherit;
+        scale: 0.5;
+    }
+
+    to {
+        opacity: 0;
+        clip-path: circle(1%  at 10% 20%);
+        inset: 50% 0 0 60%;
+        scale: 1;
+    }
+}
+
 
 @media (hover: none) {
-    
+    .clickable .logos {
+        animation: logoAnime 3000ms 1500ms 1 forwards;
+    }
 }
