@@ -128,7 +128,7 @@ const isTouchOnlyDevice = isMobile && window.innerWidth <= 768; // Adjust the sc
 if (isTouchOnlyDevice) {
     // This is likely a touch-only device, such as a mobile phone
     addScript('/two02/assets/js/mobile-non-hover.js');
-
+    addScript('/two02/assets/js/three-mobile.js', "module");
 } else {
     // This is not a touch-only device, like a desktop with touch support
     addScript('/two02/assets/js/dekstop-hover.js', "module");

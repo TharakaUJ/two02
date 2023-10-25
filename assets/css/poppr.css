@@ -256,13 +256,13 @@ body {
         z-index: 10;
     }
 
-    .twozerotwolabs:nth-child(2) {
+    & .twozerotwolabs:nth-child(2) {
         font-size: 0.5em;
         top: calc(40% + 5em);
         left: calc(20% + 18.5em);
     }
 
-    .twozerotwolabs {
+    & .twozerotwolabs {
         position: absolute;
         font-size: var(--font-size);
         animation: fadeIn 500ms forwards;
