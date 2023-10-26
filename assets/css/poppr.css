@@ -237,6 +237,7 @@ body {
     background-color: transparent;
     border-radius: 40px;
     padding: 20px;
+    transform: translateZ(0);
 }
 
 @keyframes fadeIn {
