@@ -237,6 +237,7 @@ body {
     background-color: transparent;
     border-radius: 40px;
     padding: 20px;
+    transform: translateZ(0);
 }
 
 @keyframes fadeIn {
@@ -256,13 +257,13 @@ body {
         z-index: 10;
     }
 
-    .twozerotwolabs:nth-child(2) {
+    & .twozerotwolabs:nth-child(2) {
         font-size: 0.5em;
         top: calc(40% + 5em);
         left: calc(20% + 18.5em);
     }
 
-    .twozerotwolabs {
+    & .twozerotwolabs {
         position: absolute;
         font-size: var(--font-size);
         animation: fadeIn 500ms forwards;
@@ -628,7 +629,32 @@ media query
 
 
 /* styling for non hover devices */
+@keyframes logoAnime {
+    from {
+        opacity: 0;
+        clip-path: circle(1%  at 10% 20%);
+        inset: 50% 0 0 60%;
+        scale: 1;
+    }
+
+    50% {
+        opacity: 1;
+        clip-path: circle(80% at 50% 50%);
+        inset: inherit;
+        scale: 0.5;
+    }
+
+    to {
+        opacity: 0;
+        clip-path: circle(1%  at 10% 20%);
+        inset: 50% 0 0 60%;
+        scale: 1;
+    }
+}
+
 
 @media (hover: none) {
-    
+    .clickable .logos {
+        animation: logoAnime 3000ms 1500ms 1 forwards;
+    }
 }
