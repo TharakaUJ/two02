@@ -174,6 +174,7 @@ function planeRing(objectList) {
 planeRing(carsolPlanes);
 
 let scrollPercent = 0
+let camRotateX = Math.PI * 0.5
 camera.rotation.x = Math.PI * 0.5;
 
 document.body.onscroll = () => {
@@ -184,9 +185,9 @@ document.body.onscroll = () => {
                 document.documentElement.clientHeight))
     
     // pivot.rotation.y = 2 * Math.PI * scrollPercent;
-    pivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
+    // pivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
     // pivot.position.y = 10 * scrollPercent -5;
-    camera.rotation.x = Math.PI * 0.5 * (1 - scrollPercent);
+    camRotateX = Math.PI * 0.5 * (1 - scrollPercent);
 }
 
 
@@ -248,18 +249,21 @@ const cubeMaterials = [
 
 //create material, color, or image texture
 const cube = new THREE.Mesh(geometry, cubeMaterials);
-cube.position.set(3, 0, 0);
-cube.rotation.y = -0.4;
+cube.position.set(3, 0, -20);
+// targetQuaternion.setFromEuler(new THREE.Euler(0, 0, 0));
 
 
 export function openMenu() {
     scene.add(cube);
     container.style.zIndex = 100;
+    camera.position.z = -15;
+    camRotateX = 0;
 }
 
 export function closeMenu() {
     scene.remove(cube);
     container.style.zIndex = -1;
+    camera.position.z =5;
 }
 
 // var speed = Math.PI * 0.5;
@@ -451,7 +455,17 @@ function atHoverStart(object, element) {
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-    pivot.rotation.y = 2 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth));
+    // pivot.rotation.y = 2 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth));
+    pivot.rotation.y = lerpRotation((1 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth))), pivot.rotation.y);
+    // pivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
+    pivot.rotation.x = lerpRotation((0.2 * Math.PI * (1 + 0.5 * scrollPercent)), pivot.rotation.x);
+    // camera.rotation.x = (camRotateX - camera.rotation.x) * 0.2;
+    camera.rotation.x = lerpRotation(camRotateX, camera.rotation.x);
 }
 
 animate();
+
+
+function lerpRotation(finalValue, initialValue) {
+    return (finalValue - initialValue) * 0.04 + initialValue;
+}
