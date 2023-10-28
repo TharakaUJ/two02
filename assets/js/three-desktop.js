@@ -153,7 +153,7 @@ function planeCurve(g, z) {
 
 var pivot = new THREE.Object3D();
 pivot.position.set(0, 0, 5);
-pivot.rotation.set(0, 0, 0);
+pivot.rotation.set(Math.PI * 0.2, 0, 0);
 scene.add(pivot)
 
 function planeRing(objectList) {
@@ -184,8 +184,9 @@ document.body.onscroll = () => {
                 document.documentElement.clientHeight))
     
     // pivot.rotation.y = 2 * Math.PI * scrollPercent;
+    pivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
     // pivot.position.y = 10 * scrollPercent -5;
-    camera.rotation.x = Math.PI * (0.5 - scrollPercent);
+    camera.rotation.x = Math.PI * 0.5 * (1 - scrollPercent);
 }
 
 
@@ -219,7 +220,7 @@ scrollContainer.addEventListener("mousemove", (e) => {
     if (!isDragging) return;
     // e.preventDefault();
     const x = e.pageX;
-    const walk = (x - startX); // Adjust the multiplier for faster/slower scrolling
+    const walk = (x - startX) * 0.5; // Adjust the multiplier for faster/slower scrolling
     // scrollContainer.scrollLeft = horizontalNudge - walk;
     horizontalNudge = previousHNudge + walk;
 });
