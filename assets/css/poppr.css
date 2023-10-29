@@ -348,7 +348,7 @@ body {
     overflow: hidden;
 
     font-weight: bolder;
-    font-family: 'Luckiest Guy', cursive;
+    font-family: 'Luckiest Guy';
 
     /* removing text shadow from clickable class */
     text-shadow: none;
