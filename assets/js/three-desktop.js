@@ -46,35 +46,27 @@ window.addEventListener('resize', onWindowResize, false);
 
 //======================================carasol===================================================
 
-// const carasolContainer = document.getElementById('gallery-container');
-// const carasolItems = carasolContainer.children;
 const carasolImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
 const carsolPlanes = [];
 
-//use a dictionary to map element to plane
+//object that all the Carasol planes added
+var carasolPivot = new THREE.Object3D();
+carasolPivot.position.set(0, 0, 5);
+carasolPivot.rotation.set(Math.PI * 0.2, 0, 0);
+scene.add(carasolPivot);
+
 //for (let i = 0; i < carasolItems.length; i++) {
 for (let i = 0; i < 4; i++) {
     carsolPlanes.push(createACurvedPlane(carasolImages[i]));
-    // setCarasol(carsolPlanes[i], carasolItems[i]);
     setCarasol(carsolPlanes[i]);
 };
 
 
-// function setCarasol(object, element) {
 function setCarasol(object) {
     scene.add(object);
     object.material.opacity = 1;
-    // let elRect = element.getBoundingClientRect();
-    // let elStartX = ((elRect.right / window.innerWidth)) * 2 - 1;
-    // let elStartY = -(elRect.top / window.innerHeight) * 2 + 1;
-    //object.position.copy(IntoThreeD(elStartX, elStartY, camera));
 }
 
-// carasolContainer.addEventListener('scroll', () => {
-//     for (let i = 0; i < 4; i++) {
-//         // setCarasol(carsolPlanes[i], carasolItems[i]);
-//     };
-// });
 
 function createACurvedPlane(imag) {
     const geometry = new THREE.PlaneGeometry(16 / 4, 9 / 4, 16, 16);
@@ -85,33 +77,7 @@ function createACurvedPlane(imag) {
         transparent: true,
         // side: THREE.DoubleSide
     });
-
-
-    // const positions = geometry.attributes.position.array;
-
-    // const axis = new THREE.Vector3(0, 1, 0);
-    // const axisPosition = new THREE.Vector3(-2, 0, 2);
-    // const vTemp = new THREE.Vector3(0, 0, 0);
-    // let lengthOfArc;
-    // let angleOfArc;
-
-    // for (let i = 0; i < positions.count; i++){
-    //     vTemp.fromBufferAttribute(positions, i);
-    //     lengthOfArc = (vTemp.x - axisPosition.x);
-    //     angleOfArc = (lengthOfArc / axisPosition.z);
-    //     vTemp.setX(0).setZ(-axisPosition.z).applyAxisAngle(axis, -angleOfArc).add(axisPosition);
-    //     positions.setXYZ(i, vTemp.x, vTemp.y, vTemp.z);
-    // }
-
-    // for(let i=0; i<vertices.length/2; i++) {
-    //     vertices[2*i].z = Math.pow(2, i/20);
-    //     vertices[2*i+1].z = Math.pow(2, i/20);
-    // }
-
-    // planeCurve(geometry, 0.1)
-
     const object = new THREE.Mesh(geometry, material);
-    // object.rotation.x = 1;
     return object;
 }
 
@@ -148,13 +114,8 @@ function planeCurve(g, z) {
     }
 
     pos.needsUpdate = true;
-
 }
 
-var pivot = new THREE.Object3D();
-pivot.position.set(0, 0, 5);
-pivot.rotation.set(Math.PI * 0.2, 0, 0);
-scene.add(pivot)
 
 function planeRing(objectList) {
     let axis = new THREE.Vector3(0, 1, 0);
@@ -166,28 +127,32 @@ function planeRing(objectList) {
         vTemp.applyAxisAngle(axis, -deltaAngle * i);
         objectList[i].position.copy(vTemp);
         objectList[i].rotation.y = -deltaAngle * i;
-        pivot.add(objectList[i]);
+        carasolPivot.add(objectList[i]);
     }
 
 }
 
 planeRing(carsolPlanes);
 
-let scrollPercent = 0
-let camRotateX = Math.PI * 0.5
-camera.rotation.x = Math.PI * 0.5;
+let scrollPercent = 0;
+updateScrollPercent();
+let camRotateX = Math.PI * 0.5 * (1 - scrollPercent)
+camera.rotation.x = Math.PI * 0.5 * (1 - scrollPercent);
 
 document.body.onscroll = () => {
+    updateScrollPercent()    
+    // carasolPivot.rotation.y = 2 * Math.PI * scrollPercent;
+    // carasolPivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
+    // carasolPivot.position.y = 10 * scrollPercent -5;
+    camRotateX = Math.PI * 0.5 * (1 - scrollPercent);
+}
+
+function updateScrollPercent() {
     //calculate the current scroll progress as a percentage
     scrollPercent =
-        ((document.documentElement.scrollTop || document.body.scrollTop) /
-            ((document.documentElement.scrollHeight || document.body.scrollHeight) -
-                document.documentElement.clientHeight))
-    
-    // pivot.rotation.y = 2 * Math.PI * scrollPercent;
-    // pivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
-    // pivot.position.y = 10 * scrollPercent -5;
-    camRotateX = Math.PI * 0.5 * (1 - scrollPercent);
+    ((document.documentElement.scrollTop || document.body.scrollTop) /
+        ((document.documentElement.scrollHeight || document.body.scrollHeight) -
+            document.documentElement.clientHeight))
 }
 
 
@@ -229,7 +194,7 @@ scrollContainer.addEventListener("mousemove", (e) => {
 
 
 
-//============================================togle menu ====================================================
+//============================================toggle menu ====================================================
 const menuItemsContainer = document.getElementById('menu-items-container');
 const menuItems = menuItemsContainer.children;
 // var clock = new THREE.Clock();
@@ -264,6 +229,7 @@ export function closeMenu() {
     scene.remove(cube);
     container.style.zIndex = -1;
     camera.position.z =5;
+    camRotateX = Math.PI * 0.5 * (1 - scrollPercent);
 }
 
 // var speed = Math.PI * 0.5;
@@ -455,17 +421,14 @@ function atHoverStart(object, element) {
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-    // pivot.rotation.y = 2 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth));
-    pivot.rotation.y = lerpRotation((1 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth))), pivot.rotation.y);
-    // pivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
-    pivot.rotation.x = lerpRotation((0.2 * Math.PI * (1 + 0.5 * scrollPercent)), pivot.rotation.x);
-    // camera.rotation.x = (camRotateX - camera.rotation.x) * 0.2;
+    carasolPivot.rotation.y = lerpRotation((1 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth))), carasolPivot.rotation.y);
+    carasolPivot.rotation.x = lerpRotation((0.2 * Math.PI * (1 + 0.5 * scrollPercent)), carasolPivot.rotation.x, 0.5);
     camera.rotation.x = lerpRotation(camRotateX, camera.rotation.x);
 }
 
 animate();
 
 
-function lerpRotation(finalValue, initialValue) {
-    return (finalValue - initialValue) * 0.04 + initialValue;
+function lerpRotation(finalValue, initialValue, step=0.2) {
+    return (finalValue - initialValue) * step + initialValue;
 }

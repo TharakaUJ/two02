@@ -39,6 +39,7 @@ toggleMenu.addEventListener('click', () => {
         toggleMenu.children[0].classList.add('hide');
         toggleMenu.children[1].classList.remove('hide');
         openMenu();
+        document.body.style.overflow = 'hidden';
     } else {
         menu.animate({
             top: '100%',
@@ -50,6 +51,7 @@ toggleMenu.addEventListener('click', () => {
         toggleMenu.children[1].classList.add('hide');
         toggleMenu.children[0].classList.remove('hide');
         closeMenu();
+        document.body.style.overflow ='auto';
     }
 });
 
