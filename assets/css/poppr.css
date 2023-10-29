@@ -522,8 +522,25 @@ canvas {
 
 
 
+/* carasol-hovers */
+#hover-text-container {
+    position: relative;
 
+    & div {
+        position: absolute;
+        display: none;
+        font-size: 0.5em;
+        margin: auto;
+        left: 60%;
+        top: 20%;
+        width: 30%;
+        border: black 1px solid;
+    }
+}
 
+.hovering {
+    display: block!important;
+}
 
 
 

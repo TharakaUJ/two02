@@ -47,7 +47,8 @@ window.addEventListener('resize', onWindowResize, false);
 //======================================carasol===================================================
 
 const carasolImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
-var scrollPercent = 0;
+var scrollPercent
+updateScrollPercent();
 var camRotateX = Math.PI * 0.5 * (1 - scrollPercent)
 camera.rotation.x = Math.PI * 0.5 * (1 - scrollPercent);
 
@@ -66,6 +67,7 @@ function carasolInit() {
 
     for (let i = 0; i < carasolImages.length; i++) {
         let object = createACurvedPlane(carasolImages[i]);
+        object.name = i;
         scene.add(object);
         
         let vTemp = new THREE.Vector3(0, 0, 0).sub(axisPosition);
@@ -181,6 +183,22 @@ scrollContainer.addEventListener("mousemove", (e) => {
 
 carasolInit();
 updateScrollPercent();
+//_________________________________________carasol hover _____________________________________________
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+const hoverTexts = document.getElementById('hover-text-container').children;
+
+function carasolHover(IntersecList) {
+    if (IntersecList.length === 0) {
+        document.querySelector('.hovering')?.classList.remove('hovering');
+        return
+    };
+    let hoveringObj = IntersecList[0];
+    let i = hoveringObj.object.name;
+    document.querySelector('.hovering')?.classList.remove('hovering');
+    hoverTexts[i].classList.add('hovering');
+
+}
 
 
 //============================================toggle menu ====================================================
@@ -265,7 +283,7 @@ function rotateCube() {
 }
 
 //=========================hover animation variables======================================================================
-var mouse = { x: 0, y: 0 };
+// var mouse = { x: 0, y: 0 };
 var planePos = { x: 0, y: 0, z: 0 };
 var hoverPlanes = [];
 var lastScrollPos = 0;
@@ -277,7 +295,7 @@ const hoverElements = document.getElementsByClassName("insight-items");
 
 
 function createAPlane(imag) {
-    const geometry = new THREE.PlaneGeometry(1.5, 2); //use the aspect ratio of the images
+    const geometry = new THREE.PlaneGeometry(1.5, 1); //use the aspect ratio of the images
     const material = new THREE.MeshLambertMaterial({
         color: 0xffffff,
         map: loader.load(imag),
@@ -293,6 +311,14 @@ function createAPlane(imag) {
 window.addEventListener("mousemove", (event) => {
     planePos = onMouseMove(event);
     lastScrollPos = window.scrollY;
+
+//part of carasol ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // update the picking ray with the camera and pointer position
+	raycaster.setFromCamera( mouse, camera );
+
+	// calculate objects intersecting the picking ray
+	const intersects = raycaster.intersectObjects( carasolPivot.children );
+    carasolHover(intersects);
 });
 
 window.addEventListener("scroll", (event) => {
@@ -425,3 +451,5 @@ animate();
 function lerpRotation(finalValue, initialValue, step=0.2) {
     return (finalValue - initialValue) * step + initialValue;
 }
+
+
