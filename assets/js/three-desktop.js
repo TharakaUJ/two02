@@ -47,7 +47,10 @@ window.addEventListener('resize', onWindowResize, false);
 //======================================carasol===================================================
 
 const carasolImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
-const carsolPlanes = [];
+var scrollPercent = 0;
+var camRotateX = Math.PI * 0.5 * (1 - scrollPercent)
+camera.rotation.x = Math.PI * 0.5 * (1 - scrollPercent);
+
 
 //object that all the Carasol planes added
 var carasolPivot = new THREE.Object3D();
@@ -55,16 +58,22 @@ carasolPivot.position.set(0, 0, 5);
 carasolPivot.rotation.set(Math.PI * 0.2, 0, 0);
 scene.add(carasolPivot);
 
-//for (let i = 0; i < carasolItems.length; i++) {
-for (let i = 0; i < 4; i++) {
-    carsolPlanes.push(createACurvedPlane(carasolImages[i]));
-    setCarasol(carsolPlanes[i]);
-};
 
+function carasolInit() {
+    let axis = new THREE.Vector3(0, 1, 0);
+    let axisPosition = new THREE.Vector3(0, 0, 5);
+    let deltaAngle = 2 * Math.PI / carasolImages.length;
 
-function setCarasol(object) {
-    scene.add(object);
-    object.material.opacity = 1;
+    for (let i = 0; i < carasolImages.length; i++) {
+        let object = createACurvedPlane(carasolImages[i]);
+        scene.add(object);
+        
+        let vTemp = new THREE.Vector3(0, 0, 0).sub(axisPosition);
+        vTemp.applyAxisAngle(axis, -deltaAngle * i);
+        object.position.copy(vTemp);
+        object.rotation.y = -deltaAngle * i;
+        carasolPivot.add(object);
+    };
 }
 
 
@@ -73,7 +82,7 @@ function createACurvedPlane(imag) {
     const material = new THREE.MeshLambertMaterial({
         color: 0xffffff,
         map: loader.load(imag),
-        opacity: 0,
+        opacity: 1,
         transparent: true,
         // side: THREE.DoubleSide
     });
@@ -116,28 +125,6 @@ function planeCurve(g, z) {
     pos.needsUpdate = true;
 }
 
-
-function planeRing(objectList) {
-    let axis = new THREE.Vector3(0, 1, 0);
-    let axisPosition = new THREE.Vector3(0, 0, 5);
-    let deltaAngle = 2 * Math.PI / objectList.length;
-
-    for (let i = 0; i < objectList.length; i++) {
-        let vTemp = new THREE.Vector3(0, 0, 0).sub(axisPosition);
-        vTemp.applyAxisAngle(axis, -deltaAngle * i);
-        objectList[i].position.copy(vTemp);
-        objectList[i].rotation.y = -deltaAngle * i;
-        carasolPivot.add(objectList[i]);
-    }
-
-}
-
-planeRing(carsolPlanes);
-
-let scrollPercent = 0;
-updateScrollPercent();
-let camRotateX = Math.PI * 0.5 * (1 - scrollPercent)
-camera.rotation.x = Math.PI * 0.5 * (1 - scrollPercent);
 
 document.body.onscroll = () => {
     updateScrollPercent()    
@@ -192,6 +179,8 @@ scrollContainer.addEventListener("mousemove", (e) => {
 });
 //______________________________________________________________________________________________
 
+carasolInit();
+updateScrollPercent();
 
 
 //============================================toggle menu ====================================================
@@ -201,21 +190,25 @@ const menuItems = menuItemsContainer.children;
 var targetQuaternion = new THREE.Quaternion();
 var cubeRotating = false;
 
-//create shape
-const geometry = new THREE.BoxGeometry(2, 2, 2);
-const cubeMaterials = [
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //right side
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //left side
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //top side
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //bottom side
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //front side
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //back side
-];
+function cubeInit() {
+    //create shape
+    let geometry = new THREE.BoxGeometry(2, 2, 2);
+    let cubeMaterials = [
+        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //right side
+        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //left side
+        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //top side
+        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //bottom side
+        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //front side
+        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //back side
+    ];
 
-//create material, color, or image texture
-const cube = new THREE.Mesh(geometry, cubeMaterials);
+    //create material, color, or image texture
+    let object = new THREE.Mesh(geometry, cubeMaterials);
+    return object
+}
+
+const cube = cubeInit();
 cube.position.set(3, 0, -20);
-// targetQuaternion.setFromEuler(new THREE.Euler(0, 0, 0));
 
 
 export function openMenu() {
