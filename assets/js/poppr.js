@@ -123,7 +123,7 @@ window.addEventListener('scrollend', () => {
 // only on hover devices
 
 const isMobile = /Mobi/.test(navigator.userAgent) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 2);
-const isTouchOnlyDevice = isMobile && window.innerWidth <= 768; // Adjust the screen width as needed
+const isTouchOnlyDevice = isMobile && window.innerWidth <= 768; // && navigator.maxTouchPoints > 0; // Adjust the screen width as needed
 
 if (isTouchOnlyDevice) {
     // This is likely a touch-only device, such as a mobile phone

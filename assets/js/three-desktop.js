@@ -187,13 +187,22 @@ updateScrollPercent();
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 const hoverTexts = document.getElementById('hover-text-container').children;
+var previousIntersects = []
 
-function carasolHover(IntersecList) {
-    if (IntersecList.length === 0) {
+function carasolHover(event) {
+        // update the picking ray with the camera and pointer position
+	raycaster.setFromCamera( mouse, camera );
+
+	// calculate objects intersecting the picking ray
+	const intersects = raycaster.intersectObjects( carasolPivot.children );
+
+    if (intersects === previousIntersects) return;
+
+    if (intersects.length === 0) {
         document.querySelector('.hovering')?.classList.remove('hovering');
         return
     };
-    let hoveringObj = IntersecList[0];
+    let hoveringObj = intersects[0];
     let i = hoveringObj.object.name;
     document.querySelector('.hovering')?.classList.remove('hovering');
     hoverTexts[i].classList.add('hovering');
@@ -313,12 +322,7 @@ window.addEventListener("mousemove", (event) => {
     lastScrollPos = window.scrollY;
 
 //part of carasol ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // update the picking ray with the camera and pointer position
-	raycaster.setFromCamera( mouse, camera );
-
-	// calculate objects intersecting the picking ray
-	const intersects = raycaster.intersectObjects( carasolPivot.children );
-    carasolHover(intersects);
+    carasolHover(event);
 });
 
 window.addEventListener("scroll", (event) => {

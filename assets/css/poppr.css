@@ -524,18 +524,19 @@ canvas {
 
 /* carasol-hovers */
 #hover-text-container {
-    position: relative;
+    /* position: relative; */
     display: grid;
-    grid-template-columns: 1f 3fr;
-    padding: clamp(30px, 5%, 100px);
+    grid-template-columns: 1fr 4fr 6fr;
+    grid-template-rows: 1fr 2fr;
+    padding-left: clamp(30px, 5%, 100px);
 
     & div {
-        position: absolute;
+        /* position: absolute; */
         display: none;
         font-size: 0.5em;
-        border: black 1px solid;
-        grid-column: 1;
-        width: 40%;
+        grid-area: 1 / 2;
+        /* width: 40%; */
+        margin: auto;
     }
 }
 
@@ -543,7 +544,13 @@ canvas {
     display: block!important;
 }
 
+#midSection {
+    height: 80vh;
 
+    & p {
+        height: fit-content;
+    }
+}
 
 
 
