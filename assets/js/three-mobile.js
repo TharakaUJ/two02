@@ -45,37 +45,195 @@ window.addEventListener('resize', onWindowResize, false);
 //================common constants end =========================================================
 
 //======================================carasol===================================================
-/*
-const carasolContainer = document.getElementById('gallery-container');
-const carasolItems = carasolContainer.children;
+
+// const carasolContainer = document.getElementById('gallery-container');
+// const carasolItems = carasolContainer.children;
 const carasolImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
 const carsolPlanes = [];
 
 //use a dictionary to map element to plane
 //for (let i = 0; i < carasolItems.length; i++) {
 for (let i = 0; i < 4; i++) {
-    carsolPlanes.push(createAPlane(carasolImages[i]));
-    setCarasol(carsolPlanes[i], carasolItems[i]);
+    carsolPlanes.push(createACurvedPlane(carasolImages[i]));
+    // setCarasol(carsolPlanes[i], carasolItems[i]);
+    setCarasol(carsolPlanes[i]);
 };
 
 
-function setCarasol(object, element) {
+// function setCarasol(object, element) {
+function setCarasol(object) {
     scene.add(object);
     object.material.opacity = 1;
-    let elRect = element.getBoundingClientRect();
-    let elStartX = ((elRect.right / window.innerWidth)) * 2 - 1;
-    let elStartY = -(elRect.top / window.innerHeight) * 2 + 1;
-    object.position.copy(IntoThreeD(elStartX, elStartY, camera));
+    // let elRect = element.getBoundingClientRect();
+    // let elStartX = ((elRect.right / window.innerWidth)) * 2 - 1;
+    // let elStartY = -(elRect.top / window.innerHeight) * 2 + 1;
+    //object.position.copy(IntoThreeD(elStartX, elStartY, camera));
 }
 
-carasolContainer.addEventListener('scroll', () => {
-    for (let i = 0; i < 4; i++) {
-        setCarasol(carsolPlanes[i], carasolItems[i]);
-    };
+// carasolContainer.addEventListener('scroll', () => {
+//     for (let i = 0; i < 4; i++) {
+//         // setCarasol(carsolPlanes[i], carasolItems[i]);
+//     };
+// });
+
+function createACurvedPlane(imag) {
+    const geometry = new THREE.PlaneGeometry(16 / 4, 9 / 4, 16, 16);
+    const material = new THREE.MeshLambertMaterial({
+        color: 0xffffff,
+        map: loader.load(imag),
+        opacity: 0,
+        transparent: true,
+        // side: THREE.DoubleSide
+    });
+
+
+    // const positions = geometry.attributes.position.array;
+
+    // const axis = new THREE.Vector3(0, 1, 0);
+    // const axisPosition = new THREE.Vector3(-2, 0, 2);
+    // const vTemp = new THREE.Vector3(0, 0, 0);
+    // let lengthOfArc;
+    // let angleOfArc;
+
+    // for (let i = 0; i < positions.count; i++){
+    //     vTemp.fromBufferAttribute(positions, i);
+    //     lengthOfArc = (vTemp.x - axisPosition.x);
+    //     angleOfArc = (lengthOfArc / axisPosition.z);
+    //     vTemp.setX(0).setZ(-axisPosition.z).applyAxisAngle(axis, -angleOfArc).add(axisPosition);
+    //     positions.setXYZ(i, vTemp.x, vTemp.y, vTemp.z);
+    // }
+
+    // for(let i=0; i<vertices.length/2; i++) {
+    //     vertices[2*i].z = Math.pow(2, i/20);
+    //     vertices[2*i+1].z = Math.pow(2, i/20);
+    // }
+
+    // planeCurve(geometry, 0.1)
+
+    const object = new THREE.Mesh(geometry, material);
+    // object.rotation.x = 1;
+    return object;
+}
+
+function planeCurve(g, z) {
+
+    let p = g.parameters;
+    let hw = p.width * 0.5;
+
+    let a = new THREE.Vector2(-hw, 0);
+    let b = new THREE.Vector2(0, z);
+    let c = new THREE.Vector2(hw, 0);
+
+    let ab = new THREE.Vector2().subVectors(a, b);
+    let bc = new THREE.Vector2().subVectors(b, c);
+    let ac = new THREE.Vector2().subVectors(a, c);
+
+    let r = (ab.length() * bc.length() * ac.length()) / (2 * Math.abs(ab.cross(ac)));
+    // let t = (ab.length() * ab.length()) / (2*z)
+    // console.log(r-t)
+
+    let center = new THREE.Vector2(0, z - r);
+    let baseV = new THREE.Vector2().subVectors(a, center);
+    let baseAngle = baseV.angle() - (Math.PI * 0.5);
+    let arc = baseAngle * 2;
+
+    let uv = g.attributes.uv;
+    let pos = g.attributes.position;
+    let mainV = new THREE.Vector2();
+    for (let i = 0; i < uv.count; i++) {
+        let uvRatio = 1 - uv.getX(i);
+        let y = pos.getY(i);
+        mainV.copy(c).rotateAround(center, (arc * uvRatio));
+        pos.setXYZ(i, mainV.x, y, -mainV.y);
+    }
+
+    pos.needsUpdate = true;
+
+}
+
+var pivot = new THREE.Object3D();
+pivot.position.set(0, 0, 5);
+pivot.rotation.set(Math.PI * 0.2, 0, 0);
+scene.add(pivot)
+
+function planeRing(objectList) {
+    let axis = new THREE.Vector3(0, 1, 0);
+    let axisPosition = new THREE.Vector3(0, 0, 5);
+    let deltaAngle = 2 * Math.PI / objectList.length;
+
+    for (let i = 0; i < objectList.length; i++) {
+        let vTemp = new THREE.Vector3(0, 0, 0).sub(axisPosition);
+        vTemp.applyAxisAngle(axis, -deltaAngle * i);
+        objectList[i].position.copy(vTemp);
+        objectList[i].rotation.y = -deltaAngle * i;
+        pivot.add(objectList[i]);
+    }
+
+}
+
+planeRing(carsolPlanes);
+
+let scrollPercent = 0;
+updateScrollPercent();
+let camRotateX = Math.PI * 0.5 * (1 - scrollPercent)
+camera.rotation.x = Math.PI * 0.5 * (1 - scrollPercent);
+
+document.body.onscroll = () => {
+    updateScrollPercent()    
+    // pivot.rotation.y = 2 * Math.PI * scrollPercent;
+    // pivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
+    // pivot.position.y = 10 * scrollPercent -5;
+    camRotateX = Math.PI * 0.5 * (1 - scrollPercent);
+}
+
+function updateScrollPercent() {
+    //calculate the current scroll progress as a percentage
+    scrollPercent =
+    ((document.documentElement.scrollTop || document.body.scrollTop) /
+        ((document.documentElement.scrollHeight || document.body.scrollHeight) -
+            document.documentElement.clientHeight))
+}
+
+
+//carasol drag____________________________________________________________________________________
+const scrollContainer = document.getElementsByClassName('section')[1];
+let isDragging = false;
+let startX;
+let horizontalNudge = 0;
+let previousHNudge = 0;
+
+scrollContainer.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    startX = e.pageX;
+    // horizontalNudge = scrollContainer.horizontalNudge;
+    scrollContainer.style.cursor = "grabbing"; // Change cursor when dragging
 });
 
-*/
-//============================================togle menu ====================================================
+scrollContainer.addEventListener("mouseup", () => {
+    isDragging = false;
+    scrollContainer.style.cursor = "grab"; // Change cursor back to "grab"
+    previousHNudge = horizontalNudge;
+});
+
+scrollContainer.addEventListener("mouseleave", () => {
+    isDragging = false;
+    scrollContainer.style.cursor = "grab"; // Change cursor back to "grab"
+    previousHNudge = horizontalNudge;
+});
+
+scrollContainer.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    // e.preventDefault();
+    const x = e.pageX;
+    const walk = (x - startX) * 0.5; // Adjust the multiplier for faster/slower scrolling
+    // scrollContainer.scrollLeft = horizontalNudge - walk;
+    horizontalNudge = previousHNudge + walk;
+});
+//______________________________________________________________________________________________
+
+
+
+//============================================toggle menu ====================================================
 const menuItemsContainer = document.getElementById('menu-items-container');
 const menuItems = menuItemsContainer.children;
 // var clock = new THREE.Clock();
@@ -95,18 +253,22 @@ const cubeMaterials = [
 
 //create material, color, or image texture
 const cube = new THREE.Mesh(geometry, cubeMaterials);
-cube.position.set(3, 0, 0);
-cube.rotation.y = -0.4;
+cube.position.set(3, 0, -20);
+// targetQuaternion.setFromEuler(new THREE.Euler(0, 0, 0));
 
 
 export function openMenu() {
     scene.add(cube);
     container.style.zIndex = 100;
+    camera.position.z = -15;
+    camRotateX = 0;
 }
 
 export function closeMenu() {
     scene.remove(cube);
     container.style.zIndex = -1;
+    camera.position.z =5;
+    camRotateX = Math.PI * 0.5 * (1 - scrollPercent);
 }
 
 // var speed = Math.PI * 0.5;
@@ -114,19 +276,19 @@ export function closeMenu() {
 var step = Math.PI * 0.01
 
 for (let i = 0; i < menuItems.length; i++) {
-    menuItems[i].addEventListener('mouseenter', ()=>{
-        targetQuaternion.setFromEuler( new THREE.Euler( Math.PI * 0.5 * i, Math.PI * (i+1), 0 ) );
+    menuItems[i].addEventListener('mouseenter', () => {
+        targetQuaternion.setFromEuler(new THREE.Euler(Math.PI * 0.5 * i, Math.PI * (i + 1), 0));
         // if ( ! cube.quaternion.equals( targetQuaternion ) ) {
 
         //     var step = speed * delta;
         //     cube.quaternion.rotateTowards( targetQuaternion, step );
-        
+
         // }
         startCubeRotation();
     });
 
-    menuItems[i].addEventListener('mouseleave', ()=>{
-        targetQuaternion.setFromEuler( new THREE.Euler( 0, 0, 0 ) );
+    menuItems[i].addEventListener('mouseleave', () => {
+        targetQuaternion.setFromEuler(new THREE.Euler(0, 0, 0));
         startCubeRotation();
     });
 };
@@ -138,13 +300,13 @@ function startCubeRotation() {
 }
 
 function rotateCube() {
-    if ( cube.quaternion.equals( targetQuaternion ) ) {
+    if (cube.quaternion.equals(targetQuaternion)) {
         cubeRotating = false;
         return;
     };
     // delta = clock.getDelta();
     // var step = speed * delta;
-    cube.quaternion.rotateTowards( targetQuaternion, step );
+    cube.quaternion.rotateTowards(targetQuaternion, step);
     requestAnimationFrame(rotateCube);
 }
 
@@ -298,6 +460,17 @@ function atHoverStart(object, element) {
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
+    // pivot.rotation.y = 2 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth));
+    pivot.rotation.y = lerpRotation((1 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth))), pivot.rotation.y);
+    // pivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
+    pivot.rotation.x = lerpRotation((0.2 * Math.PI * (1 + 0.5 * scrollPercent)), pivot.rotation.x, 0.5);
+    // camera.rotation.x = (camRotateX - camera.rotation.x) * 0.2;
+    camera.rotation.x = lerpRotation(camRotateX, camera.rotation.x);
 }
 
 animate();
+
+
+function lerpRotation(finalValue, initialValue, step=0.2) {
+    return (finalValue - initialValue) * step + initialValue;
+}

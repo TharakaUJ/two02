@@ -348,7 +348,7 @@ body {
     overflow: hidden;
 
     font-weight: bolder;
-    font-family: 'Luckiest Guy', cursive;
+    font-family: 'Luckiest Guy';
 
     /* removing text shadow from clickable class */
     text-shadow: none;
@@ -522,8 +522,26 @@ canvas {
 
 
 
+/* carasol-hovers */
+#hover-text-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1f 3fr;
+    padding: clamp(30px, 5%, 100px);
 
+    & div {
+        position: absolute;
+        display: none;
+        font-size: 0.5em;
+        border: black 1px solid;
+        grid-column: 1;
+        width: 40%;
+    }
+}
 
+.hovering {
+    display: block!important;
+}
 
 
 
