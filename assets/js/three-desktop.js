@@ -175,7 +175,7 @@ scrollContainer.addEventListener("mousemove", (e) => {
     if (!isDragging) return;
     // e.preventDefault();
     const x = e.pageX;
-    const walk = (x - startX) * 0.5; // Adjust the multiplier for faster/slower scrolling
+    const walk = (x - startX) * 1; // Adjust the multiplier for faster/slower scrolling
     // scrollContainer.scrollLeft = horizontalNudge - walk;
     horizontalNudge = previousHNudge + walk;
 });
@@ -187,7 +187,8 @@ updateScrollPercent();
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 const hoverTexts = document.getElementById('hover-text-container').children;
-var previousIntersects = []
+var previousIntersects = [];
+
 
 function carasolHover(event) {
         // update the picking ray with the camera and pointer position
@@ -197,16 +198,16 @@ function carasolHover(event) {
 	const intersects = raycaster.intersectObjects( carasolPivot.children );
 
     if (intersects === previousIntersects) return;
-
+    previousIntersects = intersects;
     if (intersects.length === 0) {
-        document.querySelector('.hovering')?.classList.remove('hovering');
+        // document.querySelector('.hovering')?.classList.remove('hovering');
+        // hoverTexts[0].classList.add('hovering');
         return
     };
     let hoveringObj = intersects[0];
     let i = hoveringObj.object.name;
     document.querySelector('.hovering')?.classList.remove('hovering');
-    hoverTexts[i].classList.add('hovering');
-
+    hoverTexts[i+1].classList.add('hovering');
 }
 
 

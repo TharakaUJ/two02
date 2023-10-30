@@ -535,13 +535,15 @@ canvas {
         display: none;
         font-size: 0.5em;
         grid-area: 1 / 2;
-        /* width: 40%; */
         margin: auto;
+        opacity: 0; 
     }
 }
 
 .hovering {
     display: block!important;
+    transition: width 1s;
+    animation: fadeIn 800ms 600ms forwards;
 }
 
 #midSection {
