@@ -525,16 +525,17 @@ canvas {
 /* carasol-hovers */
 #hover-text-container {
     position: relative;
+    display: grid;
+    grid-template-columns: 1f 3fr;
+    padding: clamp(30px, 5%, 100px);
 
     & div {
         position: absolute;
         display: none;
         font-size: 0.5em;
-        margin: auto;
-        left: 60%;
-        top: 20%;
-        width: 30%;
         border: black 1px solid;
+        grid-column: 1;
+        width: 40%;
     }
 }
 
