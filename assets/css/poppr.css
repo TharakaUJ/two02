@@ -15,6 +15,11 @@
     --font-shadow-color: #2979ff;
 }
 
+@font-face {
+    font-family: ProductSans;
+    src: url("{{ site.baseurl }}/assets/css/fonts/Product Sans Bold.ttf");
+  }
+
 body {
     margin: 0;
     background-color: var(--background-color);
@@ -255,6 +260,8 @@ body {
         top: 40%;
         left: 20%;
         z-index: 10;
+        font-family: ProductSans;
+        font-weight: bold;
     }
 
     & .twozerotwolabs:nth-child(2) {
@@ -294,6 +301,7 @@ body {
         font-size: 0.75em;
         left: 60%;
         top: 0%;
+        font-family: -apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Helvetica Neue,Lucida Grande,Arial,sans-serif;
     }
 
     & .products:nth-child(6) {
@@ -301,12 +309,14 @@ body {
         left: 75%;
         top: 30%;
         writing-mode: vertical-lr;
+        font-family: -apple-system,BlinkMacSystemFont,"Roboto","Segoe UI","Helvetica Neue","Lucida Grande",Arial,sans-serif;
     }
 
     & .products:nth-child(7) {
         font-size: 0.625em;
         top: 80%;
         left: 20%;
+        font-family: 'Trebuchet MS', sans-serif;
     }
 
     & .clickable:hover, .twozerotwolabs:first-child {
