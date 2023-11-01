@@ -212,7 +212,7 @@ body {
     z-index: 10000;
 }
 
-#logo img {
+#logo svg {
     width: 20vw;
     margin: 10px;
 }
