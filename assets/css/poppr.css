@@ -210,11 +210,12 @@ body {
     top: 0;
     left: 0%;
     z-index: 10000;
+    margin: 10px;
 }
 
 #site-logo svg {
     width: 20vw;
-    margin: 10px;
+    /* margin: 10px; */
 }
 
 
