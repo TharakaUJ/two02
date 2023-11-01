@@ -205,14 +205,14 @@ body {
     z-index: -1;
 }
 
-#logo {
+#site-logo {
     position: fixed;
     top: 0;
     left: 0%;
     z-index: 10000;
 }
 
-#logo svg {
+#site-logo svg {
     width: 20vw;
     margin: 10px;
 }
