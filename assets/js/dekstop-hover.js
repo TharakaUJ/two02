@@ -71,6 +71,7 @@ function menuItemsAnimeOpen() {
     });
 }
 
+//remove this
 function menuItemsAnimeClose() {
     let menuItems = menuItemscontainer.children;
     [...menuItems].forEach((menuItem) => {

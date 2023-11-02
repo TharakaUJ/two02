@@ -134,6 +134,7 @@ document.body.onscroll = () => {
     // carasolPivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
     // carasolPivot.position.y = 10 * scrollPercent -5;
     camRotateX = Math.PI * 0.5 * (1 - scrollPercent);
+    siteLogoAnime();
 }
 
 function updateScrollPercent() {
@@ -458,4 +459,19 @@ function lerpRotation(finalValue, initialValue, step=0.2) {
 }
 
 
-//==========================================logo shrink =================================
+//==========================================logo shrink ====================================
+const siteLogo = document.getElementById('site-logo');
+
+function siteLogoAnime() {
+    if (scrollPercent > 0.1) {
+        siteLogo.animate({
+            width: '4.5vw',
+        }, { duration: 1000, fill: 'forwards' });
+    } else {
+        siteLogo.animate({
+            width: '20vw',
+        }, { duration: 1000, fill: 'forwards' });
+    }
+}
+
+siteLogoAnime();
