@@ -1,40 +1,11 @@
 ---
+layout: custom-default
 ---
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/poppr.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <title>TWO02</title>
-</head>
-
-<body>
-<div id="main-wrapper">
-    <div class="masthead">
-        <a id="site-logo" href="{{ site.baseurl }}/">
-            <!-- <img src="{{ site.baseurl }}/assets/images/white text horizontal .svg" alt="TWO02"> -->
-            <!-- <object data="{{ site.baseurl }}/assets/images/white text horizontal .svg" width="fit-content" height="fit-content"> </object> -->
-            {% include /custom_includes/logo-svg.html %}
-        </a>
-    </div>
     <div class="section typogram">
 
         {% include /custom_includes/other-sites.html %}
 
-    </div>
-    <div id="menu">
-        <div id="toggle-menu">
-            <i class="material-icons">menu</i>
-            <i class="material-icons hide">close</i>
-        </div>
-        <div id="menu-items-container">
-            <a href="{{ site.baseurl }}/new/"><span>H</span><span>O</span><span>M</span><span>E</span></a>
-            <a href="{{ site.baseurl }}/new/"><span>T</span><span>O</span></a>
-
-        </div>
     </div>
     <div class="section" id="midSection">
         <p>
@@ -81,15 +52,4 @@
         </div>
     </div>
 
-    <div id="blur">
-        <div id="blob"></div>
-    </div>
-
-    <div id="scroll-bar"></div>
     <div id="canvas-container"></div>
-
-    <script type="module" src="{{ site.baseurl }}/assets/js/poppr.js"></script>
-</div>
-</body>
-
-</html>
