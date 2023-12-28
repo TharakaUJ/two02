@@ -7,7 +7,7 @@
     {% for item in otherSites %}
     {% if item.url %}
     <div class="products clickable"><a href="{{ item.url }}" target="_blank">{{ item.title }}</a>
-        <h3 class="logos" style="background-image: url('{{ item.logo }}');">
+        <h3 class="logos" style="background-image: url('{{ item.logo | absolute_url }}');">
             {{ item.title }}
         </h3>
     </div>

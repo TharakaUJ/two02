@@ -18,16 +18,16 @@ otherSites:
   - title: "loot box"
   - title: "MIDJ.app"
     url: https://midj.app
-    logo: https://midj.app/static/media/MIDJ-logo%20(1000%20%C3%97%20500%20px).25c3cb5616f28e608c81.webp
+    logo: "/assets/images/midj-homepage.png"
   - title: "PI.lk"
     url: https://pi.lk
     logo: https://pi.lk/static/siteimages/logo%20samples-Copy%20of%20Copy%20of%20Page-12.drawio%20(1).png
   - title: "expel.bg"
     url: https://expel.bg
-    logo: http://127.0.0.1:4000/two02/pics/connecting-a-LED-to-GPIO-pin.png
+    logo: "/assets/images/expelbg-homepage.png"
   - title: "answr.dev"
     url: https://answr.dev/
-    logo: http://127.0.0.1:4000/two02/pics/connecting-a-LED-to-GPIO-pin.png
+    logo: '/assets/images/answr-dev-homepage.png'
   - title: "Geoscraper.net"
     url: https://geoscraper.net
-    logo: http://127.0.0.1:4000/two02/pics/connecting-a-LED-to-GPIO-pin.png
+    logo: "/assets/images/geoscraper-homepage.png"
