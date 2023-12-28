@@ -275,7 +275,7 @@ defaults:
       share: true
       related: true
 
-  - scope:
-      path: "pics"
-    values:
-      image: true
+  # - scope:
+  #     path: "pics"
+  #   values:
+  #     image: true
