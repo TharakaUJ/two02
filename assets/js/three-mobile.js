@@ -243,12 +243,12 @@ var cubeRotating = false;
 //create shape
 const geometry = new THREE.BoxGeometry(2, 2, 2);
 const cubeMaterials = [
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //right side
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //left side
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //top side
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //bottom side
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //front side
-    new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //back side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/answr-dev-homepage.png') }), //right side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/answr-dev-homepage.png') }), //left side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/geoscraper-homepage.png') }), //top side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/geoscraper-homepage.png') }), //bottom side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/midj-homepage.png') }), //front side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/midj-homepage.png') }), //back side
 ];
 
 //create material, color, or image texture

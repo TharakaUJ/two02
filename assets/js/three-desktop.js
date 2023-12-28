@@ -46,7 +46,7 @@ window.addEventListener('resize', onWindowResize, false);
 
 //======================================carasol===================================================
 
-const carasolImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
+const carasolImages = ["assets/images/answr-dev-homepage.png", "assets/images/geoscraper-homepage.png", "assets/images/expelbg-homepage.png", "assets/images/midj-homepage.png"];
 var scrollPercent
 updateScrollPercent();
 var camRotateX = Math.PI * 0.5 * (1 - scrollPercent)
@@ -223,12 +223,12 @@ function cubeInit() {
     //create shape
     let geometry = new THREE.BoxGeometry(2, 2, 2);
     let cubeMaterials = [
-        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //right side
-        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //left side
-        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //top side
-        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //bottom side
-        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //front side
-        new THREE.MeshLambertMaterial({ map: loader.load('pics/connecting-a-LED-to-GPIO-pin.png') }), //back side
+        new THREE.MeshLambertMaterial({ map: loader.load('assets/images/answr-dev-homepage.png') }), //right side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/answr-dev-homepage.png') }), //left side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/geoscraper-homepage.png') }), //top side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/geoscraper-homepage.png') }), //bottom side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/midj-homepage.png') }), //front side
+    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/midj-homepage.png') }), //back side
     ];
 
     //create material, color, or image texture
@@ -301,7 +301,7 @@ var lastScrollPos = 0;
 var ticking = false;
 var hovering = false;
 const zRotation = -0.3; //radians of mesh rotation
-const hoverImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
+const hoverImages = ["assets/images/answr-dev-homepage.png", "assets/images/geoscraper-homepage.png", "assets/images/expelbg-homepage.png", "assets/images/midj-homepage.png"];
 const hoverElements = document.getElementsByClassName("insight-items");
 
 
