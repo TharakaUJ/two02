@@ -89,47 +89,44 @@ function createACurvedPlane(imag) {
     return object;
 }
 
-function planeCurve(g, z) {
+// function planeCurve(g, z) {
 
-    let p = g.parameters;
-    let hw = p.width * 0.5;
+//     let p = g.parameters;
+//     let hw = p.width * 0.5;
 
-    let a = new THREE.Vector2(-hw, 0);
-    let b = new THREE.Vector2(0, z);
-    let c = new THREE.Vector2(hw, 0);
+//     let a = new THREE.Vector2(-hw, 0);
+//     let b = new THREE.Vector2(0, z);
+//     let c = new THREE.Vector2(hw, 0);
 
-    let ab = new THREE.Vector2().subVectors(a, b);
-    let bc = new THREE.Vector2().subVectors(b, c);
-    let ac = new THREE.Vector2().subVectors(a, c);
+//     let ab = new THREE.Vector2().subVectors(a, b);
+//     let bc = new THREE.Vector2().subVectors(b, c);
+//     let ac = new THREE.Vector2().subVectors(a, c);
 
-    let r = (ab.length() * bc.length() * ac.length()) / (2 * Math.abs(ab.cross(ac)));
-    // let t = (ab.length() * ab.length()) / (2*z)
-    // console.log(r-t)
+//     let r = (ab.length() * bc.length() * ac.length()) / (2 * Math.abs(ab.cross(ac)));
+//     // let t = (ab.length() * ab.length()) / (2*z)
+//     // console.log(r-t)
 
-    let center = new THREE.Vector2(0, z - r);
-    let baseV = new THREE.Vector2().subVectors(a, center);
-    let baseAngle = baseV.angle() - (Math.PI * 0.5);
-    let arc = baseAngle * 2;
+//     let center = new THREE.Vector2(0, z - r);
+//     let baseV = new THREE.Vector2().subVectors(a, center);
+//     let baseAngle = baseV.angle() - (Math.PI * 0.5);
+//     let arc = baseAngle * 2;
 
-    let uv = g.attributes.uv;
-    let pos = g.attributes.position;
-    let mainV = new THREE.Vector2();
-    for (let i = 0; i < uv.count; i++) {
-        let uvRatio = 1 - uv.getX(i);
-        let y = pos.getY(i);
-        mainV.copy(c).rotateAround(center, (arc * uvRatio));
-        pos.setXYZ(i, mainV.x, y, -mainV.y);
-    }
+//     let uv = g.attributes.uv;
+//     let pos = g.attributes.position;
+//     let mainV = new THREE.Vector2();
+//     for (let i = 0; i < uv.count; i++) {
+//         let uvRatio = 1 - uv.getX(i);
+//         let y = pos.getY(i);
+//         mainV.copy(c).rotateAround(center, (arc * uvRatio));
+//         pos.setXYZ(i, mainV.x, y, -mainV.y);
+//     }
 
-    pos.needsUpdate = true;
-}
+//     pos.needsUpdate = true;
+// }
 
 
 document.body.onscroll = () => {
     updateScrollPercent()    
-    // carasolPivot.rotation.y = 2 * Math.PI * scrollPercent;
-    // carasolPivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
-    // carasolPivot.position.y = 10 * scrollPercent -5;
     camRotateX = Math.PI * 0.5 * (1 - scrollPercent);
     siteLogoAnime();
 }
@@ -153,7 +150,6 @@ let previousHNudge = 0;
 scrollContainer.addEventListener("mousedown", (e) => {
     isDragging = true;
     startX = e.pageX;
-    // horizontalNudge = scrollContainer.horizontalNudge;
     scrollContainer.style.cursor = "grabbing"; // Change cursor when dragging
 });
 
@@ -171,10 +167,8 @@ scrollContainer.addEventListener("mouseleave", () => {
 
 scrollContainer.addEventListener("mousemove", (e) => {
     if (!isDragging) return;
-    // e.preventDefault();
     const x = e.pageX;
     const walk = (x - startX) * 1; // Adjust the multiplier for faster/slower scrolling
-    // scrollContainer.scrollLeft = horizontalNudge - walk;
     horizontalNudge = previousHNudge + walk;
 });
 //______________________________________________________________________________________________
@@ -198,8 +192,6 @@ function carasolHover(event) {
     if (intersects === previousIntersects) return;
     previousIntersects = intersects;
     if (intersects.length === 0) {
-        // document.querySelector('.hovering')?.classList.remove('hovering');
-        // hoverTexts[0].classList.add('hovering');
         return
     };
     let hoveringObj = intersects[0];
@@ -258,12 +250,6 @@ var step = Math.PI * 0.01
 for (let i = 0; i < menuItems.length; i++) {
     menuItems[i].addEventListener('mouseenter', () => {
         targetQuaternion.setFromEuler(new THREE.Euler(Math.PI * 0.5 * i, Math.PI * (i + 1), 0));
-        // if ( ! cube.quaternion.equals( targetQuaternion ) ) {
-
-        //     var step = speed * delta;
-        //     cube.quaternion.rotateTowards( targetQuaternion, step );
-
-        // }
         startCubeRotation();
     });
 
@@ -284,14 +270,11 @@ function rotateCube() {
         cubeRotating = false;
         return;
     };
-    // delta = clock.getDelta();
-    // var step = speed * delta;
     cube.quaternion.rotateTowards(targetQuaternion, step);
     requestAnimationFrame(rotateCube);
 }
 
 //=========================hover animation variables======================================================================
-// var mouse = { x: 0, y: 0 };
 var planePos = { x: 0, y: 0, z: 0 };
 var hoverPlanes = [];
 var lastScrollPos = 0;
