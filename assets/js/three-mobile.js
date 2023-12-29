@@ -1,6 +1,3 @@
----
----
-
 import * as THREE from "https://esm.sh/three";
 
 //common constants
@@ -48,7 +45,7 @@ window.addEventListener('resize', onWindowResize, false);
 
 // const carasolContainer = document.getElementById('gallery-container');
 // const carasolItems = carasolContainer.children;
-const carasolImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
+const carasolImages = ["assets/images/answr-dev-homepage.png", "assets/images/geoscraper-homepage.png", "assets/images/expelbg-homepage.png", "assets/images/midj-homepage.png"];
 const carsolPlanes = [];
 
 //use a dictionary to map element to plane
@@ -318,7 +315,7 @@ var lastScrollPos = 0;
 var ticking = false;
 var hovering = false;
 const zRotation = -0.3; //radians of mesh rotation
-const hoverImages = ["https://images.unsplash.com/photo-1695512294611-80be329e683b?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTY3NjQ4NjN8&ixlib=rb-4.0.3&q=85", "{{ site.baseurl }}/pics/featured-image-for-desktop-without-monitor-with-VNC.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png", "{{ site.baseurl }}/pics/finding-ip-adress-featured-img.png"];
+const hoverImages = ["assets/images/answr-dev-homepage.png", "assets/images/geoscraper-homepage.png", "assets/images/expelbg-homepage.png", "assets/images/midj-homepage.png"];
 const hoverElements = document.getElementsByClassName("insight-items");
 
 
