@@ -43,144 +43,56 @@ window.addEventListener('resize', onWindowResize, false);
 
 //======================================carasol===================================================
 
-// const carasolContainer = document.getElementById('gallery-container');
-// const carasolItems = carasolContainer.children;
 const carasolImages = ["assets/images/answr-dev-homepage.png", "assets/images/geoscraper-homepage.png", "assets/images/expelbg-homepage.png", "assets/images/midj-homepage.png"];
-const carsolPlanes = [];
-
-//use a dictionary to map element to plane
-//for (let i = 0; i < carasolItems.length; i++) {
-for (let i = 0; i < 4; i++) {
-    carsolPlanes.push(createACurvedPlane(carasolImages[i]));
-    // setCarasol(carsolPlanes[i], carasolItems[i]);
-    setCarasol(carsolPlanes[i]);
-};
+var scrollPercent
+updateScrollPercent();
+var camRotateX = Math.PI * 0.5 * (1 - scrollPercent)
+camera.rotation.x = Math.PI * 0.5 * (1 - scrollPercent);
 
 
-// function setCarasol(object, element) {
-function setCarasol(object) {
-    scene.add(object);
-    object.material.opacity = 1;
-    // let elRect = element.getBoundingClientRect();
-    // let elStartX = ((elRect.right / window.innerWidth)) * 2 - 1;
-    // let elStartY = -(elRect.top / window.innerHeight) * 2 + 1;
-    //object.position.copy(IntoThreeD(elStartX, elStartY, camera));
+//object that all the Carasol planes added
+var carasolPivot = new THREE.Object3D();
+carasolPivot.position.set(0, 0, 5);
+carasolPivot.rotation.set(Math.PI * 0.2, 0, 0);
+scene.add(carasolPivot);
+
+
+function carasolInit() {
+    let axis = new THREE.Vector3(0, 1, 0);
+    let axisPosition = new THREE.Vector3(0, 0, 5);
+    let deltaAngle = 2 * Math.PI / carasolImages.length;
+
+    for (let i = 0; i < carasolImages.length; i++) {
+        let object = createACurvedPlane(carasolImages[i]);
+        object.name = i;
+        scene.add(object);
+        
+        let vTemp = new THREE.Vector3(0, 0, 0).sub(axisPosition);
+        vTemp.applyAxisAngle(axis, -deltaAngle * i);
+        object.position.copy(vTemp);
+        object.rotation.y = -deltaAngle * i;
+        carasolPivot.add(object);
+    };
 }
 
-// carasolContainer.addEventListener('scroll', () => {
-//     for (let i = 0; i < 4; i++) {
-//         // setCarasol(carsolPlanes[i], carasolItems[i]);
-//     };
-// });
 
 function createACurvedPlane(imag) {
     const geometry = new THREE.PlaneGeometry(16 / 4, 9 / 4, 16, 16);
     const material = new THREE.MeshLambertMaterial({
         color: 0xffffff,
         map: loader.load(imag),
-        opacity: 0,
+        opacity: 1,
         transparent: true,
         // side: THREE.DoubleSide
     });
-
-
-    // const positions = geometry.attributes.position.array;
-
-    // const axis = new THREE.Vector3(0, 1, 0);
-    // const axisPosition = new THREE.Vector3(-2, 0, 2);
-    // const vTemp = new THREE.Vector3(0, 0, 0);
-    // let lengthOfArc;
-    // let angleOfArc;
-
-    // for (let i = 0; i < positions.count; i++){
-    //     vTemp.fromBufferAttribute(positions, i);
-    //     lengthOfArc = (vTemp.x - axisPosition.x);
-    //     angleOfArc = (lengthOfArc / axisPosition.z);
-    //     vTemp.setX(0).setZ(-axisPosition.z).applyAxisAngle(axis, -angleOfArc).add(axisPosition);
-    //     positions.setXYZ(i, vTemp.x, vTemp.y, vTemp.z);
-    // }
-
-    // for(let i=0; i<vertices.length/2; i++) {
-    //     vertices[2*i].z = Math.pow(2, i/20);
-    //     vertices[2*i+1].z = Math.pow(2, i/20);
-    // }
-
-    // planeCurve(geometry, 0.1)
-
     const object = new THREE.Mesh(geometry, material);
-    // object.rotation.x = 1;
     return object;
 }
 
-function planeCurve(g, z) {
-
-    let p = g.parameters;
-    let hw = p.width * 0.5;
-
-    let a = new THREE.Vector2(-hw, 0);
-    let b = new THREE.Vector2(0, z);
-    let c = new THREE.Vector2(hw, 0);
-
-    let ab = new THREE.Vector2().subVectors(a, b);
-    let bc = new THREE.Vector2().subVectors(b, c);
-    let ac = new THREE.Vector2().subVectors(a, c);
-
-    let r = (ab.length() * bc.length() * ac.length()) / (2 * Math.abs(ab.cross(ac)));
-    // let t = (ab.length() * ab.length()) / (2*z)
-    // console.log(r-t)
-
-    let center = new THREE.Vector2(0, z - r);
-    let baseV = new THREE.Vector2().subVectors(a, center);
-    let baseAngle = baseV.angle() - (Math.PI * 0.5);
-    let arc = baseAngle * 2;
-
-    let uv = g.attributes.uv;
-    let pos = g.attributes.position;
-    let mainV = new THREE.Vector2();
-    for (let i = 0; i < uv.count; i++) {
-        let uvRatio = 1 - uv.getX(i);
-        let y = pos.getY(i);
-        mainV.copy(c).rotateAround(center, (arc * uvRatio));
-        pos.setXYZ(i, mainV.x, y, -mainV.y);
-    }
-
-    pos.needsUpdate = true;
-
-}
-
-var pivot = new THREE.Object3D();
-pivot.position.set(0, 0, 5);
-pivot.rotation.set(Math.PI * 0.2, 0, 0);
-scene.add(pivot)
-
-function planeRing(objectList) {
-    let axis = new THREE.Vector3(0, 1, 0);
-    let axisPosition = new THREE.Vector3(0, 0, 5);
-    let deltaAngle = 2 * Math.PI / objectList.length;
-
-    for (let i = 0; i < objectList.length; i++) {
-        let vTemp = new THREE.Vector3(0, 0, 0).sub(axisPosition);
-        vTemp.applyAxisAngle(axis, -deltaAngle * i);
-        objectList[i].position.copy(vTemp);
-        objectList[i].rotation.y = -deltaAngle * i;
-        pivot.add(objectList[i]);
-    }
-
-}
-
-planeRing(carsolPlanes);
-
-let scrollPercent = 0;
-updateScrollPercent();
-let camRotateX = Math.PI * 0.5 * (1 - scrollPercent)
-camera.rotation.x = Math.PI * 0.5 * (1 - scrollPercent);
-
 document.body.onscroll = () => {
     updateScrollPercent()    
-    // pivot.rotation.y = 2 * Math.PI * scrollPercent;
-    // pivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
-    // pivot.position.y = 10 * scrollPercent -5;
     camRotateX = Math.PI * 0.5 * (1 - scrollPercent);
+    siteLogoAnime();
 }
 
 function updateScrollPercent() {
@@ -199,35 +111,61 @@ let startX;
 let horizontalNudge = 0;
 let previousHNudge = 0;
 
-scrollContainer.addEventListener("mousedown", (e) => {
+scrollContainer.addEventListener("touchstart", (e) => {
+    console.log('start')
     isDragging = true;
-    startX = e.pageX;
-    // horizontalNudge = scrollContainer.horizontalNudge;
-    scrollContainer.style.cursor = "grabbing"; // Change cursor when dragging
+    startX = e.touches[0].pageX;
+    // scrollContainer.style.cursor = "grabbing"; // Change cursor when dragging
 });
 
-scrollContainer.addEventListener("mouseup", () => {
+scrollContainer.addEventListener("touchend", () => {
     isDragging = false;
-    scrollContainer.style.cursor = "grab"; // Change cursor back to "grab"
+    // scrollContainer.style.cursor = "grab"; // Change cursor back to "grab"
     previousHNudge = horizontalNudge;
 });
 
-scrollContainer.addEventListener("mouseleave", () => {
+scrollContainer.addEventListener("touchcancel", () => {
     isDragging = false;
-    scrollContainer.style.cursor = "grab"; // Change cursor back to "grab"
+    // scrollContainer.style.cursor = "grab"; // Change cursor back to "grab"
     previousHNudge = horizontalNudge;
 });
 
-scrollContainer.addEventListener("mousemove", (e) => {
+scrollContainer.addEventListener("touchmove", (e) => {
+    console.log('move')
     if (!isDragging) return;
-    // e.preventDefault();
-    const x = e.pageX;
-    const walk = (x - startX) * 0.5; // Adjust the multiplier for faster/slower scrolling
-    // scrollContainer.scrollLeft = horizontalNudge - walk;
+    const x = e.touches[0].pageX;
+    const walk = (x - startX) * 1; // Adjust the multiplier for faster/slower scrolling
     horizontalNudge = previousHNudge + walk;
+    console.log(walk, horizontalNudge, x)
 });
 //______________________________________________________________________________________________
 
+carasolInit();
+updateScrollPercent();
+//_________________________________________carasol hover _____________________________________________
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+const hoverTexts = document.getElementById('hover-text-container').children;
+var previousIntersects = [];
+
+
+function carasolHover(event) {
+        // update the picking ray with the camera and pointer position
+	raycaster.setFromCamera( mouse, camera );
+
+	// calculate objects intersecting the picking ray
+	const intersects = raycaster.intersectObjects( carasolPivot.children );
+
+    if (intersects === previousIntersects) return;
+    previousIntersects = intersects;
+    if (intersects.length === 0) {
+        return
+    };
+    let hoveringObj = intersects[0];
+    let i = hoveringObj.object.name;
+    document.querySelector('.hovering')?.classList.remove('hovering');
+    hoverTexts[i+1].classList.add('hovering');
+}
 
 
 //============================================toggle menu ====================================================
@@ -237,21 +175,25 @@ const menuItems = menuItemsContainer.children;
 var targetQuaternion = new THREE.Quaternion();
 var cubeRotating = false;
 
-//create shape
-const geometry = new THREE.BoxGeometry(2, 2, 2);
-const cubeMaterials = [
-    new THREE.MeshLambertMaterial({ map: loader.load('assets/images/answr-dev-homepage.png') }), //right side
+function cubeInit() {
+    //create shape
+    let geometry = new THREE.BoxGeometry(2, 2, 2);
+    let cubeMaterials = [
+        new THREE.MeshLambertMaterial({ map: loader.load('assets/images/answr-dev-homepage.png') }), //right side
     new THREE.MeshLambertMaterial({ map: loader.load('assets/images/answr-dev-homepage.png') }), //left side
     new THREE.MeshLambertMaterial({ map: loader.load('assets/images/geoscraper-homepage.png') }), //top side
     new THREE.MeshLambertMaterial({ map: loader.load('assets/images/geoscraper-homepage.png') }), //bottom side
     new THREE.MeshLambertMaterial({ map: loader.load('assets/images/midj-homepage.png') }), //front side
     new THREE.MeshLambertMaterial({ map: loader.load('assets/images/midj-homepage.png') }), //back side
-];
+    ];
 
-//create material, color, or image texture
-const cube = new THREE.Mesh(geometry, cubeMaterials);
+    //create material, color, or image texture
+    let object = new THREE.Mesh(geometry, cubeMaterials);
+    return object
+}
+
+const cube = cubeInit();
 cube.position.set(3, 0, -20);
-// targetQuaternion.setFromEuler(new THREE.Euler(0, 0, 0));
 
 
 export function openMenu() {
@@ -275,12 +217,6 @@ var step = Math.PI * 0.01
 for (let i = 0; i < menuItems.length; i++) {
     menuItems[i].addEventListener('mouseenter', () => {
         targetQuaternion.setFromEuler(new THREE.Euler(Math.PI * 0.5 * i, Math.PI * (i + 1), 0));
-        // if ( ! cube.quaternion.equals( targetQuaternion ) ) {
-
-        //     var step = speed * delta;
-        //     cube.quaternion.rotateTowards( targetQuaternion, step );
-
-        // }
         startCubeRotation();
     });
 
@@ -301,14 +237,11 @@ function rotateCube() {
         cubeRotating = false;
         return;
     };
-    // delta = clock.getDelta();
-    // var step = speed * delta;
     cube.quaternion.rotateTowards(targetQuaternion, step);
     requestAnimationFrame(rotateCube);
 }
 
 //=========================hover animation variables======================================================================
-var mouse = { x: 0, y: 0 };
 var planePos = { x: 0, y: 0, z: 0 };
 var hoverPlanes = [];
 var lastScrollPos = 0;
@@ -320,7 +253,7 @@ const hoverElements = document.getElementsByClassName("insight-items");
 
 
 function createAPlane(imag) {
-    const geometry = new THREE.PlaneGeometry(1.5, 2); //use the aspect ratio of the images
+    const geometry = new THREE.PlaneGeometry(1.5, 1); //use the aspect ratio of the images
     const material = new THREE.MeshLambertMaterial({
         color: 0xffffff,
         map: loader.load(imag),
@@ -336,6 +269,9 @@ function createAPlane(imag) {
 window.addEventListener("mousemove", (event) => {
     planePos = onMouseMove(event);
     lastScrollPos = window.scrollY;
+
+//part of carasol ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    carasolHover(event);
 });
 
 window.addEventListener("scroll", (event) => {
@@ -457,11 +393,8 @@ function atHoverStart(object, element) {
 function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-    // pivot.rotation.y = 2 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth));
-    pivot.rotation.y = lerpRotation((1 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth))), pivot.rotation.y);
-    // pivot.rotation.x = 0.2 * Math.PI * (1 + 0.5 * scrollPercent);
-    pivot.rotation.x = lerpRotation((0.2 * Math.PI * (1 + 0.5 * scrollPercent)), pivot.rotation.x, 0.5);
-    // camera.rotation.x = (camRotateX - camera.rotation.x) * 0.2;
+    carasolPivot.rotation.y = lerpRotation((1 * Math.PI * (scrollPercent - (horizontalNudge/window.innerWidth))), carasolPivot.rotation.y);
+    carasolPivot.rotation.x = lerpRotation((0.2 * Math.PI * (1 + 0.5 * scrollPercent)), carasolPivot.rotation.x, 0.5);
     camera.rotation.x = lerpRotation(camRotateX, camera.rotation.x);
 }
 
@@ -471,3 +404,21 @@ animate();
 function lerpRotation(finalValue, initialValue, step=0.2) {
     return (finalValue - initialValue) * step + initialValue;
 }
+
+
+//==========================================logo shrink ====================================
+const siteLogo = document.getElementById('site-logo');
+
+function siteLogoAnime() {
+    if (scrollPercent > 0.1) {
+        siteLogo.animate({
+            width: '4.5vw',
+        }, { duration: 1000, fill: 'forwards' });
+    } else {
+        siteLogo.animate({
+            width: '20vw',
+        }, { duration: 1000, fill: 'forwards' });
+    }
+}
+
+siteLogoAnime();
