@@ -73,3 +73,12 @@ function menuItemsAnimeOpen() {
         })
     });
 }
+
+
+function randomGlow() {
+    const blob = document.getElementById("blob");
+    blob.style.top = `${Math.random() * 100}%`;
+    blob.style.left = `${Math.random() * 100}%`;
+}
+
+randomGlow();
