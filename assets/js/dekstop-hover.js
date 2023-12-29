@@ -46,7 +46,6 @@ toggleMenu.addEventListener('click', () => {
             //borderTopLeftRadius: ['50%', '0'],
             //borderTopRightRadius: ['50%', '0']
         }, { duration: 300, fill: 'forwards' });
-        menuItemsAnimeClose();
         menuToggled = false;
         toggleMenu.children[1].classList.add('hide');
         toggleMenu.children[0].classList.remove('hide');
@@ -67,18 +66,6 @@ function menuItemsAnimeOpen() {
                 opacity: ['0', '1']
             }, { duration: 1000, fill: 'forwards', delay: 300 + i * 100 });
             i = i + 1;
-        })
-    });
-}
-
-//remove this
-function menuItemsAnimeClose() {
-    let menuItems = menuItemscontainer.children;
-    [...menuItems].forEach((menuItem) => {
-        [...menuItem.children].forEach((letter) => {
-            letter.animate({
-                opacity: '0'
-            }, { duration: 200, fill: 'forwards' });
         })
     });
 }

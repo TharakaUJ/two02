@@ -13,18 +13,14 @@ toggleMenu.addEventListener('click', () => {
         menuToggled = true;
         toggleMenu.children[0].classList.add('hide');
         toggleMenu.children[1].classList.remove('hide');
-        // openMenu();
     } else {
         menu.animate({
             top: '100%',
-            //borderTopLeftRadius: ['50%', '0'],
-            //borderTopRightRadius: ['50%', '0']
         }, { duration: 300, fill: 'forwards' });
         menuItemsAnimeClose();
         menuToggled = false;
         toggleMenu.children[1].classList.add('hide');
         toggleMenu.children[0].classList.remove('hide');
-        // closeMenu();
     }
 });
 
@@ -43,18 +39,6 @@ function menuItemsAnimeOpen() {
         })
     });
 }
-
-function menuItemsAnimeClose() {
-    let menuItems = menuItemscontainer.children;
-    [...menuItems].forEach((menuItem) => {
-        [...menuItem.children].forEach((letter) => {
-            letter.animate({
-                opacity: '0'
-            }, { duration: 200, fill: 'forwards' });
-        })
-    });
-}
-
 
 function randomGlow() {
     const blob = document.getElementById("blob");
