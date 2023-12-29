@@ -112,7 +112,6 @@ let horizontalNudge = 0;
 let previousHNudge = 0;
 
 scrollContainer.addEventListener("touchstart", (e) => {
-    console.log('start')
     isDragging = true;
     startX = e.touches[0].pageX;
     // scrollContainer.style.cursor = "grabbing"; // Change cursor when dragging
@@ -131,12 +130,10 @@ scrollContainer.addEventListener("touchcancel", () => {
 });
 
 scrollContainer.addEventListener("touchmove", (e) => {
-    console.log('move')
     if (!isDragging) return;
     const x = e.touches[0].pageX;
     const walk = (x - startX) * 1; // Adjust the multiplier for faster/slower scrolling
     horizontalNudge = previousHNudge + walk;
-    console.log(walk, horizontalNudge, x)
 });
 //______________________________________________________________________________________________
 
