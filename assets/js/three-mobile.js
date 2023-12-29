@@ -271,7 +271,7 @@ window.addEventListener("mousemove", (event) => {
     carasolHover(event);
 });
 
-window.addEventListener("scroll", (event) => {
+window.addEventListener("scroll", () => {
     if (!ticking) {
         // event throtteling
         window.requestAnimationFrame(function () {

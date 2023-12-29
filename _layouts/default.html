@@ -6,9 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/poppr.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="icon" href="{{ site.baseurl }}/assets/favicon.ico" type="image/x-icon">
+    {% if page.stylesheet %}
+    <link rel="stylesheet" href="{{ page.stylesheet }}">
+    {% else %}
+    <link rel="stylesheet" href="/assets/css/general.css">
+    {% endif %}
     <title>TWO02</title>
 </head>
 

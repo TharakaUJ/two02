@@ -1,0 +1,6 @@
+@import url('/assets/css/basic.css');
+
+.service {
+    text-decoration: unset;
+    color: var(--font-color);
+}
